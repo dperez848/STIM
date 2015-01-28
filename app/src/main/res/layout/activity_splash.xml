@@ -1,0 +1,18 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context="pack.tomainventario.tomadeinventario.Config.Splash">
+
+    <TextView android:id="@+id/label1"
+        android:text="@string/toma_inventario"
+        android:textColor="#000000"
+        android:textSize="@dimen/toma_inventario"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:gravity="center"/>
+
+</LinearLayout>

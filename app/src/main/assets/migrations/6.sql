@@ -1,0 +1,2 @@
+ALTER TABLE SBN001D ADD COLUMN checked int;
+ALTER TABLE SBN001D ADD COLUMN imagePrincipal text;

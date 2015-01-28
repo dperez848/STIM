@@ -1,0 +1,89 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="pack.tomainventario.tomadeinventario.AjustarRPU">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView android:id="@+id/txt_rpu"
+            android:text="@string/rpu"
+            android:layout_marginTop="@dimen/margin_top_titulo"
+            android:textSize="@dimen/regular"
+            android:layout_marginLeft="@dimen/check_margin"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText android:id="@+id/edit_rpu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/regular_margin"
+            android:layout_marginLeft="@dimen/regular_margin"
+            android:inputType="text"
+            android:layout_marginBottom="@dimen/margin_top_titulo"
+            android:focusable="false"
+            android:onClick="rpuDialog"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_bottom_peq"
+
+        android:layout_marginTop="@dimen/check_margin"
+        android:orientation="horizontal">
+
+        <TextView android:id="@+id/bienes"
+            android:text="@string/bienes"
+            android:textSize="@dimen/regular"
+            android:layout_marginLeft="@dimen/check_margin"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <ImageView android:id="@+id/filter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/filter"
+            android:contentDescription="@string/content_description_logo"
+            android:adjustViewBounds="true"
+            android:layout_marginRight="@dimen/check_margin"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView android:id="@+id/selec_todos"
+            android:text="@string/selec"
+            android:textSize="@dimen/regular"
+            android:layout_marginLeft="@dimen/check_margin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <CheckBox android:id="@+id/ck_all"
+            android:focusable="false"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="@dimen/check_margin"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ListView android:id="@+id/LstOpciones"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:choiceMode="multipleChoice"/>
+
+
+    </LinearLayout>
+</LinearLayout>

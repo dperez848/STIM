@@ -1,0 +1,27 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <!-- Margin -->
+    <dimen name="activity_horizontal_margin">40dp</dimen>
+    <dimen name="activity_vertical_margin">40dp</dimen>
+    <dimen name="margin_top_button">25dp</dimen>
+    <dimen name="margin_top_titulo">20dp</dimen>
+    <dimen name="margin_bottom_peq">10dp</dimen>
+    <dimen name="check_margin">5dp</dimen>
+    <dimen name="regular_margin">8dp</dimen>
+
+
+    <!-- Text Size -->
+    <dimen name="toma_inventario">22sp</dimen>
+    <dimen name="activity_grid_margin">20dp</dimen>
+    <dimen name="lista_main_titulo">20sp</dimen>
+    <dimen name="lista_main_subs">15sp</dimen>
+    <dimen name="width_img_list_main">70sp</dimen>
+    <dimen name="height_img_list_ain">70sp</dimen>
+    <dimen name="regular">18sp</dimen>
+
+    <!-- Padding -->
+    <dimen name="lateral_padding">70dp</dimen>
+
+
+</resources>

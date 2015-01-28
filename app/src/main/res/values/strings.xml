@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App -->
+    <string name="app_name">Toma de inventaro</string>
+    <string name="action_settings">Settings</string>
+    <string name="content_description_logo">Logo UNEG</string>
+
+    <!-- Login -->
+    <string name="toma_inventario">Sistema de Toma de Inventario Móvil</string>
+    <string name="title_activity_login">Login</string>
+    <string name="btn1">Ingresar</string>
+    <string name="hint_usuario">Usuario</string>
+    <string name="hint_clave">Contraseña</string>
+    <string name="cerrar">Cerrar sesión</string>
+
+    <!-- Aviso -->
+    <string name="aviso">¡Disculpe! no ha realizado la activación del inventario</string>
+    <string name="activarAhora">¡Activar ahora!</string>
+
+    <!-- Galeria -->
+    <!-- Array de imagenes de prueba -->
+    <array name="imagenes_prueba">
+        <item>@android:drawable/ic_menu_mylocation</item>
+        <item>@android:drawable/ic_menu_search</item>
+        <item>@android:drawable/ic_menu_preferences</item>
+        <item>@android:drawable/ic_menu_gallery</item>
+        <item>@android:drawable/ic_menu_report_image</item>
+        <item>@android:drawable/ic_lock_power_off</item>
+    </array>
+
+    <!-- Main -->
+    <string name="menu_add">Nuevo</string>
+    <string name="manual">Asignar manualmente</string>
+    <string name="no_manual">Asignar de la lista</string>
+
+    <!-- Reportes -->
+
+    <!-- Detalle de la toma -->
+    <string name="detalletoma">Detalle de toma de inventario</string>
+    <string name="numero">Numero de Bien: </string>
+    <string name="fecha">Fecha:</string>
+    <string name="dRpu">RPU: </string>
+    <string name="ubic">Ubicación física: </string>
+    <string name="edo">Estado físico: </string>
+    <string name="obsevacion">Observación: </string>
+    <string name="editar">Editar </string>
+
+    <!-- Filtro Bienes -->
+    <string name="sedes">Sede:</string>
+
+    <!-- Ajustar RPU -->
+    <string name="rpu">RPU </string>
+    <string name="bienes">BIENES NACIONALES </string>
+    <string name="selec">Seleccionar todos </string>
+    <string name="tittle_dialog">Elegir RPU </string>
+    <string name="search">Ingrese nombre o # de ficha </string>
+
+    <!-- Nueva Toma -->
+    <string name="nueva_toma">Lista de nuevas tomas de inventario: </string>
+    <string name="buscar">Buscar: </string>
+    <string name="deshacer">Deshacer </string>
+
+    <!-- Asignar manualmente -->
+    <string name="numbn"># Bien Nacional: </string>
+    <string name="serial">Serial: </string>
+    <string name="descripcion">Descripción:</string>
+    <string name="estado">Estado físico: </string>
+    <string name="status">Status: </string>
+    <string name="foto">Gestor de fotos </string>
+    <string name="observacion">Observación: </string>
+    <string name="cambiar">Editar </string>
+
+    <!-- Activacion de Inventario -->
+    <string name="txtNum"># Toma de inventaro: </string>
+    <string name="txtEstatus">Estatus: </string>
+    <string name="txtFecha">Fecha: </string>
+    <string name="txtSede">Sede: </string>
+    <string name="txtUbic">Ubicacion Física: </string>
+    <string name="txtCosto">Unidad de Costo: </string>
+    <string name="txtRPP">RPP: </string>
+    <string name="title_activity_nueva_toma">NuevaToma</string>
+
+    <!-- Consulta -->
+    <string name="consultar">Esta pantalla esta horrible
+        pero mas o menos asi quedará.
+        Aqui va toda la informacion del bien nacional</string>
+    <string-array name="serialnumero">
+        <item>#</item>
+        <item>S</item>
+    </string-array>
+    <string name="unidad">Unidad: </string>
+    <string name="sede">Sede: </string>
+    <string name="usuario">RPU: </string>
+    <string name="rpp">RPP: </string>
+
+    <!-- Visor de fotos -->
+    <string name="close">Cerrar </string>
+
+    <!-- Drawer -->
+    <!-- Lista de titulos de navegacion -->
+    <string-array name="nav_options">
+        <item>Inicio</item>
+        <item>Consultar Bien</item>
+        <item>Ajustar RPU</item>
+        <item>Galeria</item>
+        <item>Sobrantes/Faltantes</item>
+        <item>Cerrar Sesión</item>
+    </string-array>
+    <!-- Lista de iconos de navegacion -->
+    <array name="navigation_iconos">
+        <item>@android:drawable/ic_menu_mylocation</item>
+        <item>@android:drawable/ic_menu_search</item>
+        <item>@android:drawable/ic_menu_preferences</item>
+        <item>@android:drawable/ic_menu_gallery</item>
+        <item>@android:drawable/ic_menu_report_image</item>
+        <item>@android:drawable/ic_lock_power_off</item>
+    </array>
+    <!-- Titulos del drawer -->
+    <string name="title_activity_consultar_bien">ConsultarBien</string>
+    <string name="title_activity_ajustar_rpu">AjustarRPU</string>
+    <string name="title_activity_galeria">Galeria</string>
+    <string name="title_activity_reportes">Reportes</string>
+    <string name="title_activity_activacion_inventario">ActivacionInventario</string>
+    <string name="title_activity_aviso_activacion">AvisoActivacion</string>
+    <string name="title_activity_asignar_lote">AsignarLote</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_splash">Splash</string>
+    <string name="title_activity_detalle_galeria">DetalleGaleria</string>
+    <string name="yesNo">¿Guardar cambios?</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="title_activity_visor_fotos">VisorFotos</string>
+    <string name="title_activity_asignar_manual">Asignar Manualmente</string>
+    <string name="title_activity_toma_filter_dialog">TomaFilterDialog</string>
+    <string name="title_activity_detalle_toma">DetalleToma</string>
+
+</resources>

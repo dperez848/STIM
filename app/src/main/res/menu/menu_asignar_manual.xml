@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="pack.tomainventario.tomadeinventario.AsignarManual">
+    <item
+        android:id="@+id/action_aceptar"
+        android:showAsAction="ifRoom|withText"
+        android:icon="@android:drawable/ic_menu_upload"
+        android:title="@string/menu_add"/>
+
+</menu>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView android:id="@+id/txt_sedes"
+        android:text="@string/sedes"
+        android:layout_marginTop="@dimen/margin_top_titulo"
+        android:textSize="@dimen/regular"
+        android:layout_marginLeft="@dimen/check_margin"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Spinner android:id="@+id/sedes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/margin_top_button"
+        android:layout_weight="1"/>
+    <TextView android:id="@+id/txt_status"
+        android:text="@string/status"
+        android:layout_marginTop="@dimen/margin_top_titulo"
+        android:textSize="@dimen/regular"
+        android:layout_marginLeft="@dimen/check_margin"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Spinner android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/margin_top_button"
+        android:layout_weight="1"/>
+</LinearLayout>

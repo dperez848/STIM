@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="pack.tomainventario.tomadeinventario" >
+
+    <application
+        android:name="com.activeandroid.app.Application"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:logo="@drawable/logo"
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="TomaInventario.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="16" />
+
+        <uses-permission android:name="android.permission.CAMERA" />
+
+        <uses-feature
+            android:name="android.hardware.camera"
+            android:required="false" />
+
+        <activity
+            android:name="pack.tomainventario.tomadeinventario.Config.Splash"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="pack.tomainventario.tomadeinventario.MainActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="pack.tomainventario.tomadeinventario.Login"
+            android:excludeFromRecents="true"
+            android:label="@string/title_activity_login"
+            android:noHistory="true" >
+        </activity>
+        <activity
+            android:name="pack.tomainventario.tomadeinventario.ConsultarBien"
+            android:label="@string/title_activity_consultar_bien" >
+        </activity>
+        <activity
+            android:name="pack.tomainventario.tomadeinventario.AjustarRPU"
+            android:label="@string/title_activity_ajustar_rpu" >
+        </activity>
+        <activity
+            android:name="pack.tomainventario.tomadeinventario.Galeria"
+            android:label="@string/title_activity_galeria" >
+        </activity>
+        <activity
+            android:name="pack.tomainventario.tomadeinventario.Reportes"
+            android:label="@string/title_activity_reportes" >
+        </activity>
+        <activity
+            android:name="pack.tomainventario.tomadeinventario.ActivacionInventario"
+            android:label="@string/title_activity_activacion_inventario" >
+        </activity>
+        <activity
+            android:name="pack.tomainventario.tomadeinventario.NuevaToma"
+            android:label="@string/title_activity_nueva_toma" >
+        </activity>
+        <activity
+            android:name="pack.tomainventario.tomadeinventario.AsignarLote"
+            android:label="@string/title_activity_asignar_lote"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="pack.tomainventario.tomadeinventario.DetalleGaleria"
+            android:label="@string/title_activity_detalle_galeria" >
+        </activity>
+        <activity
+            android:name="pack.tomainventario.tomadeinventario.VisorFotos"
+            android:label="@string/title_activity_visor_fotos"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen" >
+        </activity>
+
+        <provider
+            android:name="pack.tomainventario.tomadeinventario.Config.MyFileContentProvider"
+            android:authorities="com.example.camerademo"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name="pack.tomainventario.tomadeinventario.AsignarManual"
+            android:label="@string/title_activity_asignar_manual" >
+        </activity>
+        <activity
+            android:name="pack.tomainventario.tomadeinventario.DetalleToma"
+            android:label="@string/title_activity_detalle_toma" >
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,1 @@
+drop TABLE SBN052D;

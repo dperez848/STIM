@@ -1,0 +1,1 @@
+ALTER TABLE SBN001D DROP COLUMN edoFis integer;
