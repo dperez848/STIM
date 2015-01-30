@@ -50,7 +50,6 @@ public class SBN051D extends Model {
                 .where("numeroBn = ?", numero)
                 .executeSingle();
     }
-
     public static String getObservacion(SBN051D bn) {
         if(bn!=null){
             Log.e(LOGTAG, "No llegó null");
@@ -69,10 +68,10 @@ public class SBN051D extends Model {
         }
         return "";
     }
-    public static SBN051D getInventario(int numeroBn) {
+    public static List<SBN051D> getInventario(int inventario) {
         return new Select()
                 .from(SBN051D.class)
-                .where("numeroBn = ?", numeroBn)
-                .executeSingle();
+                .where("idInventario = ?", inventario)
+                .execute();
     }
 }

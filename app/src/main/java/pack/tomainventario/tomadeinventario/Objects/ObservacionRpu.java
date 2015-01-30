@@ -5,18 +5,14 @@ import pack.tomainventario.tomadeinventario.DataBase.SIP501V;
 /**
  * Created by tmachado on 16/01/2015.
  */
-public class ObservacionEdo {
-    private int numero, edo;
+public class ObservacionRpu {
+    private int numero;
     private String observacion;
     private SIP501V rpu;
 
     public SIP501V getRpu() {return rpu;}
 
     public void setRpu(SIP501V rpu) {this.rpu = rpu;}
-
-    public int getEdo() {return edo;}
-
-    public void setEdo(int edo) {this.edo = edo;}
 
     public String getObservacion() {
         return observacion;

@@ -52,6 +52,22 @@ public class SBN010D extends Model
         }
         return "Ubicación desconocida";
     }
+
+    public static SBN010D getUbic(String cod) {
+        return new Select()
+                .from(SBN010D.class)
+                .where("codUbic = ?", cod)
+                .executeSingle();
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setCodUbic(String codUbic) {
+        this.codUbic = codUbic;
+    }
+
     @Override
     public String toString() {
         return this.nombre;

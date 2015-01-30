@@ -31,6 +31,8 @@
 
     <!-- Main -->
     <string name="menu_add">Nuevo</string>
+    <string name="delete">Excluir</string>
+    <string name="noRecord">No hay ningun Bien inventariado. Hazlo ahora (+)</string>
     <string name="manual">Asignar manualmente</string>
     <string name="no_manual">Asignar de la lista</string>
 

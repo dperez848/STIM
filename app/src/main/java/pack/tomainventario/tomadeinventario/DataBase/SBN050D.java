@@ -32,6 +32,7 @@ public class SBN050D extends Model {
         super();
     }
 
+
     public SBN050D(Integer idInventario,Integer idInventarioActivo, String fechaInventario,String codUnidad,
                    String codUbic,String fechaUa,Integer status){
         super();

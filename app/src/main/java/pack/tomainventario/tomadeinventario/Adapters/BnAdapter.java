@@ -38,11 +38,14 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
         this.context = context;
         this.data=data;
         this.hasChecked = hasChecked;
-        if(context instanceof Galeria || context instanceof DetalleGaleria || context instanceof NuevaToma)
-            this.listener2 = (IGaleria)context;
-        if( context instanceof NuevaToma)
-            this.listener3 = (Rpu)context;
-        this.listener = (Configuracion)context;
+        if(context instanceof Galeria || context instanceof DetalleGaleria || context instanceof NuevaToma) {
+            this.listener2 = (IGaleria) context;
+            this.listener = (Configuracion)context;
+        }
+        if( context instanceof NuevaToma) {
+            this.listener3 = (Rpu) context;
+            this.listener = (Configuracion)context;
+        }
     }
 
     static class ViewHolder {
@@ -111,7 +114,7 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
                 } else {
                     holder.ck1.setChecked(false);
                 }
-            } else if (hasChecked == 2) {  //Si tiene camarita y ajustes SIN check para "Nueva Toma"
+            } else if (hasChecked == 2){  //Si tiene camarita y ajustes SIN check para "Nueva Toma"
                 holder.ck1.setVisibility(View.GONE);
 
                 if (!(SBN054D.isEmpty(data.get(position).numero))) {
@@ -138,6 +141,9 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
                         listener3.openRpuDialog(data.get(position).numero);
                     }
                 });
+            } else{
+                holder.items.setVisibility(View.GONE);
+                holder.ck1.setVisibility(View.GONE);
             }
         return (item);
     }

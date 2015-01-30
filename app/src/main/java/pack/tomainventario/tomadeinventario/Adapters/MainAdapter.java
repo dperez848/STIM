@@ -4,6 +4,7 @@ package pack.tomainventario.tomadeinventario.Adapters;
 import android.app.Activity;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +23,12 @@ import pack.tomainventario.tomadeinventario.R;
     public class MainAdapter extends ArrayAdapter<Inventoried> {
         private List<Inventoried> data;
             Activity context;
+            private SparseBooleanArray mSelectedItemsIds;
+            private LayoutInflater inflater;
 
             public MainAdapter(Activity context, List<Inventoried> data) {
             super(context, R.layout.layout_list_main,data);
+            mSelectedItemsIds = new SparseBooleanArray();
             this.context = context;
             this.data=data;
             }
@@ -34,7 +38,7 @@ import pack.tomainventario.tomadeinventario.R;
             ViewHolder holder;
 
             if(item == null){
-            LayoutInflater inflater = context.getLayoutInflater();
+            inflater = context.getLayoutInflater();
             item = inflater.inflate(R.layout.layout_list_main, null);
 
             holder = new ViewHolder();
@@ -54,6 +58,7 @@ import pack.tomainventario.tomadeinventario.R;
             holder.descripcion.setText(data.get(position).getDescripcion());
             holder.fecha.setText(data.get(position).getFecha());
             holder.rpu.setText(data.get(position).getRpu());
+            if(SBN051D.getBn(data.get(position).getNumero())!=null)
             holder.ubicacion.setText(SBN010D.getUbicacion(SBN050D.getInv(SBN051D.getBn(data.get(position).getNumero()).idInventario).codUbic));
             if(!data.get(position).getFoto().equals("")) {
                 byte[] imageAsBytes = Base64.decode(data.get(position).getFoto().getBytes(), Base64.DEFAULT);
@@ -62,7 +67,10 @@ import pack.tomainventario.tomadeinventario.R;
             }
         else
             holder.foto.setImageResource(R.drawable.noimagen);
-
+            item.setBackgroundColor(context.getResources().getColor(android.R.color.background_light));
+        if (mSelectedItemsIds.get(position)) {
+            item.setBackgroundColor(context.getResources().getColor(android.R.color.holo_blue_light));
+        }
         return(item);
     }
 
@@ -74,8 +82,37 @@ import pack.tomainventario.tomadeinventario.R;
     public int getCount() {
         return data.size();
     }
+
     public void updateAdapter(List<Inventoried> data){
         this.data=data;
         this.notifyDataSetChanged();
     }
+
+        @Override
+        public void remove(Inventoried object) {
+            data.remove(object);
+            notifyDataSetChanged();
+        }
+
+        public void toggleSelection(int position) {
+            selectView(position, !mSelectedItemsIds.get(position));
+
+        }
+
+        public void removeSelection() {
+            mSelectedItemsIds = new SparseBooleanArray();
+            notifyDataSetChanged();
+        }
+
+        public void selectView(int position, boolean value) {
+            if (value)
+                mSelectedItemsIds.put(position, true);
+            else
+                mSelectedItemsIds.delete(position);
+            notifyDataSetChanged();
+        }
+
+        public SparseBooleanArray getSelectedIds() {
+            return mSelectedItemsIds;
+        }
 }

@@ -19,7 +19,7 @@ import java.util.List;
 import pack.tomainventario.tomadeinventario.Adapters.BnAdapter;
 import pack.tomainventario.tomadeinventario.Config.BaseDrawer;
 import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN203D;
+import pack.tomainventario.tomadeinventario.DataBase.SBN010D;
 import pack.tomainventario.tomadeinventario.DataBase.SIP501V;
 import pack.tomainventario.tomadeinventario.DataBase.SIP517V;
 import pack.tomainventario.tomadeinventario.Dialogs.BnFilterDialog;
@@ -53,7 +53,7 @@ public class AjustarRPU extends BaseDrawer implements Filter,Configuracion,RpuDi
         actionBar.setTitle("Ajustar RPU");
         // ------------------- Configuracion - fin
 
-       data = SBN001D.getAllFiltered(4, "", 0);
+       data = SBN001D.getAllFiltered(4, "", "");
         eRpu = (EditText)findViewById(R.id.edit_rpu);
         lstOpciones = (ListView)findViewById(R.id.LstOpciones);
         adaptador =  new BnAdapter(this,data,1);
@@ -138,15 +138,15 @@ public class AjustarRPU extends BaseDrawer implements Filter,Configuracion,RpuDi
     }
 
     @Override
-    public void filterSelect(SIP517V sede, SBN203D status) {
-        if(sede==null && status==null)
-            data= SBN001D.getAllFiltered(0, "", 0);
-        else if(sede!=null && status ==null)
-            data= SBN001D.getAllFiltered(1, sede.codSede, 0);
+    public void filterSelect(SIP517V sede, SBN010D ubicacion) {
+        if(sede==null && ubicacion==null)
+            data= SBN001D.getAllFiltered(0, "", "");
+        else if(sede!=null && ubicacion ==null)
+            data= SBN001D.getAllFiltered(1, sede.codSede, "");
         else if(sede == null)
-            data= SBN001D.getAllFiltered(2, "", status.codStatus);
+            data= SBN001D.getAllFiltered(2, "", ubicacion.codUbic);
         else
-            data= SBN001D.getAllFiltered(3, sede.codSede, status.codStatus);
+            data= SBN001D.getAllFiltered(3, sede.codSede, ubicacion.codUbic);
 
         if (data.size()==0)
             lstOpciones.setVisibility(View.GONE);
@@ -155,6 +155,7 @@ public class AjustarRPU extends BaseDrawer implements Filter,Configuracion,RpuDi
             lstOpciones.setVisibility(View.VISIBLE);
         }
     }
+
 
     @Override
     public void configDialog(int num) {}

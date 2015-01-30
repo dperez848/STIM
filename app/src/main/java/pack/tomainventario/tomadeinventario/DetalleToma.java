@@ -143,7 +143,7 @@ public class DetalleToma extends FragmentActivity implements RpuDialog.NoticeDia
         bN.pUsuario=rpu.ficha;
         bN.save();
         SBN052D historialRpu=new SBN052D(num, fechaActual(),rpu.ficha,
-                SBN051D.getInventario(num).idInventario, SBN053D.getAll().get(0).idInventarioActivo);
+                SBN052D.getInventario(num).idInventario, SBN053D.getAll().get(0).idInventarioActivo);
         historialRpu.save();
         /*for (SBN052D aData : SBN052D.getAll()){
             Log.e("TAAASSSSSG", "Los selected son " + aData.numeroBn);

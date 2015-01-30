@@ -18,7 +18,7 @@
         android:layout_marginBottom="@dimen/margin_top_button"
         android:layout_weight="1"/>
     <TextView android:id="@+id/txt_status"
-        android:text="@string/status"
+        android:text="@string/ubic"
         android:layout_marginTop="@dimen/margin_top_titulo"
         android:textSize="@dimen/regular"
         android:layout_marginLeft="@dimen/check_margin"

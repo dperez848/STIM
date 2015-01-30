@@ -12,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import pack.tomainventario.tomadeinventario.DataBase.SBN203D;
+import pack.tomainventario.tomadeinventario.DataBase.SBN010D;
 import pack.tomainventario.tomadeinventario.DataBase.SIP517V;
 import pack.tomainventario.tomadeinventario.Interfaces.Filter;
 import pack.tomainventario.tomadeinventario.R;
@@ -23,11 +23,11 @@ import pack.tomainventario.tomadeinventario.R;
 public class BnFilterDialog extends DialogFragment {
     Activity context;
     Filter listener;
-    Spinner sSedes, sStatus;
+    Spinner sSedes, sUbic;
     ArrayAdapter<SIP517V> adapSede;
-    ArrayAdapter<SBN203D> adapStatus;
+    ArrayAdapter<SBN010D> adapUbic;
     SIP517V defec1=new SIP517V();
-    SBN203D defec2=new SBN203D();
+    SBN010D defec2=new SBN010D();
     Button btn1;
 
     public BnFilterDialog(Activity context) {
@@ -44,9 +44,9 @@ public class BnFilterDialog extends DialogFragment {
 
             View dialogView = inflater.inflate(R.layout.dialog_filter_bienes, null);
 
-            sStatus = (Spinner) dialogView.findViewById(R.id.status);
+            sUbic = (Spinner) dialogView.findViewById(R.id.status);
             sSedes = (Spinner) dialogView.findViewById(R.id.sedes);
-        btn1 = (Button) dialogView.findViewById(R.id.btn1);
+            btn1 = (Button) dialogView.findViewById(R.id.btn1);
 
             adapSede = new ArrayAdapter<SIP517V>(getActivity(),android.R.layout.simple_spinner_item);
             adapSede.addAll(SIP517V.getAll());
@@ -57,13 +57,13 @@ public class BnFilterDialog extends DialogFragment {
             sSedes.setAdapter(adapSede);
 
 
-            adapStatus = new ArrayAdapter<SBN203D>(getActivity(),android.R.layout.simple_spinner_item);
-            adapStatus.addAll(SBN203D.getAll());
-            defec2.setCodStatus(0);
-            defec2.setDescripcion("Todos");
-            adapStatus.insert(defec2, 0);
-            sStatus = (Spinner) dialogView.findViewById(R.id.status);
-            sStatus.setAdapter(adapStatus);
+            adapUbic = new ArrayAdapter<SBN010D>(getActivity(),android.R.layout.simple_spinner_item);
+            adapUbic.addAll(SBN010D.getAll());
+            defec2.setCodUbic("0");
+            defec2.setNombre("Todos");
+            adapUbic.insert(defec2, 0);
+            sUbic = (Spinner) dialogView.findViewById(R.id.status);
+            sUbic.setAdapter(adapUbic);
 
             builder
                     .setTitle("Filtrar bienes por:")
@@ -71,16 +71,14 @@ public class BnFilterDialog extends DialogFragment {
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             defec1=SIP517V.getSede(adapSede.getItem(safeLongToInt(sSedes.getSelectedItemId())).codUbic);
-                            defec2=SBN203D.getStatus(adapStatus.getItem(safeLongToInt(sStatus.getSelectedItemId())).codStatus);
+                            defec2=SBN010D.getUbic(adapUbic.getItem(safeLongToInt(sUbic.getSelectedItemId())).codUbic);
                             listener.filterSelect(defec1,defec2);
                         }
                     })
                     .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            // User cancelled the dialog
                         }
                     });
-            // Create the AlertDialog object and return it
             return builder.create();
 
 

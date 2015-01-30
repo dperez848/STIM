@@ -43,5 +43,10 @@ public class SBN052D  extends Model {
                 .from(SBN052D.class)
                 .execute();
     }
-
+    public static SBN052D getInventario(int numeroBn) {
+        return new Select()
+                .from(SBN052D.class)
+                .where("numeroBn = ?", numeroBn)
+                .executeSingle();
+    }
 }

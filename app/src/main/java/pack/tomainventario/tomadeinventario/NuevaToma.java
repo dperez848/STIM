@@ -33,7 +33,7 @@ import pack.tomainventario.tomadeinventario.Interfaces.Configuracion;
 import pack.tomainventario.tomadeinventario.Interfaces.IGaleria;
 import pack.tomainventario.tomadeinventario.Interfaces.Observacion;
 import pack.tomainventario.tomadeinventario.Interfaces.Rpu;
-import pack.tomainventario.tomadeinventario.Objects.ObservacionEdo;
+import pack.tomainventario.tomadeinventario.Objects.ObservacionRpu;
 
 
 public class NuevaToma extends Activity implements Rpu,RpuDialog.NoticeDialogListener, Configuracion,IGaleria,Observacion{
@@ -47,8 +47,8 @@ public class NuevaToma extends Activity implements Rpu,RpuDialog.NoticeDialogLis
     private ActionBar actionBar;
     private String observacion;
     private static final String LOGTAG = "INFORMACION";
-    private List<ObservacionEdo> observacionList = new ArrayList<ObservacionEdo>();
-    private ObservacionEdo dato;
+    private List<ObservacionRpu> observacionList = new ArrayList<ObservacionRpu>();
+    private ObservacionRpu dato;
     private final CharSequence[] items = { "Deshacer"};
 
     @Override
@@ -118,7 +118,7 @@ public class NuevaToma extends Activity implements Rpu,RpuDialog.NoticeDialogLis
     }
 
     public String getObservacion(int bn){
-        for (ObservacionEdo aData : observacionList)
+        for (ObservacionRpu aData : observacionList)
             if(aData.getNumero()==bn)
                 return aData.getObservacion();
         return "N/A";
@@ -135,7 +135,7 @@ public class NuevaToma extends Activity implements Rpu,RpuDialog.NoticeDialogLis
                 if(requestCode==1006) {
                     observacion = data.getStringExtra("observacion");
                     num = data.getIntExtra("numero", 0);
-                    dato = new ObservacionEdo();
+                    dato = new ObservacionRpu();
                     dato.setObservacion(observacion);
                     dato.setNumero(num);
                     observacionList.add(dato);
@@ -306,7 +306,7 @@ public class NuevaToma extends Activity implements Rpu,RpuDialog.NoticeDialogLis
 
     @Override
     public void putObservacion(String observacion, int bn, int edo) {
-        ObservacionEdo obs = new ObservacionEdo();
+        ObservacionRpu obs = new ObservacionRpu();
         obs.setNumero(bn);
         obs.setObservacion(observacion);
         observacionList.add(obs);

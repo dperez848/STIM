@@ -65,7 +65,6 @@ public class SBN001D extends Model
         this.checked = checked;
     }
 
-
     public static List<SBN001D> getAll() {
         return new Select()
                 .from(SBN001D.class)
@@ -78,6 +77,13 @@ public class SBN001D extends Model
                 .from(SBN001D.class)
                 .where("numero = ?", numero)
                 .executeSingle();
+    }
+
+    public static List<SBN001D> getUbic(String ubic) {
+        return new Select()
+                .from(SBN001D.class)
+                .where("codUbic = ?", ubic)
+                .execute();
     }
 
     public static SBN001D getSerial(String serial) {
@@ -146,7 +152,7 @@ public class SBN001D extends Model
                 .and("taken = ?", 0)
                 .execute();
     }
-    public static List<SBN001D> getAllFiltered(int opc, String sede, int status) {
+    public static List<SBN001D> getAllFiltered(int opc, String sede, String ubicacion) {
         List<SBN001D> data= getNoSelected();
         List<SBN001D> retorna= new ArrayList<SBN001D>();
         switch (opc) {
@@ -159,14 +165,14 @@ public class SBN001D extends Model
                 return retorna;
             case 2:
                 for (SBN001D aData : data) 
-                    if (aData.status == status) 
+                    if (aData.codUbic.equals(ubicacion))
                         retorna.add(aData);
                 return retorna;
             case 4:
                 return getAll();
             default:
                 for (SBN001D aData : data) 
-                    if (aData.codSede.equals(sede) && aData.status == status) 
+                    if (aData.codSede.equals(sede) && aData.codUbic.equals(ubicacion))
                         retorna.add(aData);
                 return retorna;
         }

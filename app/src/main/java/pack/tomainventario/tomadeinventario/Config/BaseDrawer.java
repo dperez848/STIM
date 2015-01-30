@@ -79,7 +79,6 @@ public class BaseDrawer extends FragmentActivity {
         NavList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView parent, View view,int position, long id) {
-        Bundle bundle = new Bundle();
             switch (position) {
                 case 0: {
                     Intent intent = new Intent(BaseDrawer.this, MainActivity.class);
@@ -108,7 +107,6 @@ public class BaseDrawer extends FragmentActivity {
                 }
                 default: {
                     SharedPreferences prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
-
                     edit = prefs.edit();
                     edit.putInt("Login", 0);
                     edit.apply();

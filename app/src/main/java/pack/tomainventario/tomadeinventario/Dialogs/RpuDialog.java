@@ -23,7 +23,6 @@ import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
 import pack.tomainventario.tomadeinventario.DataBase.SIP501V;
 import pack.tomainventario.tomadeinventario.DetalleToma;
 import pack.tomainventario.tomadeinventario.NuevaToma;
-import pack.tomainventario.tomadeinventario.Objects.RpuContent;
 import pack.tomainventario.tomadeinventario.R;
 
 /**
@@ -31,7 +30,6 @@ import pack.tomainventario.tomadeinventario.R;
  */
 public class RpuDialog extends DialogFragment {
     private RpuAdapter adaptador2;
-    private RpuContent[] data4;
     private ImageButton bSearch;
     private EditText eSearch;
     private boolean boolSearch=true;
