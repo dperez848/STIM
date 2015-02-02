@@ -20,24 +20,24 @@ import pack.tomainventario.tomadeinventario.DataBase.SBN051D;
 import pack.tomainventario.tomadeinventario.Objects.Inventoried;
 import pack.tomainventario.tomadeinventario.R;
 
-    public class MainAdapter extends ArrayAdapter<Inventoried> {
-        private List<Inventoried> data;
-            Activity context;
-            private SparseBooleanArray mSelectedItemsIds;
-            private LayoutInflater inflater;
+public class MainAdapter extends ArrayAdapter<Inventoried> {
+    private List<Inventoried> data;
+    Activity context;
+    private SparseBooleanArray mSelectedItemsIds;
+    private LayoutInflater inflater;
 
-            public MainAdapter(Activity context, List<Inventoried> data) {
-            super(context, R.layout.layout_list_main,data);
-            mSelectedItemsIds = new SparseBooleanArray();
-            this.context = context;
-            this.data=data;
-            }
+    public MainAdapter(Activity context, List<Inventoried> data) {
+        super(context, R.layout.layout_list_main,data);
+        mSelectedItemsIds = new SparseBooleanArray();
+        this.context = context;
+        this.data=data;
+    }
 
     public View getView(int position, View convertView, ViewGroup parent){
-            View item = convertView;
-            ViewHolder holder;
+        View item = convertView;
+        ViewHolder holder;
 
-            if(item == null){
+        if(item == null){
             inflater = context.getLayoutInflater();
             item = inflater.inflate(R.layout.layout_list_main, null);
 
@@ -49,25 +49,25 @@ import pack.tomainventario.tomadeinventario.R;
             holder.rpu = (TextView)item.findViewById(R.id.rpu);
             holder.foto = (ImageView)item.findViewById(R.id.foto);
             item.setTag(holder);
-            }
-            else{
+        }
+        else{
             holder = (ViewHolder)item.getTag();
-            }
+        }
 
-            holder.numero.setText("" +data.get(position).getNumero());
-            holder.descripcion.setText(data.get(position).getDescripcion());
-            holder.fecha.setText(data.get(position).getFecha());
-            holder.rpu.setText(data.get(position).getRpu());
-            if(SBN051D.getBn(data.get(position).getNumero())!=null)
+        holder.numero.setText("" +data.get(position).getNumero());
+        holder.descripcion.setText(data.get(position).getDescripcion());
+        holder.fecha.setText(data.get(position).getFecha());
+        holder.rpu.setText(data.get(position).getRpu());
+        if(SBN051D.getBn(data.get(position).getNumero())!=null)
             holder.ubicacion.setText(SBN010D.getUbicacion(SBN050D.getInv(SBN051D.getBn(data.get(position).getNumero()).idInventario).codUbic));
-            if(!data.get(position).getFoto().equals("")) {
-                byte[] imageAsBytes = Base64.decode(data.get(position).getFoto().getBytes(), Base64.DEFAULT);
-                holder.foto.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
-                holder.foto.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            }
+        if(!data.get(position).getFoto().equals("")) {
+            byte[] imageAsBytes = Base64.decode(data.get(position).getFoto().getBytes(), Base64.DEFAULT);
+            holder.foto.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
+            holder.foto.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        }
         else
             holder.foto.setImageResource(R.drawable.noimagen);
-            item.setBackgroundColor(context.getResources().getColor(android.R.color.background_light));
+        item.setBackgroundColor(context.getResources().getColor(android.R.color.background_light));
         if (mSelectedItemsIds.get(position)) {
             item.setBackgroundColor(context.getResources().getColor(android.R.color.holo_blue_light));
         }
@@ -75,9 +75,9 @@ import pack.tomainventario.tomadeinventario.R;
     }
 
     static class ViewHolder {
-    TextView numero,descripcion,rpu,ubicacion,fecha;
-    ImageView foto;
-}
+        TextView numero,descripcion,rpu,ubicacion,fecha;
+        ImageView foto;
+    }
     @Override
     public int getCount() {
         return data.size();
@@ -88,31 +88,31 @@ import pack.tomainventario.tomadeinventario.R;
         this.notifyDataSetChanged();
     }
 
-        @Override
-        public void remove(Inventoried object) {
-            data.remove(object);
-            notifyDataSetChanged();
-        }
+    @Override
+    public void remove(Inventoried object) {
+        data.remove(object);
+        notifyDataSetChanged();
+    }
 
-        public void toggleSelection(int position) {
-            selectView(position, !mSelectedItemsIds.get(position));
+    public void toggleSelection(int position) {
+        selectView(position, !mSelectedItemsIds.get(position));
 
-        }
+    }
 
-        public void removeSelection() {
-            mSelectedItemsIds = new SparseBooleanArray();
-            notifyDataSetChanged();
-        }
+    public void removeSelection() {
+        mSelectedItemsIds = new SparseBooleanArray();
+        notifyDataSetChanged();
+    }
 
-        public void selectView(int position, boolean value) {
-            if (value)
-                mSelectedItemsIds.put(position, true);
-            else
-                mSelectedItemsIds.delete(position);
-            notifyDataSetChanged();
-        }
+    public void selectView(int position, boolean value) {
+        if (value)
+            mSelectedItemsIds.put(position, true);
+        else
+            mSelectedItemsIds.delete(position);
+        notifyDataSetChanged();
+    }
 
-        public SparseBooleanArray getSelectedIds() {
-            return mSelectedItemsIds;
-        }
+    public SparseBooleanArray getSelectedIds() {
+        return mSelectedItemsIds;
+    }
 }

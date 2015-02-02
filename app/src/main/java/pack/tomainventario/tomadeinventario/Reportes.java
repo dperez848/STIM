@@ -48,6 +48,7 @@ public class Reportes extends BaseDrawer {
                 });
         Tab.setAdapter(TabAdapter);
         sTabLayout.setViewPager(Tab);
+
     }
 
     @Override

@@ -48,6 +48,7 @@ public class SBN050D extends Model {
     public static List<SBN050D> getAll() {
         return new Select()
                 .from(SBN050D.class)
+                .where("status = ?",1)
                 .orderBy("idInventario ASC")
                 .execute();
     }
@@ -56,6 +57,13 @@ public class SBN050D extends Model {
                 .from(SBN050D.class)
                 .where("idInventario = ?", numero)
                 .executeSingle();
+    }
+    public static Boolean isValid(int numero) {
+        SBN050D valid= new Select()
+                .from(SBN050D.class)
+                .where("idInventario = ?", numero)
+                .executeSingle();
+        return valid.status == 1;
     }
 
 }

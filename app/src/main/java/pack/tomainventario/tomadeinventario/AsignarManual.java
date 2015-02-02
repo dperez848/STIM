@@ -8,9 +8,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,18 +30,18 @@ import pack.tomainventario.tomadeinventario.DataBase.SIP501V;
 import pack.tomainventario.tomadeinventario.Dialogs.RpuDialog;
 
 
-public class AsignarManual extends Activity implements RpuDialog.NoticeDialogListener{
+public class AsignarManual extends Activity implements RpuDialog.NoticeDialogListener,AdapterView.OnItemSelectedListener{
 
     private static final String LOGTAG = "INFORMACION";
     private SharedPreferences prefs;
     private ActionBar actionBar;
     private ArrayAdapter<SBN206D> adapEdo;
     private ArrayAdapter<SBN203D> adapStatus;
-    private Spinner cmbEstado;
+    private Spinner cmbEstado,cmbTipo;
     private SIP501V pUsuario;
-    private int spinnerPosition;
-    private EditText eNumero,eRpu,eSerial,eDescripcion,eStatus, eObservacion;
-    private Button bEditar, bBn, bSerial;
+    private int spinnerPosition,numeroBn;
+    private EditText eCod, eNumero,eRpu,eSerial,eDescripcion,eStatus, eObservacion;
+    private Button bConsultar, bEditar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +53,19 @@ public class AsignarManual extends Activity implements RpuDialog.NoticeDialogLis
 
         prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
 
-        eNumero = (EditText)findViewById(R.id.editNum);
+        eCod = (EditText)findViewById(R.id.editCod);
         eDescripcion = (EditText)findViewById(R.id.editDesc);
-        eSerial = (EditText)findViewById(R.id.editSerial);
         eStatus = (EditText)findViewById(R.id.editStatus);
         eRpu = (EditText)findViewById(R.id.editRPU);
         eObservacion = (EditText)findViewById(R.id.editObs);
+
         bEditar = (Button)findViewById(R.id.editar);
-        bBn = (Button)findViewById(R.id.buscarBN);
-        bSerial = (Button)findViewById(R.id.buscarSR);
+        bConsultar = (Button)findViewById(R.id.bConsultar);
 
 
+        cmbTipo = (Spinner)findViewById(R.id.cmbTipo);
+
+        cmbTipo.setOnItemSelectedListener(AsignarManual.this);
 
         adapEdo = new ArrayAdapter<SBN206D>(this,android.R.layout.simple_spinner_item);
         adapEdo.addAll(SBN206D.getAll());
@@ -72,99 +76,102 @@ public class AsignarManual extends Activity implements RpuDialog.NoticeDialogLis
         adapStatus.addAll(SBN203D.getAll());
 
 
-        bBn.setOnClickListener(new View.OnClickListener()
+
+        bConsultar.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View arg0)
             {
-                if(SBN001D.exists(Integer.parseInt(eNumero.getText().toString()))) {
-                    if(SBN001D.isSelected(Integer.parseInt(eNumero.getText().toString()))
-                            || SBN001D.isTaken(Integer.parseInt(eNumero.getText().toString()))){
-                        DialogInterface.OnClickListener dialogClickListener2 = new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which){
-                                    case DialogInterface.BUTTON_POSITIVE:
-                                        break;
+                if(!eCod.getText().toString().equals("")) {
+                    if(cmbTipo.getSelectedItem().toString().equals("#")){
+                        if(SBN001D.exists(Integer.parseInt(eCod.getText().toString()))) {
+                            if(SBN001D.isSelected(Integer.parseInt(eCod.getText().toString()))
+                                    || SBN001D.isTaken(Integer.parseInt(eCod.getText().toString()))){
+                                DialogInterface.OnClickListener dialogClickListener2 = new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        switch (which){
+                                            case DialogInterface.BUTTON_POSITIVE:
+                                                break;
+                                        }
+                                    }
+                                };
+                                AlertDialog.Builder builder2 = new AlertDialog.Builder(AsignarManual.this);
+                                builder2.setMessage("Bien Nacional repetido").setPositiveButton("Aceptar", dialogClickListener2).show();
+                            }else {
+
+                                eDescripcion.setText(SBN001D.getBn(Integer.parseInt(eCod.getText().toString())).nombre);
+                                eStatus.setText(SBN203D.getStatus(SBN001D.getBn(Integer.parseInt(eCod.getText().toString())).status).descripcion);
+                                eRpu.setText(SIP501V.getPersonal(SBN001D.getBn(Integer.parseInt(eCod.getText().toString())).pUsuario).nombre);
+                                spinnerPosition = adapEdo.getPosition(SBN206D.getEdoDB(SBN001D.getBn(Integer.parseInt(eCod.getText().toString())).edoFis));
+                                cmbEstado.setSelection(spinnerPosition);
+                                pUsuario=SIP501V.getPersonal(SBN001D.getBn(Integer.parseInt(eCod.getText().toString())).pUsuario);
+                                numeroBn=SBN001D.getBn(Integer.parseInt(eCod.getText().toString())).numero;
+                            }
+                        }else{
+                            DialogInterface.OnClickListener dialogClickListener2 = new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    switch (which){
+                                        case DialogInterface.BUTTON_POSITIVE:
+                                            break;
+                                    }
                                 }
-                            }
-                        };
-                        AlertDialog.Builder builder2 = new AlertDialog.Builder(AsignarManual.this);
-                        builder2.setMessage("Bien Nacional repetido").setPositiveButton("Aceptar", dialogClickListener2).show();
-                    }else {
-                        eNumero.setFocusable(true);
-                        eSerial.setFocusable(false);
-                        bBn.setEnabled(true);
-                        bSerial.setEnabled(false);
-                        eSerial.setText(SBN001D.getBn(Integer.parseInt(eNumero.getText().toString())).serial);
-                        eDescripcion.setText(SBN001D.getBn(Integer.parseInt(eNumero.getText().toString())).nombre);
-                        eStatus.setText(SBN203D.getStatus(SBN001D.getBn(Integer.parseInt(eNumero.getText().toString())).status).descripcion);
-                        eRpu.setText(SIP501V.getPersonal(SBN001D.getBn(Integer.parseInt(eNumero.getText().toString())).pUsuario).nombre);
-                        spinnerPosition = adapEdo.getPosition(SBN206D.getEdoDB(SBN001D.getBn(Integer.parseInt(eNumero.getText().toString())).edoFis));
-                        cmbEstado.setSelection(spinnerPosition);
-                        pUsuario=SIP501V.getPersonal(SBN001D.getBn(Integer.parseInt(eNumero.getText().toString())).pUsuario);
-                    }
-                }else{
-                    DialogInterface.OnClickListener dialogClickListener2 = new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            switch (which){
-                                case DialogInterface.BUTTON_POSITIVE:
-                                    break;
-                            }
+                            };
+                            AlertDialog.Builder builder2 = new AlertDialog.Builder(AsignarManual.this);
+                            builder2.setMessage("Numero de Bien incorrecto").setPositiveButton("Aceptar", dialogClickListener2).show();
                         }
-                    };
-                    AlertDialog.Builder builder2 = new AlertDialog.Builder(AsignarManual.this);
-                    builder2.setMessage("Numero de Bien incorrecto").setPositiveButton("Aceptar", dialogClickListener2).show();
+
+                    }
+                    else {
+                        if(SBN001D.exists(SBN001D.getSerial(eCod.getText().toString()).numero)) {
+                            if(SBN001D.isSelected(SBN001D.getSerial(eCod.getText().toString()).numero)
+                                    || SBN001D.isTaken(SBN001D.getSerial(eCod.getText().toString()).numero) ){
+                                DialogInterface.OnClickListener dialogClickListener2 = new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        switch (which){
+                                            case DialogInterface.BUTTON_POSITIVE:
+                                                break;
+                                        }
+                                    }
+                                };
+                                AlertDialog.Builder builder2 = new AlertDialog.Builder(AsignarManual.this);
+                                builder2.setMessage("Bien Nacional repetido").setPositiveButton("Aceptar", dialogClickListener2).show();
+                            }else {
+
+                                eDescripcion.setText(SBN001D.getSerial(eCod.getText().toString()).nombre);
+                                eStatus.setText(SBN203D.getStatus(SBN001D.getSerial(eCod.getText().toString()).status).descripcion);
+                                eRpu.setText(SIP501V.getPersonal(SBN001D.getSerial(eCod.getText().toString()).pUsuario).nombre);
+                                cmbEstado.setPrompt(SBN206D.getEdo(SBN001D.getSerial(eCod.getText().toString()).edoFis));
+                                spinnerPosition = adapEdo.getPosition(SBN206D.getEdoDB(SBN001D.getSerial(eCod.getText().toString()).edoFis));
+                                cmbEstado.setSelection(spinnerPosition);
+                                pUsuario=SIP501V.getPersonal(SBN001D.getBn(Integer.parseInt(eCod.getText().toString())).pUsuario);
+                                numeroBn=SBN001D.getSerial(eCod.getText().toString()).numero;
+                            }
+                        }else{
+                            DialogInterface.OnClickListener dialogClickListener2 = new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    switch (which){
+                                        case DialogInterface.BUTTON_POSITIVE:
+                                            break;
+                                    }
+                                }
+                            };
+                            AlertDialog.Builder builder2 = new AlertDialog.Builder(AsignarManual.this);
+                            builder2.setMessage("Numero de Bien incorrecto").setPositiveButton("Aceptar", dialogClickListener2).show();
+                        }
+                    }
+                }
+                else{
+                    eDescripcion.setText("");
+                    eStatus.setText("");
+                    eRpu.setText("");
+                    eObservacion.setText("");
                 }
             }
         });
-        bSerial.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View arg0)
-            {
-                if(SBN001D.exists(SBN001D.getSerial(eSerial.getText().toString()).numero)) {
-                    if(SBN001D.isSelected(SBN001D.getSerial(eSerial.getText().toString()).numero)
-                            || SBN001D.isTaken(SBN001D.getSerial(eSerial.getText().toString()).numero) ){
-                        DialogInterface.OnClickListener dialogClickListener2 = new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which){
-                                    case DialogInterface.BUTTON_POSITIVE:
-                                        break;
-                                }
-                            }
-                        };
-                        AlertDialog.Builder builder2 = new AlertDialog.Builder(AsignarManual.this);
-                        builder2.setMessage("Bien Nacional repetido").setPositiveButton("Aceptar", dialogClickListener2).show();
-                    }else {
-                        eSerial.setFocusable(true);
-                        eNumero.setFocusable(false);
-                        bBn.setEnabled(false);
-                        bSerial.setEnabled(true);
-                        eNumero.setText("" +SBN001D.getSerial(eSerial.getText().toString()).numero);
-                        eDescripcion.setText(SBN001D.getSerial(eSerial.getText().toString()).nombre);
-                        eStatus.setText(SBN203D.getStatus(SBN001D.getSerial(eSerial.getText().toString()).status).descripcion);
-                        eRpu.setText(SIP501V.getPersonal(SBN001D.getSerial(eSerial.getText().toString()).pUsuario).nombre);
-                        cmbEstado.setPrompt(SBN206D.getEdo(SBN001D.getSerial(eSerial.getText().toString()).edoFis));
-                        spinnerPosition = adapEdo.getPosition(SBN206D.getEdoDB(SBN001D.getSerial(eSerial.getText().toString()).edoFis));
-                        cmbEstado.setSelection(spinnerPosition);
-                        pUsuario=SIP501V.getPersonal(SBN001D.getBn(Integer.parseInt(eSerial.getText().toString())).pUsuario);
-                    }
-                }else{
-                    DialogInterface.OnClickListener dialogClickListener2 = new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            switch (which){
-                                case DialogInterface.BUTTON_POSITIVE:
-                                    break;
-                            }
-                        }
-                    };
-                    AlertDialog.Builder builder2 = new AlertDialog.Builder(AsignarManual.this);
-                    builder2.setMessage("Numero de Bien incorrecto").setPositiveButton("Aceptar", dialogClickListener2).show();
-                }
-            }
-        });
+
         bEditar.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View arg0)
@@ -186,18 +193,18 @@ public class AsignarManual extends Activity implements RpuDialog.NoticeDialogLis
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_aceptar) {
-            SBN001D bN = SBN001D.getBn(Integer.parseInt(eNumero.getText().toString()));
+            SBN001D bN = SBN001D.getBn(numeroBn);
             bN.selected = 1;
             bN.edoFis=adapEdo.getItem(safeLongToInt(cmbEstado.getSelectedItemId())).codEdo;
             bN.pUsuario=pUsuario.ficha;
             bN.save();
-            SBN052D historialRpu=new SBN052D(SBN001D.getBn(Integer.parseInt(eNumero.getText().toString())).numero,
+            SBN052D historialRpu=new SBN052D(SBN001D.getBn(Integer.parseInt(eCod.getText().toString())).numero,
                     fechaActual(),pUsuario.ficha,prefs.getInt("Activar", 0), SBN053D.getAll().get(0).idInventarioActivo);
             historialRpu.save();
             Intent intent = new Intent();
            // Bundle bundle = new Bundle();
             intent.putExtra("observacion",eObservacion.getText().toString());
-            intent.putExtra("numero",Integer.parseInt(eNumero.getText().toString()));
+            intent.putExtra("numero",numeroBn);
             //intent.putExtras(bundle);
             setResult(RESULT_OK, intent);
             finish();
@@ -229,5 +236,16 @@ public class AsignarManual extends Activity implements RpuDialog.NoticeDialogLis
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         return df.format(c.getTime());
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if(position==0) eCod.setInputType(InputType.TYPE_CLASS_NUMBER);
+        else eCod.setInputType(InputType.TYPE_CLASS_TEXT);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

@@ -23,4 +23,5 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':ActiveAndroid-master')
     compile 'com.android.support:support-v4:21.0.0'
+    compile files('libs/jexcelapi.jar')
 }

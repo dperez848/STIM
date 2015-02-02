@@ -47,6 +47,13 @@ public class SBN054D extends Model implements Parcelable {
                 .orderBy("numeroBn ASC")
                 .execute();
     }
+    public static SBN054D getSpecificFoto(int numeroBn, String foto) {
+        return new Select()
+                .from(SBN054D.class)
+                .where("numeroBn = ?", numeroBn)
+                .and("imagen = ?", foto)
+                .executeSingle();
+    }
     public static String getFoto (int num){
         List<SBN054D> data = getAll();
         for (SBN054D aData : data) {

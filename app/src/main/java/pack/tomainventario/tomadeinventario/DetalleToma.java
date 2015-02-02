@@ -16,11 +16,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
+import pack.tomainventario.tomadeinventario.DataBase.SBN010D;
+import pack.tomainventario.tomadeinventario.DataBase.SBN050D;
 import pack.tomainventario.tomadeinventario.DataBase.SBN051D;
 import pack.tomainventario.tomadeinventario.DataBase.SBN052D;
 import pack.tomainventario.tomadeinventario.DataBase.SBN053D;
+import pack.tomainventario.tomadeinventario.DataBase.SBN054D;
+import pack.tomainventario.tomadeinventario.DataBase.SBN203D;
 import pack.tomainventario.tomadeinventario.DataBase.SBN206D;
 import pack.tomainventario.tomadeinventario.DataBase.SIP501V;
+import pack.tomainventario.tomadeinventario.DataBase.SIP517V;
 import pack.tomainventario.tomadeinventario.Dialogs.RpuDialog;
 import pack.tomainventario.tomadeinventario.Dialogs.TomaFilterDialog;
 import pack.tomainventario.tomadeinventario.Interfaces.Observacion;
@@ -34,6 +39,7 @@ public class DetalleToma extends FragmentActivity implements RpuDialog.NoticeDia
     private Button  btnRpu,btnObs,btnFoto;
     private SIP501V pUsuario;
     private byte[] imageAsBytes;
+    private SBN051D inventariado;
     private static final String LOGTAG = "INFORMACION";
 
     @Override
@@ -44,15 +50,18 @@ public class DetalleToma extends FragmentActivity implements RpuDialog.NoticeDia
         // ------------------- Obetiendo informacion de Main
         Bundle bundle = getIntent().getExtras();
         numeroBn = bundle.getInt("numero");
-        descripcion = bundle.getString("descripcion");
-        fecha = bundle.getString("fecha");
-        foto = bundle.getString("foto");
-        sede = bundle.getString("sede");
-        ubic = bundle.getString("ubic");
-        edo = bundle.getString("edo");
-        rpu = bundle.getString("rpu");
-        observacion = bundle.getString("observacion");
-        status = bundle.getString("status");
+        inventariado = SBN051D.getBn(numeroBn);
+
+        descripcion = SBN001D.getDescripcion(inventariado.numeroBn);
+        fecha = inventariado.fecha;
+        foto = SBN054D.getFoto(inventariado.numeroBn);
+        sede = SIP517V.getSede(SBN053D.getAll().get(0).sede).desUbic;
+        ubic = SBN010D.getUbicacion(SBN050D.getInv(SBN051D.getBn(inventariado.numeroBn).idInventario).codUbic);
+        edo = SBN206D.getEdo(SBN001D.getBn(numeroBn).edoFis);
+        rpu = SIP501V.getPersonal(SBN001D.getBn(inventariado.numeroBn).pUsuario).nombre;
+        observacion = SBN051D.getObservacion(SBN051D.getBn(numeroBn));
+        status = SBN203D.getStatus(SBN001D.getBn(numeroBn).status).descripcion;
+
         // ------------------- Obetiendo informacion de Main
 
         editNum = (EditText)findViewById(R.id.editNum);
@@ -166,7 +175,11 @@ public class DetalleToma extends FragmentActivity implements RpuDialog.NoticeDia
     }
 
     @Override
-    public void onBackPressed() { }
+    public void onBackPressed() {
+        Intent intent2 = new Intent();
+        setResult(RESULT_OK, intent2);
+        finish();
+    }
 
     public String fechaActual(){
         Calendar c = Calendar.getInstance();

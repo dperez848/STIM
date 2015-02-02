@@ -15,8 +15,7 @@
     <string name="cerrar">Cerrar sesión</string>
 
     <!-- Aviso -->
-    <string name="aviso">¡Disculpe! no ha realizado la activación del inventario</string>
-    <string name="activarAhora">¡Activar ahora!</string>
+    <string name="aviso">No hay ninguna imagen asociada a este Bien Nacional. Agrégala (+)</string>
 
     <!-- Galeria -->
     <!-- Array de imagenes de prueba -->

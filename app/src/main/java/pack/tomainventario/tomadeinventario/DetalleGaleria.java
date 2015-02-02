@@ -14,6 +14,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
+import android.util.SparseBooleanArray;
+import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +29,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import pack.tomainventario.tomadeinventario.Adapters.GridViewAdapter;
 import pack.tomainventario.tomadeinventario.Config.MyFileContentProvider;
@@ -33,13 +37,13 @@ import pack.tomainventario.tomadeinventario.DataBase.SBN054D;
 import pack.tomainventario.tomadeinventario.Interfaces.IGaleria;
 
 
-public class DetalleGaleria extends Activity implements IGaleria {
+public class DetalleGaleria extends Activity implements IGaleria{
 
     private ImageView imgFavorite;
     private ProgressDialog mDialog;
     private Intent intent;
     private LongOperation run;
-    private ArrayList<SBN054D> data;
+    private List<SBN054D> data = new ArrayList<SBN054D>();
     private Bitmap rotatedBitmap;
     private BitmapFactory.Options options;
     private SBN054D nuevaFoto;
@@ -76,6 +80,63 @@ public class DetalleGaleria extends Activity implements IGaleria {
         data = SBN054D.getBn(numeroBn);
         customGridAdapter = new GridViewAdapter(DetalleGaleria.this, R.layout.row_grid, data);
         gridView.setAdapter(customGridAdapter);
+        gridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
+        gridView.setMultiChoiceModeListener(new GridView.MultiChoiceModeListener() {
+
+            @Override
+            public void onItemCheckedStateChanged(ActionMode mode,int position, long id, boolean checked) {
+                final int checkedCount = gridView.getCheckedItemCount();
+                switch (checkedCount) {
+                    case 0:
+                        mode.setSubtitle(null);
+                        break;
+                    case 1:
+                        mode.setSubtitle("1 seleccionado");
+                        break;
+                    default:
+                        mode.setSubtitle("" + checkedCount + " seleccionados");
+                        break;
+                }
+                customGridAdapter.toggleSelection(position);
+
+            }
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                SBN054D selecteditem;
+                Log.e("aaaa","hizo touch largo");
+                switch (item.getItemId()) {
+                    case R.id.delete:
+                        SparseBooleanArray selected = customGridAdapter.getSelectedIds();
+                        for (int i = (selected.size() - 1); i >= 0; i--) {
+                            if (selected.valueAt(i)) {
+                                selecteditem = (SBN054D) customGridAdapter.getItem(selected.keyAt(i));
+                                SBN054D delete=SBN054D.getSpecificFoto(selecteditem.numeroBn, selecteditem.imagen);
+                                delete.delete();
+                            }
+                        }
+                        data.clear();
+                        data= SBN054D.getAll();
+                        customGridAdapter.updateAdapter(data);
+                        mode.finish();
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+            @Override
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                mode.getMenuInflater().inflate(R.menu.menu_multiple_selection, menu);
+                return true;
+            }
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+                customGridAdapter.removeSelection();
+            }
+            @Override
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+        });
 
         if(!(SBN054D.isEmpty(numeroBn))){
             gridView.setVisibility(View.GONE);
@@ -83,6 +144,7 @@ public class DetalleGaleria extends Activity implements IGaleria {
         else {
             aviso.setVisibility(View.GONE);
         }
+
     }
 
     @Override
@@ -188,10 +250,9 @@ public class DetalleGaleria extends Activity implements IGaleria {
 
     @Override
     public void detalle(int numero, int posicion) {
-
         intent = new Intent(DetalleGaleria.this, VisorFotos.class);
-        intent.putParcelableArrayListExtra("data",  data);
         intent.putExtra("pos",posicion);
+        intent.putExtra("numeroBn",numeroBn);
         startActivity(intent);
     }
 
@@ -201,6 +262,8 @@ public class DetalleGaleria extends Activity implements IGaleria {
         customGridAdapter.addFoto(nuevaFoto);
         customGridAdapter.notifyDataSetChanged();
     }
+
+
 
     private class LongOperation extends AsyncTask<Void, Void, Void> {
         private ByteArrayOutputStream arrayByte;
@@ -212,7 +275,7 @@ public class DetalleGaleria extends Activity implements IGaleria {
             mDialog.setTitle("Cargando");
             mDialog.setMessage("Espere mientras la imagen se carga");
             mDialog.setIndeterminate(true);
-            mDialog.setCancelable(true);
+            mDialog.setCancelable(false);
             mDialog.show();
         }
 
@@ -221,7 +284,7 @@ public class DetalleGaleria extends Activity implements IGaleria {
 
             Matrix matrix= new Matrix();
             options = new BitmapFactory.Options();
-            options.inSampleSize = 8;
+            options.inSampleSize = 6;
             matrix.postRotate(getImageOrientation(out.getAbsolutePath()));
 
             rotatedBitmap = resizeBitmap(Bitmap.createBitmap(BitmapFactory.decodeFile(out.getAbsolutePath(),options),
@@ -255,3 +318,4 @@ public class DetalleGaleria extends Activity implements IGaleria {
         }
     }
 }
+
