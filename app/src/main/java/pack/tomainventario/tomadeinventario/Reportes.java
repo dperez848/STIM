@@ -30,7 +30,7 @@ public class Reportes extends BaseDrawer {
         LayoutInflater layoutInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View activityView = layoutInflater.inflate(R.layout.activity_reportes, null,false);
         rLayout.addView(activityView);
-        NavAdapter.setActual(4);
+        navAdapter.setActual(4);
         actionBar=getActionBar();
         actionBar.setTitle("Sobrantes/Faltantes");
         // -------------------- Configuracion - final

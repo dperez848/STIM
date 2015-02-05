@@ -39,4 +39,10 @@ public class SBN090D extends Model {
                 .where("passwd = ?", value2.toString())
                 .executeSingle();
     }
+    public static SBN090D getUser(Object value) {
+        return new Select()
+                .from(SBN090D.class)
+                .where("user = ?", value.toString())
+                .executeSingle();
+    }
 }

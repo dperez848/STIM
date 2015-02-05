@@ -316,12 +316,17 @@ public class NuevaToma extends Activity implements Rpu,RpuDialog.NoticeDialogLis
     }
 
     @Override
-    public void detalle(int numero, int numero2) {
+    public void detalle(int numero, int position) {
         Intent intent = new Intent(NuevaToma.this, DetalleGaleria.class);
         Bundle bundle = new Bundle();
         bundle.putInt("numero", numero);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    @Override
+    public void onLong(int numero, int numero2) {
+
     }
 
     @Override

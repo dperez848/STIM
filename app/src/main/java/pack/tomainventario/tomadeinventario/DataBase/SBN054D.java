@@ -70,8 +70,7 @@ public class SBN054D extends Model implements Parcelable {
                 .execute();
     }
     public static ArrayList<SBN054D> getBn(int value) {
-        ArrayList<SBN054D> data= new ArrayList<SBN054D>(getBnC(value));
-        return data;
+        return new ArrayList<SBN054D>(getBnC(value));
     }
     public static List<SBN054D> getFirstFotos() {
         List<SBN054D> data = getAll();

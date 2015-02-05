@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,12 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import pack.tomainventario.tomadeinventario.DataBase.SBN053D;
 import pack.tomainventario.tomadeinventario.DataBase.SBN090D;
 
 
 public class Login extends Activity {
     private Button bIngresar;
     private EditText eUser,ePassword;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -44,8 +48,9 @@ public class Login extends Activity {
             public void onClick(View arg0)
             {
 
-                SBN090D regUsuario = SBN090D.getLog(eUser.getText(), ePassword.getText());
-                if(regUsuario == null)
+                //SBN090D regUsuario = SBN090D.getLog(eUser.getText(), ePassword.getText());
+                Log.e("FICHA", "El user es "+ eUser.getText() + " y el passw es "+ ePassword.getText());
+                if(SBN090D.getLog(eUser.getText(),ePassword.getText()) == null)
                 {
                     Toast.makeText(getApplicationContext(),"Usuario o clave incorrecto",Toast.LENGTH_LONG).show();
                     eUser.setText("");
@@ -53,10 +58,23 @@ public class Login extends Activity {
                 }
                 else
                 {
-                    SharedPreferences prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor edit = prefs.edit();
-                    edit.putInt("Login", 1);
+                    prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
+                    edit = prefs.edit();
+
+
+                    if(SBN090D.getUser(eUser.getText()).ficha.equals(SBN053D.getAll().get(0).fichaUa)){
+                        edit.putInt("Login", 2);
+                        Log.e("FICHA", "Dice q es la misma ficha de 53 "+ prefs.getInt("Login",0));
+                    }
+                    else{
+                        edit.putInt("Login", 1);
+                        Toast.makeText(getApplicationContext(),"Usuario invitado",Toast.LENGTH_LONG).show();
+                        Log.e("FICHA", "Dice q NO es la misma ficha de 53 "+ prefs.getInt("Login",0));
+                    }
+
                     edit.apply();
+
+
                     Intent intent = new Intent(Login.this, MainActivity.class);
                     startActivity(intent);
                 }

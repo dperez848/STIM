@@ -93,10 +93,16 @@ public class SBN001D extends Model
                 .executeSingle();
     }
 
-    public static void setAllChecked (int value){
+    public static void setAllChecked (int value,int from){ // from 1 = lote, from 2=ajustar
         List<SBN001D> data = getAll();
         for (SBN001D aData : data) {
-            if(aData.show==1 ) {
+            if(from==1) {
+                if (aData.show == 1) {
+                    SBN001D bN = SBN001D.getBn(aData.numero);
+                    bN.checked = value;
+                    bN.save();
+                }
+            }else{
                 SBN001D bN = SBN001D.getBn(aData.numero);
                 bN.checked = value;
                 bN.save();
@@ -210,6 +216,7 @@ public class SBN001D extends Model
             if(aData.numero==numeroBn ) {
                 SBN001D bN = SBN001D.getBn(aData.numero);
                 bN.selected = 0;
+                bN.checked=0;
                 bN.save();
             }
         }

@@ -48,7 +48,7 @@ public class AjustarRPU extends BaseDrawer implements Filter,Configuracion,RpuDi
         LayoutInflater layoutInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View activityView = layoutInflater.inflate(R.layout.activity_ajustar_rpu, null,false);
         rLayout.addView(activityView);
-        NavAdapter.setActual(2);
+        navAdapter.setActual(2);
         actionBar= getActionBar();
         actionBar.setTitle("Ajustar RPU");
         // ------------------- Configuracion - fin
@@ -65,13 +65,13 @@ public class AjustarRPU extends BaseDrawer implements Filter,Configuracion,RpuDi
             public void onClick(View v) {
                 if(all) {
                     ckAll.setChecked(false);
-                    SBN001D.setAllChecked(0);
+                    SBN001D.setAllChecked(0,2);
                     all = false;
                     adaptador.notifyDataSetChanged();
                 }
                 else {
                     ckAll.setChecked(true);
-                    SBN001D.setAllChecked(1);
+                    SBN001D.setAllChecked(1,2);
                     all=true;
                     adaptador.notifyDataSetChanged();
                 }
@@ -105,7 +105,7 @@ public class AjustarRPU extends BaseDrawer implements Filter,Configuracion,RpuDi
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_aceptar) {
-            SBN001D.setAllChecked(0);
+            SBN001D.setAllChecked(0,2);
             Intent intent = new Intent(AjustarRPU.this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -123,7 +123,7 @@ public class AjustarRPU extends BaseDrawer implements Filter,Configuracion,RpuDi
     @Override
     public void onStop() {
         super.onStop();
-        SBN001D.setAllChecked(0);
+        SBN001D.setAllChecked(0,2);
     }
     @Override
     public Boolean isAll() {

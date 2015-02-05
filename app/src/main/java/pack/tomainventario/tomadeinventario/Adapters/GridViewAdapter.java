@@ -10,12 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
 import pack.tomainventario.tomadeinventario.DataBase.SBN054D;
+import pack.tomainventario.tomadeinventario.DetalleGaleria;
 import pack.tomainventario.tomadeinventario.Interfaces.IGaleria;
 import pack.tomainventario.tomadeinventario.Objects.Inventoried;
 import pack.tomainventario.tomadeinventario.R;
@@ -25,24 +25,25 @@ import pack.tomainventario.tomadeinventario.R;
  */
 public class GridViewAdapter extends ArrayAdapter {
     private Context context;
-    private int layoutResourceId;
+    private int layoutResourceId, shared;
     private SparseBooleanArray mSelectedItemsIds;
     private List<SBN054D> data;
     private IGaleria listener;
 
-    public GridViewAdapter(Context context, int layoutResourceId, List<SBN054D> data) {
+    public GridViewAdapter(Context context, int layoutResourceId, List<SBN054D> data,int shared) {
         super(context, layoutResourceId, data);
         mSelectedItemsIds = new SparseBooleanArray();
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
+        this.shared= shared;
         this.listener = (IGaleria)context;
-    }
+          }
 
     static class ViewHolder {
         TextView imageTitle;
         ImageView image;
-        RelativeLayout layout;
+       // RelativeLayout layout;
     }
 
     @Override
@@ -56,7 +57,6 @@ public class GridViewAdapter extends ArrayAdapter {
             holder = new ViewHolder();
             holder.imageTitle = (TextView) row.findViewById(R.id.text);
             holder.image = (ImageView) row.findViewById(R.id.image);
-            holder.layout = (RelativeLayout) row.findViewById(R.id.layout);
             row.setTag(holder);
         } else {
             holder = (ViewHolder) row.getTag();
@@ -67,9 +67,24 @@ public class GridViewAdapter extends ArrayAdapter {
         holder.image.setScaleType(ImageView.ScaleType.CENTER_CROP);
         holder.imageTitle.setText(data.get(position).nombre);
 
-        holder.layout.setOnClickListener(new View.OnClickListener() {
-                                            public void onClick(View v) {listener.detalle(data.get(position).numeroBn, position);}
-                                        });
+        row.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {listener.detalle(data.get(position).numeroBn, position);}
+        });
+
+
+            if (context instanceof DetalleGaleria) {
+                if(shared==2) {
+                    row.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            listener.onLong(data.get(position).numeroBn, position);
+                            return false;
+                        }
+                    });
+                }
+            }
+
+
         return row;
     }
 
@@ -86,19 +101,8 @@ public class GridViewAdapter extends ArrayAdapter {
         this.notifyDataSetChanged();
     }
 
-
     public void remove(Inventoried object) {
         data.remove(object);
-        notifyDataSetChanged();
-    }
-
-    public void toggleSelection(int position) {
-        selectView(position, !mSelectedItemsIds.get(position));
-
-    }
-
-    public void removeSelection() {
-        mSelectedItemsIds = new SparseBooleanArray();
         notifyDataSetChanged();
     }
 
@@ -108,10 +112,6 @@ public class GridViewAdapter extends ArrayAdapter {
         else
             mSelectedItemsIds.delete(position);
         notifyDataSetChanged();
-    }
-
-    public SparseBooleanArray getSelectedIds() {
-        return mSelectedItemsIds;
     }
 
 }

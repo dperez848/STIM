@@ -65,8 +65,8 @@ public class MainAdapter extends ArrayAdapter<Inventoried> {
             holder.foto.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
             holder.foto.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
-        else
-            holder.foto.setImageResource(R.drawable.noimagen);
+        else  holder.foto.setImageResource(R.drawable.noimagen);
+
         item.setBackgroundColor(context.getResources().getColor(android.R.color.background_light));
         if (mSelectedItemsIds.get(position)) {
             item.setBackgroundColor(context.getResources().getColor(android.R.color.holo_blue_light));

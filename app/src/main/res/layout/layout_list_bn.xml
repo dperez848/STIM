@@ -29,6 +29,12 @@ android:descendantFocusability="blocksDescendants">
         android:layout_height="wrap_content"
         android:textStyle="normal"
         android:textSize="@dimen/lista_main_subs" />
+
+    <TextView android:id="@+id/ubic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        android:textSize="@dimen/lista_main_subs" />
 </LinearLayout>
 
         <CheckBox android:id="@+id/check"

@@ -43,7 +43,7 @@ public class ConsultarBien extends BaseDrawer implements AdapterView.OnItemSelec
         LayoutInflater layoutInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View activityView = layoutInflater.inflate(R.layout.activity_consultar_bien, null,false);
         rLayout.addView(activityView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        NavAdapter.setActual(1);
+        navAdapter.setActual(1);
         actionBar= getActionBar();
         actionBar.setTitle("Consultar Bien Nacional");
         // ------------------- Configuracion - inicio

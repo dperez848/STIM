@@ -6,14 +6,23 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import pack.tomainventario.tomadeinventario.Adapters.NavigationAdapter;
@@ -27,36 +36,39 @@ import pack.tomainventario.tomadeinventario.Reportes;
 
 public class BaseDrawer extends FragmentActivity {
     protected String[] titulos;
-    protected DrawerLayout NavDrawerLayout;
-    protected ListView NavList;
-    protected ArrayList<Item_objct> NavItms;
-    protected TypedArray NavIcons;
+    protected DrawerLayout navDrawerLayout;
+    protected ListView navList;
+    protected ArrayList<Item_objct> navItms;
+    protected TypedArray navIcons;
     protected ActionBarDrawerToggle mDrawerToggle;
-    protected NavigationAdapter NavAdapter;
+    protected NavigationAdapter navAdapter;
     private SharedPreferences.Editor edit;
     private CharSequence mTitle, mDrawerTitle;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_layout);
 
-        NavDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        NavList = (ListView) findViewById(R.id.lista);
-        NavIcons = getResources().obtainTypedArray(R.array.navigation_iconos);
+        prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
+
+        navDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navList = (ListView) findViewById(R.id.lista);
+        navIcons = getResources().obtainTypedArray(R.array.navigation_iconos);
         titulos = getResources().getStringArray(R.array.nav_options);
-        NavItms = new ArrayList<Item_objct>();
+        navItms = new ArrayList<Item_objct>();
 
         for ( int i = 0; i <= 5; i ++ ) {
-                NavItms.add(new Item_objct(titulos[i], NavIcons.getResourceId(i, -1)));
+            navItms.add(new Item_objct(titulos[i], navIcons.getResourceId(i, -1)));
         }
 
-        NavAdapter= new NavigationAdapter(this,NavItms);
-        NavList.setAdapter(NavAdapter);
+        navAdapter= new NavigationAdapter(this,navItms);
+        navList.setAdapter(navAdapter);
         mTitle = mDrawerTitle = getTitle();
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
-                NavDrawerLayout,         /* DrawerLayout object */
+                navDrawerLayout,         /* DrawerLayout object */
                 R.drawable.ic_drawer,  /* Icono de navegacion*/
                 R.string.app_name,  /* "open drawer" description */
                 R.string.app_name  /* "close drawer" description */
@@ -73,48 +85,82 @@ public class BaseDrawer extends FragmentActivity {
             }
         };
 
-        NavDrawerLayout.setDrawerListener(mDrawerToggle);
+        navDrawerLayout.setDrawerListener(mDrawerToggle);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
-        NavList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        navList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView parent, View view,int position, long id) {
-            switch (position) {
-                case 0: {
-                    Intent intent = new Intent(BaseDrawer.this, MainActivity.class);
-                    startActivity(intent);
-                    break;
+                switch (position) {
+                    case 0: {
+                        Intent intent = new Intent(BaseDrawer.this, MainActivity.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    case 1: {
+                        Intent intent = new Intent(BaseDrawer.this, ConsultarBien.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    case 2: {
+                        Log.e("LOG","El login es "+prefs.getInt("Login",0));
+                        if(prefs.getInt("Login",0)==2) {
+                            Intent intent = new Intent(BaseDrawer.this, AjustarRPU.class);
+                            startActivity(intent);
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "Invitado no puede ajustar RPU", Toast.LENGTH_LONG).show();
+                        }
+                        break;
+                    }
+                    case 3: {
+                        Intent intent = new Intent(BaseDrawer.this, Galeria.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    case 4: {
+                        Intent intent = new Intent(BaseDrawer.this, Reportes.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    default: {
+                        SharedPreferences prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
+                        edit = prefs.edit();
+                        edit.putInt("Login", 0);
+                        edit.apply();
+
+                        File directoryFile = new File(Environment.getExternalStorageDirectory() + "/SistemaInventario");
+                        if (!directoryFile.exists()) {
+                            directoryFile.mkdirs();
+                        }
+                        File target = new File(directoryFile, "TomaInventario.db");
+                        if(!target.exists()) {
+                            try {
+                                target.createNewFile();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        Context context = getApplicationContext();
+                        String DB_PATH = "/data/data/"
+                                + context.getPackageName()
+                                + "/databases/";
+                        File origen = new File(DB_PATH, "TomaInventario.db");
+                        Log.e("DIRECCION",""+ origen.getAbsolutePath());
+                        try {
+                            copy(origen,target);
+                            Log.e("COPAR","BUENO");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.e("COPAR","MALO");
+                        }
+
+                        finish();
+                        System.exit(0);
+                        break;
+
+                    }
                 }
-                case 1: {
-                    Intent intent = new Intent(BaseDrawer.this, ConsultarBien.class);
-                    startActivity(intent);
-                    break;
-                }
-                case 2: {
-                    Intent intent = new Intent(BaseDrawer.this, AjustarRPU.class);
-                    startActivity(intent);
-                    break;
-                }
-                case 3: {
-                    Intent intent = new Intent(BaseDrawer.this, Galeria.class);
-                    startActivity(intent);
-                    break;
-                }
-                case 4: {
-                    Intent intent = new Intent(BaseDrawer.this, Reportes.class);
-                    startActivity(intent);
-                    break;
-                }
-                default: {
-                    SharedPreferences prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
-                    edit = prefs.edit();
-                    edit.putInt("Login", 0);
-                    edit.apply();
-                    finish();
-                    System.exit(0);
-                    break;
-                }
-            }
             }
         });
         //--NavigationDrawer - Fin
@@ -136,4 +182,19 @@ public class BaseDrawer extends FragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
+
+    public void copy(File src, File dst) throws IOException {
+        InputStream in = new FileInputStream(src);
+        OutputStream out = new FileOutputStream(dst);
+
+        // Transfer bytes from in to out
+        byte[] buf = new byte[1024];
+        int len;
+        while ((len = in.read(buf)) > 0) {
+            out.write(buf, 0, len);
+        }
+        in.close();
+        out.close();
+    }
+
 }

@@ -33,14 +33,14 @@ public class Galeria extends BaseDrawer implements IGaleria {
         LayoutInflater layoutInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View activityView = layoutInflater.inflate(R.layout.activity_galeria, null,false);
         rLayout.addView(activityView);
-        NavAdapter.setActual(3);
+        navAdapter.setActual(3);
         actionBar= getActionBar();
         actionBar.setTitle("Galería");
 
         // ------------------- Configuracion - inicio
         gridView = (GridView) findViewById(R.id.gridView);
         data= SBN054D.getFirstFotos();
-        customGridAdapter = new GridViewAdapter(Galeria.this, R.layout.row_grid, data);
+        customGridAdapter = new GridViewAdapter(Galeria.this, R.layout.row_grid, data,0);
         gridView.setAdapter(customGridAdapter);
     }
 
@@ -57,11 +57,16 @@ public class Galeria extends BaseDrawer implements IGaleria {
     }
 
     @Override
-    public void detalle(int numero, int numero2) {
+    public void detalle(int numero, int position) {
         Intent intent = new Intent(Galeria.this, DetalleGaleria.class);
         Bundle bundle = new Bundle();
         bundle.putInt("numero", numero);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    @Override
+    public void onLong(int numero, int numero2) {
+
     }
 }

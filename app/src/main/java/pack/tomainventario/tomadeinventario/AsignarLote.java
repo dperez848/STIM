@@ -110,14 +110,14 @@ public class AsignarLote extends Activity implements Configuracion,Filter {
             public void onClick(View v) {
                 if(all) {
                     ckAll.setChecked(false);
-                    SBN001D.setAllChecked(0);
+                    SBN001D.setAllChecked(0,1);
                     SBN001D.setAllSelected(0);
                     all = false;
                     adaptador.notifyDataSetChanged();
                 }
                 else {
                     ckAll.setChecked(true);
-                    SBN001D.setAllChecked(1);
+                    SBN001D.setAllChecked(1,1);
                     SBN001D.setAllSelected(1);
                     all=true;
                     adaptador.notifyDataSetChanged();
@@ -136,7 +136,7 @@ public class AsignarLote extends Activity implements Configuracion,Filter {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_aceptar) {
-            SBN001D.setAllChecked(0);
+            SBN001D.setAllChecked(0,1);
             Intent intent1 = new Intent();
             setResult(RESULT_OK, intent1);
             finish();

@@ -30,6 +30,7 @@ public class Splash extends Activity {
     private SBN053D inventarioActivo;
     private SBN054D fotoBN;
     private SBN001D bN;
+    private SBN090D user;
     private SBN203D status;
     private SBN206D estado;
     private SharedPreferences.Editor edit;
@@ -51,16 +52,9 @@ public class Splash extends Activity {
 
         if(first != 1){ //Si es la primera vez q abre la app
 
-            SBN090D logUser = new SBN090D();
-            logUser.user = "a";
-            logUser.ficha = "0001";
-            logUser.nombre = "Manuel";
-            logUser.passwd = "a";
-            logUser.save();
-
             inventarioActivo = new SBN053D();inventarioActivo.idInventarioActivo= 1;inventarioActivo.anno = 2015;
             inventarioActivo.trimestre = 1;inventarioActivo.sede = "atco";inventarioActivo.fechaUa = "20-11-12";
-            inventarioActivo.fichaUa = "fichapc";inventarioActivo.status = "activo";
+            inventarioActivo.fichaUa = "1";inventarioActivo.status = "activo";
             inventarioActivo.deviceId = android_id;inventarioActivo.obervacion = "observacion";inventarioActivo.save();
 
             fotoBN = new SBN054D();fotoBN.idInventario = 1;fotoBN.idInventarioActivo = 1;fotoBN.numeroBn =1;
@@ -119,6 +113,67 @@ public class Splash extends Activity {
             bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "upt";bN.numFicha = "111";
             bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
 
+            bN = new SBN001D();bN.numero = 11;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+
+            bN = new SBN001D();bN.numero = 12;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 13;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 14;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 15;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 16;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 17;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 18;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 19;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 20;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+
+
+            bN = new SBN001D();bN.numero = 21;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 22;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 23;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 24;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 25;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 26;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 27;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 28;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 29;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+
             uEjec = new SIP528V(); uEjec.desUejec = "Unidad1";uEjec.codUejec = "ubic1";uEjec.codUbic = "ubic1";uEjec.save();
             uEjec = new SIP528V(); uEjec.desUejec = "Unidad2";uEjec.codUejec = "ubic2";uEjec.codUbic = "ubic2";uEjec.save();
             uEjec = new SIP528V(); uEjec.desUejec = "Unidad3";uEjec.codUejec = "ubic3";uEjec.codUbic = "ubic3";uEjec.save();
@@ -150,6 +205,9 @@ public class Splash extends Activity {
             ubic = new SBN010D(); ubic.codUbic = "codigo3u"; ubic.codUejec = "codigo1";ubic.nombre="ubicacion 3";
             ubic.codSede="codigo1"; ubic.respUa="22222"; ubic.save();
 
+            user = new SBN090D(); user.ficha = "1"; user.nombre = "Daniela"; user.passwd = "a"; user.user = "a"; user.save();
+            user = new SBN090D(); user.ficha = "2"; user.nombre = "DanielaP"; user.passwd = "b"; user.user = "b"; user.save();
+
             edit = prefs.edit();
             edit.putInt("First", 1);
             edit.putInt("Activar", 0);
@@ -163,9 +221,7 @@ public class Splash extends Activity {
 
                     int act = prefs.getInt("Act", 0);
                     int regUsuario = prefs.getInt("Login", 0);
-                    edit = prefs.edit();
-                    edit.putInt("Login", 1);
-                    edit.apply();
+
                     if(regUsuario != 1){
                         Intent intent = new Intent(Splash.this, Login.class);
                         startActivity(intent);
@@ -174,6 +230,7 @@ public class Splash extends Activity {
                     else{
 
                         if(act != 1){
+
                             Intent intent = new Intent(Splash.this, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -186,6 +243,7 @@ public class Splash extends Activity {
                             startActivity(intent);
                             finish();
                         }
+
                     }
                 }
             }, SPLASH_DISPLAY_LENGTH);

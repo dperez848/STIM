@@ -1,6 +1,7 @@
 package pack.tomainventario.tomadeinventario.Adapters;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import pack.tomainventario.tomadeinventario.AjustarRPU;
+import pack.tomainventario.tomadeinventario.AsignarLote;
 import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
+import pack.tomainventario.tomadeinventario.DataBase.SBN010D;
 import pack.tomainventario.tomadeinventario.DataBase.SBN054D;
 import pack.tomainventario.tomadeinventario.DetalleGaleria;
 import pack.tomainventario.tomadeinventario.Galeria;
@@ -33,12 +37,14 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
     private IGaleria listener2;
     private Rpu listener3;
 
+
     public BnAdapter(Activity context, List<SBN001D> data, int hasChecked) {
         super(context, R.layout.layout_list_bn,data);
         this.context = context;
         this.data=data;
         this.hasChecked = hasChecked;
-        if(context instanceof Galeria || context instanceof DetalleGaleria || context instanceof NuevaToma) {
+        if(context instanceof Galeria || context instanceof DetalleGaleria
+                || context instanceof NuevaToma) {
             this.listener2 = (IGaleria) context;
             this.listener = (Configuracion)context;
         }
@@ -46,12 +52,13 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
             this.listener3 = (Rpu) context;
             this.listener = (Configuracion)context;
         }
+        if( context instanceof AsignarLote || context instanceof AjustarRPU) {
+            this.listener = (Configuracion)context;
+        }
     }
 
     static class ViewHolder {
-        TextView numero;
-        TextView descripcion;
-        TextView serial;
+        TextView numero, descripcion, serial, ubic;
         CheckBox ck1;
         LinearLayout items;
         ImageButton camara,ajustes,rpu;
@@ -68,6 +75,7 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
             holder.numero = (TextView)item.findViewById(R.id.numero);
             holder.descripcion = (TextView)item.findViewById(R.id.descripcion);
             holder.serial = (TextView)item.findViewById(R.id.serial);
+            holder.ubic = (TextView)item.findViewById(R.id.ubic);
             holder.ck1 = (CheckBox)item.findViewById(R.id.check);
             holder.items = (LinearLayout)item.findViewById(R.id.items);
             holder.camara = (ImageButton)item.findViewById(R.id.camera);
@@ -83,6 +91,7 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
             holder.numero.setText("" + data.get(position).numero);
             holder.descripcion.setText(data.get(position).nombre);
             holder.serial.setText(data.get(position).serial);
+            holder.ubic.setText(SBN010D.getUbicacion(data.get(position).codUbic));
 
             if (hasChecked == 1) { //Si tiene solo check para "Ajustar RPU" y "Asignar por lote"
                 holder.items.setVisibility(View.GONE);
@@ -91,6 +100,7 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
                     public void onClick(View v) {
 
                         if (holder.ck1.isChecked()) {
+                            Log.e("aaa", "ischeck() " + holder.ck1.isChecked());
                             SBN001D bN = SBN001D.getBn(data.get(position).numero);
                             bN.checked = 1;
                             bN.selected = 1;
@@ -99,6 +109,7 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
                                 listener.setCheck(true);
                             }
                         } else {
+                            Log.e("aaa", "ischeck() " + holder.ck1.isChecked());
                             SBN001D bN = SBN001D.getBn(data.get(position).numero);
                             bN.checked = 0;
                             bN.selected = 0;
@@ -106,6 +117,32 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
                             if (listener.isAll()) {
                                 listener.setCheck(false);
                             }
+                        }
+                    }
+                });
+                item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!holder.ck1.isChecked()) {
+                            Log.e("aaa", "ischeck() " + holder.ck1.isChecked());
+                            SBN001D bN = SBN001D.getBn(data.get(position).numero);
+                            bN.checked = 1;
+                            bN.selected = 1;
+                            bN.save();
+                            if (SBN001D.isFull()) {
+                                listener.setCheck(true);
+                            }
+                            holder.ck1.setChecked(true);
+                        } else {
+
+                            SBN001D bN = SBN001D.getBn(data.get(position).numero);
+                            bN.checked = 0;
+                            bN.selected = 0;
+                            bN.save();
+                            if (listener.isAll()) {
+                                listener.setCheck(false);
+                            }
+                            holder.ck1.setChecked(false);
                         }
                     }
                 });
@@ -147,6 +184,7 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
             }
         return (item);
     }
+
     public void updateAdapter(List<SBN001D> data){
         this.data=data;
         this.notifyDataSetChanged();
@@ -155,4 +193,6 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
     public int getCount() {
         return data.size();
     }
+
+
 }

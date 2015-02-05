@@ -2,8 +2,12 @@ package pack.tomainventario.tomadeinventario;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,9 +18,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.Log;
-import android.util.SparseBooleanArray;
-import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +38,7 @@ import pack.tomainventario.tomadeinventario.DataBase.SBN054D;
 import pack.tomainventario.tomadeinventario.Interfaces.IGaleria;
 
 
-public class DetalleGaleria extends Activity implements IGaleria{
+public class DetalleGaleria extends Activity implements IGaleria {
 
     private ImageView imgFavorite;
     private ProgressDialog mDialog;
@@ -55,7 +56,8 @@ public class DetalleGaleria extends Activity implements IGaleria{
     private GridViewAdapter customGridAdapter;
     private final int CAMERA_RESULT = 1;
     private ActionBar actionBar;
-
+    private final CharSequence[] items = { "Deshacer"};
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +72,7 @@ public class DetalleGaleria extends Activity implements IGaleria{
         actionBar.setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
         actionBar.setTitle("Detalle");
         // ------------------- Configuracion - fin
-
+        prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
         // ------------------- Obetiendo informacion de BN en Galeria
         Bundle bundle = getIntent().getExtras();
         numeroBn = bundle.getInt("numero");
@@ -78,72 +80,11 @@ public class DetalleGaleria extends Activity implements IGaleria{
         gridView = (GridView) findViewById(R.id.gridViewDetalle);
         aviso = (TextView) findViewById(R.id.d_aviso);
         data = SBN054D.getBn(numeroBn);
-        customGridAdapter = new GridViewAdapter(DetalleGaleria.this, R.layout.row_grid, data);
+        customGridAdapter = new GridViewAdapter(DetalleGaleria.this, R.layout.row_grid, data, prefs.getInt("Login",0));
         gridView.setAdapter(customGridAdapter);
-        gridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
-        gridView.setMultiChoiceModeListener(new GridView.MultiChoiceModeListener() {
 
-            @Override
-            public void onItemCheckedStateChanged(ActionMode mode,int position, long id, boolean checked) {
-                final int checkedCount = gridView.getCheckedItemCount();
-                switch (checkedCount) {
-                    case 0:
-                        mode.setSubtitle(null);
-                        break;
-                    case 1:
-                        mode.setSubtitle("1 seleccionado");
-                        break;
-                    default:
-                        mode.setSubtitle("" + checkedCount + " seleccionados");
-                        break;
-                }
-                customGridAdapter.toggleSelection(position);
-
-            }
-            @Override
-            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                SBN054D selecteditem;
-                Log.e("aaaa","hizo touch largo");
-                switch (item.getItemId()) {
-                    case R.id.delete:
-                        SparseBooleanArray selected = customGridAdapter.getSelectedIds();
-                        for (int i = (selected.size() - 1); i >= 0; i--) {
-                            if (selected.valueAt(i)) {
-                                selecteditem = (SBN054D) customGridAdapter.getItem(selected.keyAt(i));
-                                SBN054D delete=SBN054D.getSpecificFoto(selecteditem.numeroBn, selecteditem.imagen);
-                                delete.delete();
-                            }
-                        }
-                        data.clear();
-                        data= SBN054D.getAll();
-                        customGridAdapter.updateAdapter(data);
-                        mode.finish();
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-            @Override
-            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                mode.getMenuInflater().inflate(R.menu.menu_multiple_selection, menu);
-                return true;
-            }
-            @Override
-            public void onDestroyActionMode(ActionMode mode) {
-                customGridAdapter.removeSelection();
-            }
-            @Override
-            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                return false;
-            }
-        });
-
-        if(!(SBN054D.isEmpty(numeroBn))){
-            gridView.setVisibility(View.GONE);
-        }
-        else {
-            aviso.setVisibility(View.GONE);
-        }
+        if(!(SBN054D.isEmpty(numeroBn))) gridView.setVisibility(View.GONE);
+        else aviso.setVisibility(View.GONE);
 
     }
 
@@ -151,6 +92,14 @@ public class DetalleGaleria extends Activity implements IGaleria{
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_detalle_galeria, menu);
         return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if(prefs.getInt("Login",0)!=2){
+            menu.findItem(R.id.action_add).setVisible(false);
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -249,11 +198,29 @@ public class DetalleGaleria extends Activity implements IGaleria{
     }
 
     @Override
-    public void detalle(int numero, int posicion) {
+    public void detalle(int numero, int position) {
         intent = new Intent(DetalleGaleria.this, VisorFotos.class);
-        intent.putExtra("pos",posicion);
+        intent.putExtra("pos",position);
         intent.putExtra("numeroBn",numeroBn);
         startActivity(intent);
+    }
+
+    @Override
+    public void onLong(int numero, final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(DetalleGaleria.this);
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                SBN054D selecteditem;
+                List<SBN054D> info;
+                selecteditem = (SBN054D) customGridAdapter.getItem(position);
+                SBN054D delete = SBN054D.getSpecificFoto(selecteditem.numeroBn, selecteditem.imagen);
+                delete.delete();
+                info = SBN054D.getBn(selecteditem.numeroBn);
+                customGridAdapter.updateAdapter(info);
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     public void dataSet() {
@@ -262,8 +229,6 @@ public class DetalleGaleria extends Activity implements IGaleria{
         customGridAdapter.addFoto(nuevaFoto);
         customGridAdapter.notifyDataSetChanged();
     }
-
-
 
     private class LongOperation extends AsyncTask<Void, Void, Void> {
         private ByteArrayOutputStream arrayByte;
