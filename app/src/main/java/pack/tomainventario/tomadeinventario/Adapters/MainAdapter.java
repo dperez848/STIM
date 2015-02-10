@@ -4,6 +4,7 @@ package pack.tomainventario.tomadeinventario.Adapters;
 import android.app.Activity;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ public class MainAdapter extends ArrayAdapter<Inventoried> {
         mSelectedItemsIds = new SparseBooleanArray();
         this.context = context;
         this.data=data;
+
     }
 
     public View getView(int position, View convertView, ViewGroup parent){
@@ -114,5 +116,15 @@ public class MainAdapter extends ArrayAdapter<Inventoried> {
 
     public SparseBooleanArray getSelectedIds() {
         return mSelectedItemsIds;
+    }
+
+    @Override
+    public Inventoried getItem(int position) {
+        return data.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return data.get(position).hashCode();
     }
 }

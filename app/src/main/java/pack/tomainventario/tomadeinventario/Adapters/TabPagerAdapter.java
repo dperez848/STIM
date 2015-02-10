@@ -11,17 +11,23 @@ import pack.tomainventario.tomadeinventario.Sobrantes;
 public class TabPagerAdapter extends FragmentStatePagerAdapter {
 
     private String[] titles = { "Faltantes", "Sobrantes" };
+    private String ubic;
+    private Faltantes fFaltante ;
+    private Sobrantes fSobrantes ;
 
-    public TabPagerAdapter(FragmentManager fm) {
+    public TabPagerAdapter(FragmentManager fm, String ubic) {
         super(fm);
+        this.ubic=ubic;
+        fFaltante = new Faltantes(ubic);
+        fSobrantes = new Sobrantes(ubic);
     }
     @Override
     public Fragment getItem(int i) {
         switch (i) {
             case 0:
-                return new Faltantes();
+                return  fFaltante;
             case 1:
-                return new Sobrantes();
+                return  fSobrantes;
         }
         return null;
     }
@@ -34,5 +40,12 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return titles[position];
+    }
+
+    public void updateAdapter(String ubic){
+        this.ubic=ubic;
+        fFaltante.updateData(ubic);
+        fSobrantes.updateData(ubic);
+        notifyDataSetChanged();
     }
 }

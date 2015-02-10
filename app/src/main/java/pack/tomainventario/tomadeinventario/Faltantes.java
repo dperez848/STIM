@@ -20,8 +20,16 @@ public class Faltantes extends android.support.v4.app.Fragment {
     private BnAdapter adaptador;
     private View view;
     private List<SBN050D> tomas;
-    private List<SBN051D> inventariados;
     private List<SBN001D> lstFaltantes, bienes;
+    private String ubic;
+
+    public Faltantes() {
+    }
+
+    public Faltantes(String ubic) {
+        this.ubic = ubic;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -29,10 +37,9 @@ public class Faltantes extends android.support.v4.app.Fragment {
 
         lstFaltantes = new ArrayList<SBN001D>();
         bienes= new ArrayList<SBN001D>();
-        tomas=SBN050D.getAll();
+        tomas=SBN050D.getAllUbic(ubic);
         for (SBN050D aData : tomas){
             bienes= SBN001D.getUbic(aData.codUbic);
-            inventariados=SBN051D.getInventario(aData.idInventario);
             for (SBN001D aBien : bienes){
                 if(SBN051D.getBn(aBien.numero)==null){
                     lstFaltantes.add(aBien);
@@ -45,5 +52,22 @@ public class Faltantes extends android.support.v4.app.Fragment {
         lView.setAdapter(adaptador);
 
         return view;
+    }
+
+    public void updateData(String ubicacion) {
+        ubic=ubicacion;
+
+        lstFaltantes = new ArrayList<SBN001D>();
+        bienes= new ArrayList<SBN001D>();
+        tomas=SBN050D.getAllUbic(ubic);
+        for (SBN050D aData : tomas){
+            bienes= SBN001D.getUbic(aData.codUbic);
+            for (SBN001D aBien : bienes){
+                if(SBN051D.getBn(aBien.numero)==null){
+                    lstFaltantes.add(aBien);
+                }
+            }
+        }
+        adaptador.updateAdapter(lstFaltantes);
     }
 }

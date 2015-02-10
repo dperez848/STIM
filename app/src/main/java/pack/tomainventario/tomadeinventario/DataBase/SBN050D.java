@@ -52,6 +52,14 @@ public class SBN050D extends Model {
                 .orderBy("idInventario ASC")
                 .execute();
     }
+    public static List<SBN050D> getAllUbic(String ubic) {
+        return new Select()
+                .from(SBN050D.class)
+                .where("status = ?",1)
+                .and("codUbic = ?",ubic)
+                .orderBy("idInventario ASC")
+                .execute();
+    }
     public static SBN050D getInv(int numero) {
         return new Select()
                 .from(SBN050D.class)

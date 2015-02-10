@@ -191,6 +191,14 @@ public class SBN001D extends Model
                 return true;
         return false;
     }
+
+    public static Boolean existsSerial (String serial){
+        List<SBN001D> data = getAll();
+        for (SBN001D aData : data)
+            if (aData.serial.equals(serial))
+                return true;
+        return false;
+    }
     
     public static Boolean isSelected (int numero){
         SBN001D data = getBn(numero);

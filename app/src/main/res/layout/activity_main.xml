@@ -5,7 +5,8 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <ListView android:id="@+id/LstOpciones"
+    <pack.tomainventario.tomadeinventario.Config.EndlessListView
+        android:id="@+id/LstOpciones"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:drawSelectorOnTop="false"

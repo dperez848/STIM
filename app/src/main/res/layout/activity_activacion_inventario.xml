@@ -55,10 +55,11 @@
             android:layout_marginTop="@dimen/margin_top_titulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"/>
+            android:layout_gravity="top"/>
 
         <Spinner android:id="@+id/cmbStatus"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <LinearLayout
@@ -91,7 +92,7 @@
             android:layout_marginTop="@dimen/margin_top_titulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"/>
+            android:layout_gravity="top"/>
 
         <Spinner android:id="@+id/cmbUbic"
             android:layout_width="match_parent"
@@ -109,7 +110,7 @@
             android:layout_marginTop="@dimen/margin_top_titulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"/>
+            android:layout_gravity="top"/>
 
         <Spinner android:id="@+id/cmbCosto"
             android:layout_width="match_parent"

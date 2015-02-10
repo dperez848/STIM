@@ -21,6 +21,13 @@ public class Sobrantes extends android.support.v4.app.Fragment {
     private View view;
     private List<SBN051D> inventariados;
     private List<SBN001D> lstSobrantes;
+    private String ubic;
+
+    public Sobrantes(String ubic) {
+        this.ubic = ubic;
+    }
+    public Sobrantes() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,7 +37,8 @@ public class Sobrantes extends android.support.v4.app.Fragment {
         lstSobrantes = new ArrayList<SBN001D>();
         inventariados=SBN051D.getAll();
         for (SBN051D aData : inventariados)
-            if (!SBN001D.getBn(aData.numeroBn).codUbic.equals(SBN050D.getInv(aData.idInventario).codUbic))
+            if (!SBN001D.getBn(aData.numeroBn).codUbic.equals(SBN050D.getInv(aData.idInventario).codUbic)
+                    && SBN050D.getInv(aData.idInventario).codUbic.equals(ubic))
                 lstSobrantes.add(SBN001D.getBn(aData.numeroBn));
 
         Log.e("TAAAG", "la cantidad de lstSobrantes " + lstSobrantes.size());
@@ -38,4 +46,18 @@ public class Sobrantes extends android.support.v4.app.Fragment {
         lView= ((ListView)view.findViewById(R.id.LstOpciones));
         lView.setAdapter(adaptador);
         return view;
-    }}
+    }
+
+    public void updateData(String ubicacion) {
+        ubic=ubicacion;
+        lstSobrantes = new ArrayList<SBN001D>();
+        inventariados=SBN051D.getAll();
+        for (SBN051D aData : inventariados)
+            if (!SBN001D.getBn(aData.numeroBn).codUbic.equals(SBN050D.getInv(aData.idInventario).codUbic)
+                    && SBN050D.getInv(aData.idInventario).codUbic.equals(ubic))
+                lstSobrantes.add(SBN001D.getBn(aData.numeroBn));
+        adaptador.updateAdapter(lstSobrantes);
+    }
+
+
+}

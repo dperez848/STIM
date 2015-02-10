@@ -32,11 +32,10 @@ public class ActivacionInventario extends FragmentActivity implements RpuDialog.
     private EditText editFecha, editRpp, editSede, editNum;
     private ActionBar actionBar;
     private SIP501V pUsuario;
-    private ArrayAdapter<SIP517V> adapSede;
     private ArrayAdapter<SIP528V> adapUCosto;
     private ArrayAdapter<SBN010D> adapUbic;
     private ArrayAdapter<SBN203D> adapStatus;
-    private Spinner cmbSede,cmbCosto,cmbUbic,cmbStatus;
+    private Spinner cmbCosto,cmbUbic,cmbStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

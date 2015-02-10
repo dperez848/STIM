@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import pack.tomainventario.tomadeinventario.Config.BaseDrawer;
 import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
@@ -68,32 +69,59 @@ public class ConsultarBien extends BaseDrawer implements AdapterView.OnItemSelec
             public void onClick(View arg0)
             {
                 if(!eCod.getText().toString().equals("")) {
-                    if(cmbTipo.getSelectedItem().toString().equals("#")){
-                        numero = Integer.parseInt(eCod.getText().toString());
-                        eNumero.setText("" + SBN001D.getBn(numero).numero);
-                        eDescripcion.setText(SBN001D.getBn(numero).nombre);
-                        eSede.setText(SIP517V.getSede(SBN001D.getBn(numero).codSede).desUbic);
-                        eUbic.setText(SBN010D.getUbicacion(SBN001D.getBn(numero).codUbic));
-                        eEdo.setText(SBN206D.getEdoDB(SBN001D.getBn(numero).edoFis).descripcion);
-                        eRpp.setText(SIP501V.getPersonal(SBN001D.getBn(numero).numFicha).nombre);
-                        eRpu.setText(SIP501V.getPersonal(SBN001D.getBn(numero).pUsuario).nombre);
-                        eSerial.setText(SBN001D.getBn(numero).serial);
-                        eStatus.setText(SBN203D.getStatus(SBN001D.getBn(numero).status).descripcion);
-                        eUnidad.setText(SIP528V.getUnidad(SBN001D.getBn(numero).codUnidad).desUejec);
-                    }
-                    else {
+                    if (cmbTipo.getSelectedItem().toString().equals("#")) {
+                        if (SBN001D.exists(Integer.parseInt(eCod.getText().toString()))) {
+                            numero = Integer.parseInt(eCod.getText().toString());
+                            eNumero.setText("" + SBN001D.getBn(numero).numero);
+                            eDescripcion.setText(SBN001D.getBn(numero).nombre);
+                            eSede.setText(SIP517V.getSede(SBN001D.getBn(numero).codSede).desUbic);
+                            eUbic.setText(SBN010D.getUbicacion(SBN001D.getBn(numero).codUbic));
+                            eEdo.setText(SBN206D.getEdoDB(SBN001D.getBn(numero).edoFis).descripcion);
+                            eRpp.setText(SIP501V.getPersonal(SBN001D.getBn(numero).numFicha).nombre);
+                            eRpu.setText(SIP501V.getPersonal(SBN001D.getBn(numero).pUsuario).nombre);
+                            eSerial.setText(SBN001D.getBn(numero).serial);
+                            eStatus.setText(SBN203D.getStatus(SBN001D.getBn(numero).status).descripcion);
+                            eUnidad.setText(SIP528V.getUnidad(SBN001D.getBn(numero).codUnidad).desUejec);
+                        } else {
+                            eNumero.setText("");
+                            eDescripcion.setText("");
+                            eSede.setText("");
+                            eUbic.setText("");
+                            eEdo.setText("");
+                            eRpp.setText("");
+                            eRpu.setText("");
+                            eSerial.setText("");
+                            eStatus.setText("");
+                            eUnidad.setText("");
+                            Toast.makeText(getBaseContext(), "Numero de Bien Nacional INVÁLIDO", Toast.LENGTH_LONG).show();
+                        }
 
-                        serial = eCod.getText().toString();
-                        eNumero.setText("" + SBN001D.getSerial(eCod.getText().toString()).numero);
-                        eDescripcion.setText(SBN001D.getSerial(serial).nombre);
-                        eSede.setText(SIP517V.getSede(SBN001D.getSerial(serial).codSede).desUbic);
-                        eUbic.setText(SBN010D.getUbicacion(SBN001D.getSerial(serial).codUbic));
-                        eEdo.setText(SBN206D.getEdoDB(SBN001D.getSerial(serial).edoFis).descripcion);
-                        eRpp.setText(SIP501V.getPersonal(SBN001D.getSerial(serial).numFicha).nombre);
-                        eRpu.setText(SIP501V.getPersonal(SBN001D.getSerial(serial).pUsuario).nombre);
-                        eSerial.setText(SBN001D.getSerial(serial).serial);
-                        eStatus.setText(SBN203D.getStatus(SBN001D.getSerial(serial).status).descripcion);
-                        eUnidad.setText(SIP528V.getUnidad(SBN001D.getSerial(serial).codUnidad).desUejec);
+                    } else {
+                        if (SBN001D.existsSerial(eCod.getText().toString())) {
+                            serial = eCod.getText().toString();
+                            eNumero.setText("" + SBN001D.getSerial(eCod.getText().toString()).numero);
+                            eDescripcion.setText(SBN001D.getSerial(serial).nombre);
+                            eSede.setText(SIP517V.getSede(SBN001D.getSerial(serial).codSede).desUbic);
+                            eUbic.setText(SBN010D.getUbicacion(SBN001D.getSerial(serial).codUbic));
+                            eEdo.setText(SBN206D.getEdoDB(SBN001D.getSerial(serial).edoFis).descripcion);
+                            eRpp.setText(SIP501V.getPersonal(SBN001D.getSerial(serial).numFicha).nombre);
+                            eRpu.setText(SIP501V.getPersonal(SBN001D.getSerial(serial).pUsuario).nombre);
+                            eSerial.setText(SBN001D.getSerial(serial).serial);
+                            eStatus.setText(SBN203D.getStatus(SBN001D.getSerial(serial).status).descripcion);
+                            eUnidad.setText(SIP528V.getUnidad(SBN001D.getSerial(serial).codUnidad).desUejec);
+                        } else {
+                            eNumero.setText("");
+                            eDescripcion.setText("");
+                            eSede.setText("");
+                            eUbic.setText("");
+                            eEdo.setText("");
+                            eRpp.setText("");
+                            eRpu.setText("");
+                            eSerial.setText("");
+                            eStatus.setText("");
+                            eUnidad.setText("");
+                            Toast.makeText(getBaseContext(), "Numero de serial INVÁLIDO", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
                 else{

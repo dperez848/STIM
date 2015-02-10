@@ -4,15 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="pack.tomainventario.tomadeinventario.ActivacionInventario">
+    tools:context="pack.tomainventario.tomadeinventario.Reportes">
 
-<pack.tomainventario.tomadeinventario.Config.SlidingTabLayout
-    android:id="@+id/sTabLayout"
+    <TextView android:id="@+id/txtUbic"
+        android:text="@string/txtUbic"
+        android:layout_marginTop="@dimen/check_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Spinner android:id="@+id/cmbUbic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/check_margin"/>
+
+    <pack.tomainventario.tomadeinventario.Config.SlidingTabLayout
+        android:id="@+id/sTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v4.view.ViewPager
+    android:id="@+id/pager"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
-
-<android.support.v4.view.ViewPager
-android:id="@+id/pager"
-android:layout_width="match_parent"
-android:layout_height="match_parent" />
+    android:layout_height="match_parent" />
 </LinearLayout>

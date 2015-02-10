@@ -29,6 +29,7 @@ import pack.tomainventario.tomadeinventario.Adapters.NavigationAdapter;
 import pack.tomainventario.tomadeinventario.AjustarRPU;
 import pack.tomainventario.tomadeinventario.ConsultarBien;
 import pack.tomainventario.tomadeinventario.Galeria;
+import pack.tomainventario.tomadeinventario.Login;
 import pack.tomainventario.tomadeinventario.MainActivity;
 import pack.tomainventario.tomadeinventario.Objects.Item_objct;
 import pack.tomainventario.tomadeinventario.R;
@@ -120,6 +121,7 @@ public class BaseDrawer extends FragmentActivity {
                     }
                     case 4: {
                         Intent intent = new Intent(BaseDrawer.this, Reportes.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         break;
                     }
@@ -155,8 +157,13 @@ public class BaseDrawer extends FragmentActivity {
                             Log.e("COPAR","MALO");
                         }
 
+
+                        Intent intent = new Intent(BaseDrawer.this, Login.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        edit.putInt("Activar",0);
+                        edit.apply();
+                        startActivity(intent);
                         finish();
-                        System.exit(0);
                         break;
 
                     }

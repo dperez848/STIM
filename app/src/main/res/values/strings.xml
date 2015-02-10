@@ -36,6 +36,68 @@
     <string name="no_manual">Asignar de la lista</string>
 
     <!-- Reportes -->
+    <string name="logo">data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/
+                        2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0sIiAdHx
+                        8wKD4sJiYxJx8fLT0tMTVBN0Y6LDU0RDwvQDc5RjUBCgoKDg0O
+                        GxAQGzEkHyQ3LC0sLyw2Ny8sLDUyLCwsLC0sNSwuLDQsLCwsLC
+                        8sLCwsLCwsLDQsLDQ0LCw0NCwsLP/AABEIADwAPAMBEQACEQED
+                        EQH/xAAbAAACAwEBAQAAAAAAAAAAAAAGBwAEBQEDCP/EAD8QAA
+                        EDAgQCBAkKBgMAAAAAAAECAwQFBgAREiETMQcUQdIVMlFVYXGB
+                        kaEWIlJWk5SVpNPjFyQlVGOxIzRT/8QAGQEAAgMBAAAAAAAAAA
+                        AAAAAAAwQAAgUB/8QALREAAgECAwcDBAMBAAAAAAAAAQIAAxEE
+                        EiETMVFSkaHwFEHhYXGB0SKxwTL/2gAMAwEAAhEDEQA/ABW7Lm
+                        qFw1Z+RJkOhgOK4EfWdLSewAcs8gMz2436NFaa2EyKlQu1zMTi
+                        uf8Aor34LaDm/b1o3HcSA7TYjnVzykPr4bZ9R5n2DAamIp09CY
+                        dMO7Qsa6Ha6pALtZhIV9FKVqy9u2Fjj09lhxhOJlGpdFN0w0Fc
+                        Z2LOAGelp0oV7lbfHF1xtI79JRsK3sYES2ZkGSuNNafjyEeM06
+                        ClQ9mG1KsLiLsrKbGeQdcBBDiwRyOo47YSl4yrT6U5lNpIi1SM
+                        7UnUOHQ+t/JWnbYnIk757nCFbBKzXU2jdPElVsdYFuyreDi86N
+                        P5nM+Eh+nhoLU5h0+YLNT4edIxLM6OaXV6cxV5kSfT9ag5HZVJ
+                        S6VJ7FKBby35geTCNfFspygg+feN06C75jXtdtxUK55lLptdkq
+                        jxwgAuttFWZSCeSB5cGoUKdSmGZYKtWZGsDMP+Id3ee3fsW+7g
+                        3pKPLBepqcZP4h3d57d+xb7uJ6SjyyepqcYxLcoTfSBaMKZcVU
+                        nSHda9QTwkhCkqI+aQjMbAbZ4QqVNhUIQDz8xxF2iAtAG6qPS7
+                        Yq7lPnUWeoZa2X01EBLyOwj/AI9j2Edh9mHaNR6q5gw6fMWqIt
+                        M6jzpKMaTQNByo88b+cR+ni5WpzDp8ygZOEv25asasV9qNEq8C
+                        epCy85FLT7YcQk7gq0bA7DFKtcolyCOn7hKdJS2hv59o7uNcaU
+                        /9KkJSB/duZAfZ4ybU+J6fMe/lERV65b9UqsudKoU1x591Slrb
+                        qmlKjyzSOHsNtsa6UqiqAG7fMQeqhOo86Sp122Pq/UPxb9vF8t
+                        XmHT5lc9Pl86Sddtj6v1D8W/bxMtXmHT5kz0+XzpGT0VVlciBM
+                        p1t01lhuO4HVonT1LUdfakhvl83CGLp2IZzv4D5jVF8w/iJo9I
+                        tCqlfoRXUmqZEEHN8SUPOuKbSB88aeHuCP9DFMNUWm/wDG5v5x
+                        lqqFl1iqjUum8M5XLBIz59Wf7uNEu3Ke37iezTj50hb0WsSbfr
+                        1QmVSmz0pcY4bRbjKcOevM7JBy5DC2LIqIApENh1yE3EMrzvGG
+                        3b8qO29Jp0mWgssvTYTyEgnxiPm7kJz+GFaNBs4O+3AiHeoAIl
+                        RSqcAALjgZDl/Lv9zGrtG5T2/cRyJzedJPBdP+scD7u/3MTaNy
+                        nt+5zZpzedJPBdP+scD7u/3MTaNynt+5NmnN50hFYVQgWtcKJy
+                        q/EdjOILL7TbD2pSTyyzRzCgPjgGIVqqWy/wBQ1Eqh3xuzrihS
+                        YciMqDVsnW1IP9Ne7Rl9HGatJgQbjqI2XBEREO2a8hkJVRpwI/
+                        wnyY1zWp8wmeaT33TZ6JasxSb2KZDrbTMxpbJUtQACgdScz7CP
+                        bgWMQtS09oTDNZrGWL8auS666qWKctEJkcOI0qQzmlPaojX4yu
+                        Z9g7Mcw5p0ktfX3lq6vUOm6DnyRr/m78wz38H9RT4wHp3k+SNf
+                        83fmGe/ieop8ZPTvJ8ka/wCbvzDPfxPUU+Mnp3nDaNeIINOzB5
+                        /zDPfxPUU+M7sHjNp101GmdHdRZuBrgz4cYsxnVPtqMjUNKOSi
+                        dQ2z9/lxntRVqwKbj2jochNd8UUJRSzlxFHI5eN6MaZEz8zGb1
+                        OdqFUi1qQHYDaabH6wpCqcyrijVlp8Xb14C4VCo11+phku4J/y
+                        VaE/LrFag0weDmTKeDfE8GMK059uWnfli1QBFLa6fUylMl2tCV
+                        NEiRoEeTW7kpFPXJU7wmzRGV6koWU556fR8cL7UkkKpP5MY2el
+                        ye074AZmR23qDcFIqI64zFd/orLfDLhyB8Xfy5Ym1INnUjQnef
+                        aTZ33HtOyqVQIkl2NIveiIeZWUOINEYzSoHIjljgqORcIepndl
+                        9e0r06kx57tWfTX6Oij03hBVQ8DskOKWOQTp2yO2eLNUICjKbn
+                        2uZUU7k69p5z2qJEhSH4N40aVJbQVNx0UZlKnVfRBy2zx1WckA
+                        oepkZLC9+0w4tdnFs5iHz/sWe7g5pL4TFxVM1rDhu1Bu6qZHLY
+                        mSqfw2W3FhGpWvfngWIbLkY7gYbD6giadqdH9xUy5qZPmsxERo
+                        0gOOKEpJISAezA62KpshUS1KgyNczMv91t6kW4tpxK0lEsgpOe
+                        3GwTDCzN+P6lMQbqJd6Nn2WKRLW+822lNZgKJWoDIa+eKYoEsL
+                        cGl8P/xDGpx7iXUpa49n2tIZU8otvOuJ1uJz2UrbmRhVSmUXdo
+                        wQb7vOsH41On1aFe9GESnwqs+qIpMKM8lLSQADmk+oZn04MXVT
+                        Te5I11g8t8w+026NSZyITsW4rZtxiEzBUkyWihThUE5An17nPA
+                        ncZroxveWVdNRE7ASpUcEJUfTl6MarTOtqYw+mG2adTqhHqUQO
+                        odqDji3k6hp1DIkjbMElRJ392EcFWZlKn2jOJphTmHvF51Vvyr
+                        9+Hrxa5k6q2O1WJectIYrZ554l5JOqo8q/fiXnbmTqrflV78S8
+                        5OpiNqWlJK8icueJed1n0vbNvwbapgp9NDnD1lxS3FZqWo9p7O
+                        QA2HZjAq1WqNmaatOmEFhP/9k=</string>
+
 
     <!-- Detalle de la toma -->
     <string name="detalletoma">Detalle de toma de inventario</string>

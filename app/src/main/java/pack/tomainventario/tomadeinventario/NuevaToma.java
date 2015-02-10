@@ -252,7 +252,7 @@ public class NuevaToma extends Activity implements Rpu,RpuDialog.NoticeDialogLis
                     }
                 };
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
-                builder2.setMessage("¿Desea guardar?").setPositiveButton("Yes", dialogClickListener2)
+                builder2.setMessage("¿Desea guardar?").setPositiveButton("Si", dialogClickListener2)
                         .setNegativeButton("No", dialogClickListener2).show();
                 return true;
             default:

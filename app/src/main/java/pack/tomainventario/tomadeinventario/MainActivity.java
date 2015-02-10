@@ -4,7 +4,9 @@ import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import java.util.List;
 
 import pack.tomainventario.tomadeinventario.Adapters.MainAdapter;
 import pack.tomainventario.tomadeinventario.Config.BaseDrawer;
+import pack.tomainventario.tomadeinventario.Config.EndlessListView;
 import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
 import pack.tomainventario.tomadeinventario.DataBase.SBN010D;
 import pack.tomainventario.tomadeinventario.DataBase.SBN050D;
@@ -33,17 +36,20 @@ import pack.tomainventario.tomadeinventario.DataBase.SIP517V;
 import pack.tomainventario.tomadeinventario.Objects.Inventoried;
 
 
-public class MainActivity extends BaseDrawer {
+public class MainActivity extends BaseDrawer implements EndlessListView.EndlessListener{
 
     private ActionBar actionBar;
     private SharedPreferences prefs;
-    private ListView lstOpciones;
+    private EndlessListView lstOpciones;
     private MainAdapter adaptador;
     private Inventoried inv;
     private List<Inventoried> data;
     private List<SBN051D> inventariados;
     private List<SBN050D> inventarios;
     private TextView txtEmpty ;
+    private final static int ITEM_PER_REQUEST = 20;
+    private int ini = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +68,7 @@ public class MainActivity extends BaseDrawer {
         prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
         txtEmpty = (TextView)findViewById(R.id.empty);
         data = new ArrayList<Inventoried>();
-        lstOpciones = (ListView)findViewById(R.id.LstOpciones);
+        lstOpciones = (EndlessListView)findViewById(R.id.LstOpciones);
         inventariados= SBN051D.getAll();
         setData();
         showList();
@@ -149,8 +155,13 @@ public class MainActivity extends BaseDrawer {
         else if (data.size()!=0){
             lstOpciones.setVisibility(View.VISIBLE);
             txtEmpty.setVisibility(View.GONE);
-            adaptador =  new MainAdapter(this,data);
+            /*adaptador =  new MainAdapter(this,data);
+            lstOpciones.setAdapter(adaptador);*/
+            adaptador = new MainAdapter(this, createItems());
+            lstOpciones.setLoadingView(R.layout.loading_layout);
             lstOpciones.setAdapter(adaptador);
+
+            lstOpciones.setListener(this);
             lstOpciones.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
             if(prefs.getInt("Login",0)==2) {
 
@@ -211,6 +222,7 @@ public class MainActivity extends BaseDrawer {
 
                                     for (SBN050D aData : inventarios) {
                                         if (SBN051D.getInv(aData.idInventario) == null) {
+                                            Log.e("AAA", "Inventario q esta null en 051 "+aData.idInventario);
                                             aData.status = 0;
                                             aData.save();
                                         }
@@ -245,7 +257,47 @@ public class MainActivity extends BaseDrawer {
         }
         SBN001D.setTaken();
     }
+    private List<Inventoried> createItems() {
+        List<Inventoried> result = new ArrayList<Inventoried>();
+        int i;
+        for (i= 0; i < ITEM_PER_REQUEST; i++) {
+            if((i+ini)>=data.size()) {
+                lstOpciones.setDone(true);
+                return result;
+            }
+            else {
+                result.add(data.get(i+ini));
+            }
+        }
+        ini= ini+i;
+        return result;
+    }
+
+    @Override
+    public void loadData() {
+        FakeNetLoader fl = new FakeNetLoader();
+        fl.execute();
+    }
+
+    private class FakeNetLoader extends AsyncTask<String, Void, List<Inventoried>> {
+
+        @Override
+        protected List<Inventoried> doInBackground(String... params) {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return createItems();
+        }
+
+        @Override
+        protected void onPostExecute(List<Inventoried> result) {
+            super.onPostExecute(result);
+            lstOpciones.addNewData(result);
+        }
 
 
 
+    }
 }

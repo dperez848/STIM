@@ -199,11 +199,11 @@ public class Splash extends Activity {
             rpu = new SIP501V(); rpu.nombre = "Jorge Escalona"; rpu.ficha = "555";rpu.codUbic="1"; rpu.codUejec="codigo1"; rpu.save();
 
             ubic = new SBN010D(); ubic.codUbic = "codigo1u"; ubic.codUejec = "codigo1";ubic.nombre="ubicacion 1";
-            ubic.codSede="codigo1"; ubic.respUa="11111"; ubic.save();
+            ubic.codSede="codigo1"; ubic.respUa="111"; ubic.save();
             ubic = new SBN010D(); ubic.codUbic = "codigo2u"; ubic.codUejec = "codigo1";ubic.nombre="ubicacion 2";
-            ubic.codSede="codigo1"; ubic.respUa="33333"; ubic.save();
+            ubic.codSede="codigo1"; ubic.respUa="333"; ubic.save();
             ubic = new SBN010D(); ubic.codUbic = "codigo3u"; ubic.codUejec = "codigo1";ubic.nombre="ubicacion 3";
-            ubic.codSede="codigo1"; ubic.respUa="22222"; ubic.save();
+            ubic.codSede="codigo1"; ubic.respUa="222"; ubic.save();
 
             user = new SBN090D(); user.ficha = "1"; user.nombre = "Daniela"; user.passwd = "a"; user.user = "a"; user.save();
             user = new SBN090D(); user.ficha = "2"; user.nombre = "DanielaP"; user.passwd = "b"; user.user = "b"; user.save();
@@ -222,7 +222,7 @@ public class Splash extends Activity {
                     int act = prefs.getInt("Act", 0);
                     int regUsuario = prefs.getInt("Login", 0);
 
-                    if(regUsuario != 1){
+                    if(regUsuario == 0){
                         Intent intent = new Intent(Splash.this, Login.class);
                         startActivity(intent);
                         finish();
