@@ -168,6 +168,7 @@
         <item>Ajustar RPU</item>
         <item>Galeria</item>
         <item>Sobrantes/Faltantes</item>
+        <item>Fializar inventario</item>
         <item>Cerrar Sesión</item>
     </string-array>
     <!-- Lista de iconos de navegacion -->
@@ -177,6 +178,7 @@
         <item>@android:drawable/ic_menu_preferences</item>
         <item>@android:drawable/ic_menu_gallery</item>
         <item>@android:drawable/ic_menu_report_image</item>
+        <item>@android:drawable/ic_delete</item>
         <item>@android:drawable/ic_lock_power_off</item>
     </array>
     <!-- Titulos del drawer -->

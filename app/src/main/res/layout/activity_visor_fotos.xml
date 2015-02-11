@@ -5,13 +5,13 @@
     android:orientation="vertical" >
     <Button
         android:id="@+id/btnClose"
-        android:layout_width="wrap_content"
+        android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
-        android:text="@string/close" />
+        android:text="X" />
     <android.support.v4.view.ViewPager
         android:id="@+id/pager2"
         android:layout_width="fill_parent"

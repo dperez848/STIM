@@ -1,6 +1,8 @@
 package pack.tomainventario.tomadeinventario.Config;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -53,14 +55,13 @@ public class BaseDrawer extends FragmentActivity {
         setContentView(R.layout.drawer_layout);
 
         prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
-
         navDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navList = (ListView) findViewById(R.id.lista);
         navIcons = getResources().obtainTypedArray(R.array.navigation_iconos);
         titulos = getResources().getStringArray(R.array.nav_options);
         navItms = new ArrayList<Item_objct>();
 
-        for ( int i = 0; i <= 5; i ++ ) {
+        for ( int i = 0; i <= 6; i ++ ) {
             navItms.add(new Item_objct(titulos[i], navIcons.getResourceId(i, -1)));
         }
 
@@ -125,42 +126,66 @@ public class BaseDrawer extends FragmentActivity {
                         startActivity(intent);
                         break;
                     }
+                    case 5: {
+                        if(prefs.getInt("Login",0)==2) {
+                            DialogInterface.OnClickListener dialogClickListener2 = new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    switch (which) {
+                                        case DialogInterface.BUTTON_POSITIVE:
+                                            File directoryFile = new File(Environment.getExternalStorageDirectory() + "/SistemaInventario");
+                                            if (!directoryFile.exists()) {
+                                                directoryFile.mkdirs();
+                                            }
+                                            File target = new File(directoryFile, "TomaInventario.db");
+                                            if (!target.exists()) {
+                                                try {
+                                                    target.createNewFile();
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                            Context context = getApplicationContext();
+                                            String DB_PATH = "/data/data/"+ context.getPackageName()+ "/databases/";
+                                            File origen = new File(DB_PATH, "TomaInventario.db");
+                                            try {
+                                                copy(origen, target);
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                            edit = prefs.edit();
+                                            edit.putInt("Login", 0);
+                                            Intent intent = new Intent(BaseDrawer.this, Login.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                            edit.putInt("Activar", 0);
+                                            edit.putInt("Formatear", 1);
+                                            edit.apply();
+                                            startActivity(intent);
+                                            finish();
+                                            Toast.makeText(getBaseContext(), "Inventario finalizado satisfactoriamente", Toast.LENGTH_LONG).show();
+                                            break;
+
+                                        case DialogInterface.BUTTON_NEGATIVE:
+                                            //No button clicked
+                                            break;
+                                    }
+                                }
+                            };
+                            AlertDialog.Builder builder2 = new AlertDialog.Builder(BaseDrawer.this);
+                            builder2.setMessage("¿Desea finalizar el inventario actual? ").setPositiveButton("Si", dialogClickListener2)
+                                    .setNegativeButton("No", dialogClickListener2).show();
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "Invitado no puede finalizar inventario", Toast.LENGTH_LONG).show();
+                        }
+                        break;
+                    }
                     default: {
-                        SharedPreferences prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
                         edit = prefs.edit();
                         edit.putInt("Login", 0);
-                        edit.apply();
-
-                        File directoryFile = new File(Environment.getExternalStorageDirectory() + "/SistemaInventario");
-                        if (!directoryFile.exists()) {
-                            directoryFile.mkdirs();
-                        }
-                        File target = new File(directoryFile, "TomaInventario.db");
-                        if(!target.exists()) {
-                            try {
-                                target.createNewFile();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        Context context = getApplicationContext();
-                        String DB_PATH = "/data/data/"
-                                + context.getPackageName()
-                                + "/databases/";
-                        File origen = new File(DB_PATH, "TomaInventario.db");
-                        Log.e("DIRECCION",""+ origen.getAbsolutePath());
-                        try {
-                            copy(origen,target);
-                            Log.e("COPAR","BUENO");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            Log.e("COPAR","MALO");
-                        }
-
-
                         Intent intent = new Intent(BaseDrawer.this, Login.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        edit.putInt("Activar",0);
+                        edit.putInt("Activar",0); //no va aqui, va en la pregunta de formatear
                         edit.apply();
                         startActivity(intent);
                         finish();

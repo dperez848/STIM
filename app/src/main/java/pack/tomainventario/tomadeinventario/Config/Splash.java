@@ -174,6 +174,36 @@ public class Splash extends Activity {
             bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
             bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
 
+            bN = new SBN001D();bN.numero = 30;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 31;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 32;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 33;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 34;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 35;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 36;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 37;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+            bN = new SBN001D();bN.numero = 38;bN.nombre = "computador rosado";bN.status = 1;bN.serial = "srial1";
+            bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
+            bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
+
+
+
             uEjec = new SIP528V(); uEjec.desUejec = "Unidad1";uEjec.codUejec = "ubic1";uEjec.codUbic = "ubic1";uEjec.save();
             uEjec = new SIP528V(); uEjec.desUejec = "Unidad2";uEjec.codUejec = "ubic2";uEjec.codUbic = "ubic2";uEjec.save();
             uEjec = new SIP528V(); uEjec.desUejec = "Unidad3";uEjec.codUejec = "ubic3";uEjec.codUbic = "ubic3";uEjec.save();
