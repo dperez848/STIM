@@ -5,6 +5,8 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
+import java.util.List;
+
 /*Usuaros del sistema que pueden iniciar sesion*/
 
 @Table(name = "SBN090D")
@@ -30,6 +32,12 @@ public class SBN090D extends Model {
         this.nombre = nombre;
         this.user = user;
         this.passwd = passwd;
+    }
+
+    public static List<SBN090D> getAll() {
+        return new Select()
+                .from(SBN090D.class)
+                .execute();
     }
 
     public static SBN090D getLog(Object value, Object value2) {

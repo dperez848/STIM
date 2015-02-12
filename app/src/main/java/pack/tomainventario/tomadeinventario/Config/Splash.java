@@ -41,6 +41,7 @@ public class Splash extends Activity {
     private String android_id ;
     private final int SPLASH_DISPLAY_LENGTH = 2000;
     private SharedPreferences prefs;
+    private  Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +49,9 @@ public class Splash extends Activity {
         setContentView(R.layout.activity_splash);
         android_id = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
         prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
-        int first = prefs.getInt("First", 0);
+        bundle = new Bundle();
 
-        if(first != 1){ //Si es la primera vez q abre la app
+        if(prefs.getInt("First", 0) != 1){ //Si es la primera vez q abre la app
 
             inventarioActivo = new SBN053D();inventarioActivo.idInventarioActivo= 1;inventarioActivo.anno = 2015;
             inventarioActivo.trimestre = 1;inventarioActivo.sede = "atco";inventarioActivo.fechaUa = "20-11-12";
@@ -202,8 +203,6 @@ public class Splash extends Activity {
             bN.codUnidad = "ubic3";bN.codUbic = "codigo3u";bN.codSede = "atco";bN.numFicha = "111";
             bN.pUsuario = "555";bN.edoFis = 1;bN.checked = 0;bN.selected = 0;bN.taken = 0;bN.show=1;bN.save();
 
-
-
             uEjec = new SIP528V(); uEjec.desUejec = "Unidad1";uEjec.codUejec = "ubic1";uEjec.codUbic = "ubic1";uEjec.save();
             uEjec = new SIP528V(); uEjec.desUejec = "Unidad2";uEjec.codUejec = "ubic2";uEjec.codUbic = "ubic2";uEjec.save();
             uEjec = new SIP528V(); uEjec.desUejec = "Unidad3";uEjec.codUejec = "ubic3";uEjec.codUbic = "ubic3";uEjec.save();
@@ -248,32 +247,32 @@ public class Splash extends Activity {
                 @Override
                 public void run() {
 
-
-                    int act = prefs.getInt("Act", 0);
-                    int regUsuario = prefs.getInt("Login", 0);
-
-                    if(regUsuario == 0){
+                    if(prefs.getInt("Login", 0) == 0){
+                        if(prefs.getInt("Formatear",0)== 1) {
+                            bundle.putBoolean("Formatear",true);
+                        }
+                        else{
+                            bundle.putBoolean("Formatear",false);
+                        }
                         Intent intent = new Intent(Splash.this, Login.class);
+                        intent.putExtras(bundle);
                         startActivity(intent);
                         finish();
                     }
                     else{
 
-                        if(act != 1){
+                        if(prefs.getInt("Act", 0) != 1){
 
                             Intent intent = new Intent(Splash.this, MainActivity.class);
                             startActivity(intent);
                             finish();
                         }
                         else{
-                            //
                             // Toast.makeText(getBaseContext(), ""+act, Toast.LENGTH_LONG).show();
-
                             Intent intent = new Intent(Splash.this, NuevaToma.class);
                             startActivity(intent);
                             finish();
                         }
-
                     }
                 }
             }, SPLASH_DISPLAY_LENGTH);

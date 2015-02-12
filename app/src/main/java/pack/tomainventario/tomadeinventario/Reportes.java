@@ -147,7 +147,7 @@ public class Reportes extends BaseDrawer {
                             }
                             // FALTATES fin
 
-                            File directoryFile = new File(Environment.getExternalStorageDirectory() + "/SistemaInventario");
+                            File directoryFile = new File(Environment.getExternalStorageDirectory() + "/SistemaInventario/Reportes");
                             if (!directoryFile.exists()) {
                                 directoryFile.mkdirs();
                             }

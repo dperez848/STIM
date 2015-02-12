@@ -48,11 +48,14 @@ public class BaseDrawer extends FragmentActivity {
     private SharedPreferences.Editor edit;
     private CharSequence mTitle, mDrawerTitle;
     private SharedPreferences prefs;
+    private  Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_layout);
+
+
 
         prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
         navDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -133,7 +136,7 @@ public class BaseDrawer extends FragmentActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     switch (which) {
                                         case DialogInterface.BUTTON_POSITIVE:
-                                            File directoryFile = new File(Environment.getExternalStorageDirectory() + "/SistemaInventario");
+                                            File directoryFile = new File(Environment.getExternalStorageDirectory() + "/SistemaInventario/BD_final");
                                             if (!directoryFile.exists()) {
                                                 directoryFile.mkdirs();
                                             }
@@ -155,11 +158,11 @@ public class BaseDrawer extends FragmentActivity {
                                             }
                                             edit = prefs.edit();
                                             edit.putInt("Login", 0);
-                                            Intent intent = new Intent(BaseDrawer.this, Login.class);
+                                            Intent intent = new Intent(BaseDrawer.this, Splash.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                            edit.putInt("Activar", 0);
                                             edit.putInt("Formatear", 1);
                                             edit.apply();
+
                                             startActivity(intent);
                                             finish();
                                             Toast.makeText(getBaseContext(), "Inventario finalizado satisfactoriamente", Toast.LENGTH_LONG).show();
@@ -172,7 +175,7 @@ public class BaseDrawer extends FragmentActivity {
                                 }
                             };
                             AlertDialog.Builder builder2 = new AlertDialog.Builder(BaseDrawer.this);
-                            builder2.setMessage("¿Desea finalizar el inventario actual? ").setPositiveButton("Si", dialogClickListener2)
+                            builder2.setMessage("¿Esta seguro de finalizar el inventario actual? ").setPositiveButton("Si", dialogClickListener2)
                                     .setNegativeButton("No", dialogClickListener2).show();
                         }
                         else{
@@ -185,7 +188,6 @@ public class BaseDrawer extends FragmentActivity {
                         edit.putInt("Login", 0);
                         Intent intent = new Intent(BaseDrawer.this, Login.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        edit.putInt("Activar",0); //no va aqui, va en la pregunta de formatear
                         edit.apply();
                         startActivity(intent);
                         finish();
