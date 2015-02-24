@@ -25,7 +25,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.channels.FileChannel;
 
 import pack.tomainventario.tomadeinventario.DataBase.SBN051D;
 import pack.tomainventario.tomadeinventario.DataBase.SBN053D;
@@ -64,63 +63,65 @@ public class Login extends Activity {
             formatear = bundle.getBoolean("Formatear");
 
 
-        if (formatear) {
-            DialogInterface.OnClickListener dialogClickListener2 = new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch (which) {
-                        case DialogInterface.BUTTON_POSITIVE:
-
-                            try {
+            if (formatear) {
+                DialogInterface.OnClickListener dialogClickListener2 = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
                                 File sd = Environment.getExternalStorageDirectory();
-                                File data = Environment.getDataDirectory();
 
                                 if (sd.canWrite()) {
-                                    String currentDBPath = "/data/data/" + getPackageName() + "/databases/TomaInventario.db";
-                                    String backupDBPath = "/SistemaInventario/BD_nueva/TomaInventario.db";
-                                    File currentDB = new File(data, currentDBPath);
-                                    File backupDB = new File(sd, backupDBPath);
 
-                                    if (currentDB.exists()) {
-                                        FileChannel src = new FileInputStream(backupDB).getChannel();
-                                        FileChannel dst = new FileOutputStream(currentDB).getChannel();
-                                        dst.transferFrom(src, 0, src.size());
-                                        src.close();
-                                        dst.close();
-                                        edit.putInt("Formatear", 0);
-                                        edit.putInt("Activar", 0);
-                                        Toast.makeText(getBaseContext(), "Nuevo inventario activado", Toast.LENGTH_LONG).show();
+                                    Context context = getApplicationContext();
+                                    String pathDestino = "/data/data/"+ context.getPackageName()+ "/databases/";
+                                    File pathOrigen = new File(Environment.getExternalStorageDirectory() + "/SistemaInventario/BD_nueva");
+                                    File destino = new File(pathDestino, "TomaInventario.db");
+                                    File origen = new File(pathOrigen, "TomaInventario.db");
+                                    if (destino.exists()) {
+                                        Log.e("EXISTE destino",": si");
+                                        if(origen.exists()) {
+                                            Log.e("EXISTE origen",": si");
+                                            try {
+                                                //copy(origen, destino);
+                                                importDatabase(Environment.getExternalStorageDirectory() + "/SistemaInventario/BD_nueva/TomaInventario.db");
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                            edit.putInt("Formatear", 0);
+                                            edit.putInt("Activar", 0);
+
+                                        }
+                                        else Log.e("EXISTE origen",": no");
                                     }
+                                    else Log.e("EXISTE destino",": no");
                                 }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
 
-                            break;
+                                break;
 
-                        case DialogInterface.BUTTON_NEGATIVE:
-                            edit.putInt("Formatear", 0);
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                edit.putInt("Formatear", 0);
 
-                            break;
-                        case DialogInterface.BUTTON_NEUTRAL:
-                            onBackPressed();
-                            break;
+                                break;
+                            case DialogInterface.BUTTON_NEUTRAL:
+                                onBackPressed();
+                                break;
+                        }
+                        edit.apply();
                     }
-                    edit.apply();
-                }
-            };
-            AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
-            builder2.setMessage("Si desea empezar un nuevo inventario es muy importante recordar actualizar la base de datos." +
-                    " Si desea seguir con el inventario actual seleccione \" Actual\"").setPositiveButton("Nuevo", dialogClickListener2)
-                    .setNegativeButton("Actual", dialogClickListener2).setNeutralButton("Cancelar",dialogClickListener2).setCancelable(false).show();
+                };
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+                builder2.setMessage("Si desea empezar un nuevo inventario es muy importante recordar actualizar la base de datos." +
+                        " Si desea seguir con el inventario actual seleccione \" Actual\"").setPositiveButton("Nuevo", dialogClickListener2)
+                        .setNegativeButton("Actual", dialogClickListener2).setNeutralButton("Cancelar",dialogClickListener2).setCancelable(false).show();
+            }
         }
-    }
 
         bIngresar.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View arg0)
             {
-                Log.e("AAA", "el user 1 de 090 es " + SBN090D.getAll().get(0).user);
+                Log.e("AAA", "el user 1 de 090 es " + SBN090D.getAll().get(0).user +" y su clave es "+SBN090D.getAll().get(0).passwd);
                 Log.e("AAA", "el tamaño de la 51 es " + SBN051D.getAll().size());
                 if(SBN090D.getLog(eUser.getText(),ePassword.getText()) == null)
                 {
@@ -171,5 +172,22 @@ public class Login extends Activity {
         }
         in.close();
         out.close();
+    }
+
+    private void importDatabase(String inputFileName) throws IOException
+    {Context context = getApplicationContext();
+        InputStream mInput = new FileInputStream(inputFileName);
+        String outFileName = "/data/data/"+ context.getPackageName()+ "/databases/TomaInventario.db";
+        OutputStream mOutput = new FileOutputStream(outFileName);
+        byte[] mBuffer = new byte[1024];
+        int mLength;
+        while ((mLength = mInput.read(mBuffer))>0)
+        {
+            mOutput.write(mBuffer, 0, mLength);
+        }
+        mOutput.flush();
+        mOutput.close();
+        mInput.close();
+        Toast.makeText(getBaseContext(), "Nuevo inventario activado", Toast.LENGTH_LONG).show();
     }
 }

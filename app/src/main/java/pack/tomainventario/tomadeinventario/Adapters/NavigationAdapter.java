@@ -54,19 +54,16 @@ public class NavigationAdapter extends BaseAdapter {
         if(convertView==null)
         {
             view = new Fila();
-            //Creo objeto item y lo obtengo del array
             Item_objct itm=arrayitms.get(position);
             convertView = inflator.inflate(R.layout.drawer, null);
-            //Titulo
             view.titulo_itm = (TextView) convertView.findViewById(R.id.title_item);
-            //Seteo en el campo titulo el nombre correspondiente obtenido del objeto
             view.titulo_itm.setText(itm.getTitulo());
-            //Icono
             view.icono = (ImageView) convertView.findViewById(R.id.icon);
-            //Seteo el icono
             view.icono.setImageResource(itm.getIcono());
-            if(position == actual)
-              convertView.setBackgroundColor(Color.parseColor("#A9CBE9"));
+            if(position == actual) {
+                convertView.setBackgroundColor(Color.parseColor("#73C0EA"));
+                view.titulo_itm.setTextColor(Color.parseColor("#FFFFFF"));
+            }
             convertView.setTag(view);
         }
         else

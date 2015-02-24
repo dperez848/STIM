@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/button"
     android:orientation="vertical"
     tools:context="pack.tomainventario.tomadeinventario.ConsultarBien">
 
@@ -11,7 +10,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:layout_marginBottom="@dimen/check_margin">
+        android:layout_marginBottom="@dimen/check_margin"
+        android:layout_marginTop="@dimen/check_margin">
 
         <Spinner android:id="@+id/cmbTipo"
             android:layout_width="0dp"
@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_selector"
             android:layout_marginRight="10dp"
+            android:textColor="@color/white"
             android:text="Buscar"/>
     </LinearLayout>
     <LinearLayout

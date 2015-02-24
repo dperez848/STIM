@@ -48,23 +48,35 @@ android:descendantFocusability="blocksDescendants">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <ImageButton
+
+        <ImageView
             android:id="@+id/rpu"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:src="@drawable/rpu"/>
-        <ImageButton
-            android:id="@+id/camera"
-            android:layout_width="48dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/camera"/>
-        <ImageButton
+            android:layout_marginLeft="@dimen/regular_margin"
+            android:src="@drawable/rpu"
+            android:layout_gravity="center"
+            android:contentDescription="@string/content_description_logo"
+            android:adjustViewBounds="true"/>
+        <ImageView
+            android:id="@+id/camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/regular_margin"
+            android:src="@drawable/camera"
+            android:layout_gravity="center"
+            android:contentDescription="@string/content_description_logo"
+            android:adjustViewBounds="true"/>
+        <ImageView
             android:id="@+id/settings"
-            android:layout_width="48dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/settings"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/regular_margin"
+            android:src="@drawable/settings"
+            android:layout_gravity="center"
+            android:contentDescription="@string/content_description_logo"
+            android:adjustViewBounds="true"/>
+
 
     </LinearLayout>
 </LinearLayout>

@@ -20,11 +20,11 @@
     <!-- Galeria -->
     <!-- Array de imagenes de prueba -->
     <array name="imagenes_prueba">
-        <item>@android:drawable/ic_menu_mylocation</item>
-        <item>@android:drawable/ic_menu_search</item>
-        <item>@android:drawable/ic_menu_preferences</item>
-        <item>@android:drawable/ic_menu_gallery</item>
-        <item>@android:drawable/ic_menu_report_image</item>
+        <item>@drawable/home</item>
+        <item>@drawable/search</item>
+        <item>@drawable/rpu</item>
+        <item>@drawable/gallery</item>
+        <item>@drawable/report</item>
         <item>@android:drawable/ic_lock_power_off</item>
     </array>
 
@@ -173,13 +173,13 @@
     </string-array>
     <!-- Lista de iconos de navegacion -->
     <array name="navigation_iconos">
-        <item>@android:drawable/ic_menu_mylocation</item>
-        <item>@android:drawable/ic_menu_search</item>
-        <item>@android:drawable/ic_menu_preferences</item>
-        <item>@android:drawable/ic_menu_gallery</item>
-        <item>@android:drawable/ic_menu_report_image</item>
-        <item>@android:drawable/ic_delete</item>
-        <item>@android:drawable/ic_lock_power_off</item>
+        <item>@drawable/home</item>
+        <item>@drawable/search</item>
+        <item>@drawable/rpu</item>
+        <item>@drawable/gallery</item>
+        <item>@drawable/report</item>
+        <item>@drawable/eliminar</item>
+        <item>@drawable/cerrar</item>
     </array>
     <!-- Titulos del drawer -->
     <string name="title_activity_consultar_bien">ConsultarBien</string>

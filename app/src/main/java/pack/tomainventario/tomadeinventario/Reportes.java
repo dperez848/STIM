@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
@@ -58,7 +59,7 @@ public class Reportes extends BaseDrawer {
         RelativeLayout rLayout = (RelativeLayout) findViewById(R.id.activity_frame);
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View activityView = layoutInflater.inflate(R.layout.activity_reportes, null, false);
-        rLayout.addView(activityView);
+        rLayout.addView(activityView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         navAdapter.setActual(4);
         actionBar = getActionBar();
         actionBar.setTitle("Sobrantes/Faltantes");

@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,6 +23,7 @@ import pack.tomainventario.tomadeinventario.Galeria;
 import pack.tomainventario.tomadeinventario.Interfaces.Configuracion;
 import pack.tomainventario.tomadeinventario.Interfaces.IGaleria;
 import pack.tomainventario.tomadeinventario.Interfaces.Rpu;
+import pack.tomainventario.tomadeinventario.Interfaces.Selected;
 import pack.tomainventario.tomadeinventario.NuevaToma;
 import pack.tomainventario.tomadeinventario.R;
 
@@ -36,6 +37,7 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
     private Configuracion listener;
     private IGaleria listener2;
     private Rpu listener3;
+    private Selected listener4;
 
 
     public BnAdapter(Activity context, List<SBN001D> data, int hasChecked) {
@@ -51,6 +53,7 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
         if( context instanceof NuevaToma) {
             this.listener3 = (Rpu) context;
             this.listener = (Configuracion)context;
+            this.listener4 = (Selected)context;
         }
         if( context instanceof AsignarLote || context instanceof AjustarRPU) {
             this.listener = (Configuracion)context;
@@ -61,7 +64,7 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
         TextView numero, descripcion, serial, ubic;
         CheckBox ck1;
         LinearLayout items;
-        ImageButton camara,ajustes,rpu;
+        ImageView camara,ajustes,rpu;
     }
 
     public View getView(final int position, View convertView, ViewGroup parent){
@@ -78,9 +81,9 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
             holder.ubic = (TextView)item.findViewById(R.id.ubic);
             holder.ck1 = (CheckBox)item.findViewById(R.id.check);
             holder.items = (LinearLayout)item.findViewById(R.id.items);
-            holder.camara = (ImageButton)item.findViewById(R.id.camera);
-            holder.ajustes = (ImageButton)item.findViewById(R.id.settings);
-            holder.rpu = (ImageButton)item.findViewById(R.id.rpu);
+            holder.camara = (ImageView)item.findViewById(R.id.camera);
+            holder.ajustes = (ImageView)item.findViewById(R.id.settings);
+            holder.rpu = (ImageView)item.findViewById(R.id.rpu);
 
             item.setTag(holder);
         }
@@ -103,7 +106,6 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
                             Log.e("aaa", "ischeck() " + holder.ck1.isChecked());
                             SBN001D bN = SBN001D.getBn(data.get(position).numero);
                             bN.checked = 1;
-                            bN.selected = 1;
                             bN.save();
                             if (SBN001D.isFull()) {
                                 listener.setCheck(true);
@@ -112,7 +114,6 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
                             Log.e("aaa", "ischeck() " + holder.ck1.isChecked());
                             SBN001D bN = SBN001D.getBn(data.get(position).numero);
                             bN.checked = 0;
-                            bN.selected = 0;
                             bN.save();
                             if (listener.isAll()) {
                                 listener.setCheck(false);
@@ -127,7 +128,6 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
                             Log.e("aaa", "ischeck() " + holder.ck1.isChecked());
                             SBN001D bN = SBN001D.getBn(data.get(position).numero);
                             bN.checked = 1;
-                            bN.selected = 1;
                             bN.save();
                             if (SBN001D.isFull()) {
                                 listener.setCheck(true);
@@ -137,7 +137,6 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
 
                             SBN001D bN = SBN001D.getBn(data.get(position).numero);
                             bN.checked = 0;
-                            bN.selected = 0;
                             bN.save();
                             if (listener.isAll()) {
                                 listener.setCheck(false);
@@ -157,7 +156,7 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
                 if (!(SBN054D.isEmpty(data.get(position).numero))) {
                     holder.camara.setImageResource(R.drawable.camerar);
                 } else {
-                    holder.camara.setImageResource(R.drawable.camerav);
+                    holder.camara.setImageResource(R.drawable.camera);
                 }
 
                 holder.camara.setOnClickListener(new View.OnClickListener() {
@@ -178,6 +177,10 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
                         listener3.openRpuDialog(data.get(position).numero);
                     }
                 });
+                item.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {listener4.deshacer(position);}
+                });
+
             } else{
                 holder.items.setVisibility(View.GONE);
                 holder.ck1.setVisibility(View.GONE);

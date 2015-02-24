@@ -111,14 +111,12 @@ public class AsignarLote extends Activity implements Configuracion,Filter {
                 if(all) {
                     ckAll.setChecked(false);
                     SBN001D.setAllChecked(0,1);
-                    SBN001D.setAllSelected(0);
                     all = false;
                     adaptador.notifyDataSetChanged();
                 }
                 else {
                     ckAll.setChecked(true);
                     SBN001D.setAllChecked(1,1);
-                    SBN001D.setAllSelected(1);
                     all=true;
                     adaptador.notifyDataSetChanged();
                 }
@@ -136,6 +134,14 @@ public class AsignarLote extends Activity implements Configuracion,Filter {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_aceptar) {
+            SBN001D.allCheckedToSelected();
+            SBN001D.setAllChecked(0,1);
+            Intent intent1 = new Intent();
+            setResult(RESULT_OK, intent1);
+            finish();
+            return true;
+        }
+        else if (id == android.R.id.home){
             SBN001D.setAllChecked(0,1);
             Intent intent1 = new Intent();
             setResult(RESULT_OK, intent1);
@@ -158,14 +164,22 @@ public class AsignarLote extends Activity implements Configuracion,Filter {
 
     @Override
     public void filterSelect(SIP517V sede, SBN010D ubicacion) {
-        if(sede==null && ubicacion==null)
-            data= SBN001D.getAllFiltered(0, "", "");
-        else if(sede!=null && ubicacion ==null)
-            data= SBN001D.getAllFiltered(1, sede.codSede, "");
-        else if(sede == null)
-            data= SBN001D.getAllFiltered(2, "", ubicacion.codUbic);
-        else
-            data= SBN001D.getAllFiltered(3, sede.codSede, ubicacion.codUbic);
+        if(sede==null && ubicacion==null) {
+            data = SBN001D.getAllFiltered(0, "", "");
+            filter.setImageResource(R.drawable.filter_empty);
+        }
+        else if(sede!=null && ubicacion ==null) {
+            data = SBN001D.getAllFiltered(1, sede.codSede, "");
+            filter.setImageResource(R.drawable.filter_filled);
+        }
+        else if(sede == null) {
+            data = SBN001D.getAllFiltered(2, "", ubicacion.codUbic);
+            filter.setImageResource(R.drawable.filter_filled);
+        }
+        else {
+            data = SBN001D.getAllFiltered(3, sede.codSede, ubicacion.codUbic);
+            filter.setImageResource(R.drawable.filter_filled);
+        }
 
         if (data.size()==0)
             lstOpciones.setVisibility(View.GONE);
@@ -201,6 +215,7 @@ public class AsignarLote extends Activity implements Configuracion,Filter {
     }
     @Override
     public void onBackPressed() {
+        SBN001D.setAllChecked(0,1);
         Intent intent1 = new Intent();
         setResult(RESULT_OK, intent1);
         finish();

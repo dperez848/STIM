@@ -23,6 +23,8 @@ public class SBN010D extends Model
     public String codUejec;
     @Column(name = "codSede")
     public String codSede;
+    /*@Column(name = "show")
+    public int show;*/
 
        public SBN010D()
        {
@@ -73,4 +75,11 @@ public class SBN010D extends Model
         return this.nombre;
     }
 
+   /* public int getShow() {
+        return show;
+    }
+
+    public void setShow(int show) {
+        this.show = show;
+    }*/
 }

@@ -33,10 +33,11 @@ import pack.tomainventario.tomadeinventario.Interfaces.Configuracion;
 import pack.tomainventario.tomadeinventario.Interfaces.IGaleria;
 import pack.tomainventario.tomadeinventario.Interfaces.Observacion;
 import pack.tomainventario.tomadeinventario.Interfaces.Rpu;
+import pack.tomainventario.tomadeinventario.Interfaces.Selected;
 import pack.tomainventario.tomadeinventario.Objects.ObservacionRpu;
 
 
-public class NuevaToma extends Activity implements Rpu,RpuDialog.NoticeDialogListener, Configuracion,IGaleria,Observacion{
+public class NuevaToma extends Activity implements Selected,Rpu,RpuDialog.NoticeDialogListener, Configuracion,IGaleria,Observacion{
     private SharedPreferences prefs;
     private SharedPreferences.Editor edit;
     private BnAdapter adaptador;
@@ -61,7 +62,6 @@ public class NuevaToma extends Activity implements Rpu,RpuDialog.NoticeDialogLis
         bLote = (Button) findViewById(R.id.lote);
         bManual = (Button) findViewById(R.id.manual);
         prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
-        Log.e("TAAAG", "Este es paa el inventario: " +prefs.getInt("Activar", 0) );
 
         data = SBN001D.getSelected();
 
@@ -143,23 +143,7 @@ public class NuevaToma extends Activity implements Rpu,RpuDialog.NoticeDialogLis
                 info = SBN001D.getSelected();
                 adaptador =  new BnAdapter(this,info,2);
                 lstOpciones.setAdapter(adaptador);
-                lstOpciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                    public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                        pos = position;
-                        AlertDialog.Builder builder = new AlertDialog.Builder(NuevaToma.this);
-                        builder.setItems(items, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int item) {
-                                SBN001D.setOneSelected(adaptador.getItem(pos).numero);
-                                info = SBN001D.getSelected();
-                                adaptador.updateAdapter(info);
-                            }
-                        });
-                        AlertDialog alert = builder.create();
-                        alert.show();
-                    }
-
-                });
                 bLote.setOnClickListener(new View.OnClickListener()
                 {
                     public void onClick(View arg0)
@@ -213,7 +197,7 @@ public class NuevaToma extends Activity implements Rpu,RpuDialog.NoticeDialogLis
                     }
                 };
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-                builder1.setMessage("¿Desea abandonar?").setPositiveButton("Yes", dialogClickListener1)
+                builder1.setMessage("¿Desea abandonar?").setPositiveButton("Si", dialogClickListener1)
                         .setNegativeButton("No", dialogClickListener1).show();
 
                 return true;
@@ -236,10 +220,9 @@ public class NuevaToma extends Activity implements Rpu,RpuDialog.NoticeDialogLis
                                     edit.putInt("Activar", prefs.getInt("Activar",0)-1);
                                     edit.apply();
                                 }
-                                                                    //
-                                /*Intent intent = new Intent(NuevaToma.this, MainActivity.class);
-                                startActivity(intent);
-                                finish();*/
+                                /*SBN010D ubicActual = SBN010D.getUbic(SBN050D.getInv(prefs.getInt("Activar", 0)).codUbic);
+                                ubicActual.show=0;
+                                ubicActual.save();*/
                                 Intent intent1 = new Intent();
                                 setResult(RESULT_OK, intent1);
                                 finish();
@@ -300,7 +283,7 @@ public class NuevaToma extends Activity implements Rpu,RpuDialog.NoticeDialogLis
             }
         };
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        builder1.setMessage("¿Desea abandonar?").setPositiveButton("Yes", dialogClickListener1)
+        builder1.setMessage("¿Desea abandonar?").setPositiveButton("Si", dialogClickListener1)
                 .setNegativeButton("No", dialogClickListener1).show();
     }
 
@@ -354,6 +337,20 @@ public class NuevaToma extends Activity implements Rpu,RpuDialog.NoticeDialogLis
     }
 
 
+    @Override
+    public void deshacer(final int pos) {
 
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(NuevaToma.this);
+                builder.setItems(items, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+                        SBN001D.setOneSelected(adaptador.getItem(pos).numero);
+                        info = SBN001D.getSelected();
+                        adaptador.updateAdapter(info);
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
+
+    }
 }

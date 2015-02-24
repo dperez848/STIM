@@ -16,6 +16,7 @@ import java.util.List;
 
 import pack.tomainventario.tomadeinventario.DataBase.SBN054D;
 import pack.tomainventario.tomadeinventario.DetalleGaleria;
+import pack.tomainventario.tomadeinventario.Galeria;
 import pack.tomainventario.tomadeinventario.Interfaces.IGaleria;
 import pack.tomainventario.tomadeinventario.Objects.Inventoried;
 import pack.tomainventario.tomadeinventario.R;
@@ -43,7 +44,6 @@ public class GridViewAdapter extends ArrayAdapter {
     static class ViewHolder {
         TextView imageTitle;
         ImageView image;
-       // RelativeLayout layout;
     }
 
     @Override
@@ -66,6 +66,8 @@ public class GridViewAdapter extends ArrayAdapter {
         holder.image.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
         holder.image.setScaleType(ImageView.ScaleType.CENTER_CROP);
         holder.imageTitle.setText(data.get(position).nombre);
+
+        if (!(context instanceof Galeria)) holder.imageTitle.setVisibility(View.GONE);
 
         row.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {listener.detalle(data.get(position).numeroBn, position);}

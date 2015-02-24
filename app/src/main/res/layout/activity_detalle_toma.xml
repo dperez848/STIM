@@ -132,6 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/check_margin"
             android:background="@drawable/button_selector"
+            android:textColor="@color/white"
             android:layout_gravity="center"
             android:text="@string/editar"/>
     </LinearLayout>
@@ -192,6 +193,7 @@
         </LinearLayout>
         <Button
             android:id="@+id/btnObs"
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/check_margin"
@@ -214,6 +216,7 @@
             android:adjustViewBounds="true"/>
         <Button
             android:id="@+id/btnFoto"
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/check_margin"

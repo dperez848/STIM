@@ -32,7 +32,6 @@ import pack.tomainventario.tomadeinventario.Dialogs.RpuDialog;
 
 public class AsignarManual extends Activity implements RpuDialog.NoticeDialogListener,AdapterView.OnItemSelectedListener{
 
-    private static final String LOGTAG = "INFORMACION";
     private SharedPreferences prefs;
     private ActionBar actionBar;
     private ArrayAdapter<SBN206D> adapEdo;
@@ -123,7 +122,7 @@ public class AsignarManual extends Activity implements RpuDialog.NoticeDialogLis
 
                     }
                     else {
-                        if(SBN001D.exists(SBN001D.getSerial(eCod.getText().toString()).numero)) {
+                        if(SBN001D.existsSerial(eCod.getText().toString())) {
                             if(SBN001D.isSelected(SBN001D.getSerial(eCod.getText().toString()).numero)
                                     || SBN001D.isTaken(SBN001D.getSerial(eCod.getText().toString()).numero) ){
                                 DialogInterface.OnClickListener dialogClickListener2 = new DialogInterface.OnClickListener() {
@@ -207,6 +206,12 @@ public class AsignarManual extends Activity implements RpuDialog.NoticeDialogLis
             intent.putExtra("numero",numeroBn);
             //intent.putExtras(bundle);
             setResult(RESULT_OK, intent);
+            finish();
+            return true;
+        }
+        else if (id == android.R.id.home){
+            Intent intent1 = new Intent();
+            setResult(RESULT_OK, intent1);
             finish();
             return true;
         }

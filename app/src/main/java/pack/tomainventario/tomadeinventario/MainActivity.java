@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -60,7 +61,7 @@ public class MainActivity extends BaseDrawer implements EndlessListView.EndlessL
         RelativeLayout rLayout = (RelativeLayout)findViewById(R.id.activity_frame);
         LayoutInflater layoutInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View activityView = layoutInflater.inflate(R.layout.activity_main, null,false);
-        rLayout.addView(activityView);
+        rLayout.addView(activityView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         super.navAdapter.setActual(0);
         actionBar= getActionBar();
         actionBar.setTitle("Tomas realizadas");

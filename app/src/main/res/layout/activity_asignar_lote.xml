@@ -23,10 +23,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/search"/>
+
         <ImageView android:id="@+id/filter"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/filter"
+            android:src="@drawable/filter_empty"
             android:contentDescription="@string/content_description_logo"
             android:adjustViewBounds="true"
             android:layout_marginRight="@dimen/check_margin"/>

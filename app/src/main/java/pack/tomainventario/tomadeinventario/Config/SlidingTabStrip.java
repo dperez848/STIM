@@ -31,7 +31,7 @@ class SlidingTabStrip extends LinearLayout {
     private static final int DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS = 2; // grosor del divisor junto al contenido del tab.
     private static final byte DEFAULT_BOTTOM_BORDER_COLOR_ALPHA = 0x10; // Color del divisor junto al contenido del tab.
     private static final int SELECTED_INDICATOR_THICKNESS_DIPS = 7; // Grosor de la barrita deslizante
-    private static final int DEFAULT_SELECTED_INDICATOR_COLOR = Color.parseColor("#020181"); // Color de la barrita deslizable
+    private static final int DEFAULT_SELECTED_INDICATOR_COLOR = Color.parseColor("#73C0EA"); // Color de la barrita deslizable
     private static final int DEFAULT_DIVIDER_THICKNESS_DIPS = 1; // Grosor del divisor de pestañas
     private static final byte DEFAULT_DIVIDER_COLOR_ALPHA = 0x70; // Color del divisor de pestañas
     private static final float DEFAULT_DIVIDER_HEIGHT = 0.5f; // Altura del divisor de pestañas

@@ -31,13 +31,17 @@
             android:text="@string/manual"
             android:background="@drawable/button_selector"
             android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:layout_margin="@dimen/check_margin"
             android:src="@drawable/search"/>
         <Button
             android:id="@+id/lote"
             android:layout_width="0dp"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:text="@string/no_manual"
             android:layout_height="match_parent"
+            android:layout_margin="@dimen/check_margin"
             android:background="@drawable/button_selector"
             android:src="@drawable/search"/>
     </LinearLayout>

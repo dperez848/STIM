@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <item name="blueAB" type="color">#FF73C0EA</item>
+    <item name="blueSelector" type="color">#FF9ADBF1</item>
+    <item name="white" type="color">#FFFFFFFF</item>
 </resources>

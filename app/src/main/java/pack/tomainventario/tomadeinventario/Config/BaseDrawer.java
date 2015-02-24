@@ -129,7 +129,7 @@ public class BaseDrawer extends FragmentActivity {
                         startActivity(intent);
                         break;
                     }
-                    case 5: {
+                    case 5: {   //Si finaliza inventario
                         if(prefs.getInt("Login",0)==2) {
                             DialogInterface.OnClickListener dialogClickListener2 = new DialogInterface.OnClickListener() {
                                 @Override
