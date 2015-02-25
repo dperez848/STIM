@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -56,6 +57,13 @@ public class AsignarLote extends Activity implements Configuracion,Filter {
         inflater2 = this.getLayoutInflater();
 
         data = SBN001D.getAllFiltered(0, "", "");
+        for (SBN001D aData : data){
+            SBN001D inv;
+            inv= SBN001D.getBn(aData.numero);
+            inv.show=1;
+            inv.save();
+        }
+
         adaptador =  new BnAdapter(this,data,1);
         lstOpciones = (ListView)findViewById(R.id.LstOpciones);
         lstOpciones.setAdapter(adaptador);
@@ -184,7 +192,7 @@ public class AsignarLote extends Activity implements Configuracion,Filter {
         if (data.size()==0)
             lstOpciones.setVisibility(View.GONE);
         else if (data.size()!=0){
-
+            Log.e("aaa", "la data no es null ");
             List<SBN001D> all=SBN001D.getAll();
             for (SBN001D aData : all){
                 if(has(aData.numero,data)){
@@ -192,13 +200,14 @@ public class AsignarLote extends Activity implements Configuracion,Filter {
                     inv= SBN001D.getBn(aData.numero);
                     inv.show=1;
                     inv.save();
+                    Log.e("aaa", "al bien "+aData.numero+" le puse show 1");
                 }
                 else{
                     SBN001D inv;
                     inv= SBN001D.getBn(aData.numero);
                     inv.show=0;
                     inv.save();
-                }
+                 }
             }
             adaptador.updateAdapter(data);
             lstOpciones.setVisibility(View.VISIBLE);

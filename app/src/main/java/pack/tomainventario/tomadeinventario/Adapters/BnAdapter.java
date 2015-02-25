@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
     public View getView(final int position, View convertView, ViewGroup parent){
         View item = convertView;
         final ViewHolder holder;
-
+        Log.e("aa","soy el item "+data.get(position).numero);
         if(item == null){
             LayoutInflater inflater = context.getLayoutInflater();
             item = inflater.inflate(R.layout.layout_list_bn, null);
@@ -103,15 +104,14 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
                     public void onClick(View v) {
 
                         if (holder.ck1.isChecked()) {
-                            Log.e("aaa", "ischeck() " + holder.ck1.isChecked());
                             SBN001D bN = SBN001D.getBn(data.get(position).numero);
                             bN.checked = 1;
                             bN.save();
                             if (SBN001D.isFull()) {
+                                Log.e("aaa", "esta full " );
                                 listener.setCheck(true);
                             }
                         } else {
-                            Log.e("aaa", "ischeck() " + holder.ck1.isChecked());
                             SBN001D bN = SBN001D.getBn(data.get(position).numero);
                             bN.checked = 0;
                             bN.save();
@@ -125,7 +125,6 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
                     @Override
                     public void onClick(View v) {
                         if (!holder.ck1.isChecked()) {
-                            Log.e("aaa", "ischeck() " + holder.ck1.isChecked());
                             SBN001D bN = SBN001D.getBn(data.get(position).numero);
                             bN.checked = 1;
                             bN.save();
@@ -178,7 +177,9 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
                     }
                 });
                 item.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {listener4.deshacer(position);}
+                    public void onClick(View v) {
+                        Toast.makeText(context, "ADAPTER mandare a ponerle al item "+data.get(position).numero+" en la pos "+position, Toast.LENGTH_LONG).show();
+                        listener4.deshacer(data.get(position).numero);}
                 });
 
             } else{

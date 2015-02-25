@@ -226,6 +226,10 @@ public class MainActivity extends BaseDrawer implements EndlessListView.EndlessL
                                             Log.e("AAA", "Inventario q esta null en 051 "+aData.idInventario);
                                             aData.status = 0;
                                             aData.save();
+                                            SBN010D ubicActual = SBN010D.getUbic(aData.codUbic);
+                                            ubicActual.show=1;
+                                            ubicActual.save();
+                                            Log.e("AAA", "La ubicacion "+ ubicActual.nombre+" tiene show 1");
                                         }
                                     }
                                     mode.finish();

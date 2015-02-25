@@ -12,9 +12,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,6 +23,8 @@ import java.util.List;
 
 import pack.tomainventario.tomadeinventario.Adapters.BnAdapter;
 import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
+import pack.tomainventario.tomadeinventario.DataBase.SBN010D;
+import pack.tomainventario.tomadeinventario.DataBase.SBN050D;
 import pack.tomainventario.tomadeinventario.DataBase.SBN051D;
 import pack.tomainventario.tomadeinventario.DataBase.SBN052D;
 import pack.tomainventario.tomadeinventario.DataBase.SBN053D;
@@ -68,21 +70,7 @@ public class NuevaToma extends Activity implements Selected,Rpu,RpuDialog.Notice
         adaptador =  new BnAdapter(this,data,2);
         lstOpciones = (ListView)findViewById(R.id.LstOpciones);
         lstOpciones.setAdapter(adaptador);
-        lstOpciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(NuevaToma.this);
-                builder.setItems(items, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int item) {
-                        SBN001D.setOneSelected(adaptador.getItem(pos).numero);
-                        info = SBN001D.getSelected();
-                        adaptador.updateAdapter(info);
-                    }
-                });
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
-        });
         bLote.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View arg0)
@@ -220,9 +208,9 @@ public class NuevaToma extends Activity implements Selected,Rpu,RpuDialog.Notice
                                     edit.putInt("Activar", prefs.getInt("Activar",0)-1);
                                     edit.apply();
                                 }
-                                /*SBN010D ubicActual = SBN010D.getUbic(SBN050D.getInv(prefs.getInt("Activar", 0)).codUbic);
+                                SBN010D ubicActual = SBN010D.getUbic(SBN050D.getInv(prefs.getInt("Activar", 0)).codUbic);
                                 ubicActual.show=0;
-                                ubicActual.save();*/
+                                ubicActual.save();
                                 Intent intent1 = new Intent();
                                 setResult(RESULT_OK, intent1);
                                 finish();
@@ -338,19 +326,19 @@ public class NuevaToma extends Activity implements Selected,Rpu,RpuDialog.Notice
 
 
     @Override
-    public void deshacer(final int pos) {
+    public void deshacer( final int numeroBn) {
 
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(NuevaToma.this);
-                builder.setItems(items, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int item) {
-                        SBN001D.setOneSelected(adaptador.getItem(pos).numero);
-                        info = SBN001D.getSelected();
-                        adaptador.updateAdapter(info);
-                    }
-                });
-                AlertDialog alert = builder.create();
-                alert.show();
-
+        Toast.makeText(getApplicationContext(), "me llegó numeroBn "+numeroBn, Toast.LENGTH_LONG).show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(NuevaToma.this);
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                Toast.makeText(getApplicationContext(), "ONCLICK numeroBn "+numeroBn, Toast.LENGTH_LONG).show();
+                SBN001D.setOneSelected(numeroBn);
+                info = SBN001D.getSelected();
+                adaptador.updateAdapter(info);
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

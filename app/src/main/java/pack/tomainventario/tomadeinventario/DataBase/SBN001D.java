@@ -1,5 +1,7 @@
 package pack.tomainventario.tomadeinventario.DataBase;
 
+import android.util.Log;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -251,6 +253,7 @@ public class SBN001D extends Model
                 bN.selected = 0;
                 bN.checked=0;
                 bN.save();
+                Log.e("aa", "le puse selected 0 al item "+numeroBn);
             }
         }
     }

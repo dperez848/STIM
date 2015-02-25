@@ -63,7 +63,7 @@ public class ActivacionInventario extends FragmentActivity implements RpuDialog.
         cmbCosto.setAdapter(adapUCosto);
 
         adapUbic = new ArrayAdapter<SBN010D>(this,android.R.layout.simple_spinner_item);
-        adapUbic.addAll(SBN010D.getAll());
+        adapUbic.addAll(SBN010D.getAllShow());
         cmbUbic = (Spinner)findViewById(R.id.cmbUbic);
         cmbUbic.setAdapter(adapUbic);
 
