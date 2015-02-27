@@ -9,7 +9,9 @@ import android.widget.ListView;
 
 import java.util.List;
 
+import pack.tomainventario.tomadeinventario.Adapters.BnAdapter;
 import pack.tomainventario.tomadeinventario.Adapters.MainAdapter;
+import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
 import pack.tomainventario.tomadeinventario.Objects.Inventoried;
 
 public class EndlessListView extends ListView implements AbsListView.OnScrollListener {
@@ -18,6 +20,7 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
     private boolean isLoading;
     private EndlessListener listener;
     private MainAdapter adapter;
+    private BnAdapter adapterBn;
     private boolean done=false;
 
     public EndlessListView(Context context, AttributeSet attrs, int defStyle) {
@@ -45,14 +48,12 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
 
         if (getAdapter() == null)
             return ;
-
         if (getAdapter().getCount() == 0)
             return ;
         if (isDone())
             return ;
         int l = visibleItemCount + firstVisibleItem;
         if (l >= totalItemCount && !isLoading) {
-            // It is time to add new data. We call the listener
             this.addFooterView(footer);
             isLoading = true;
             listener.loadData();
@@ -75,7 +76,11 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
         this.adapter = adapter;
         this.removeFooterView(footer);
     }
-
+    public void setAdapterBn(BnAdapter adapter) {
+        super.setAdapter(adapter);
+        this.adapterBn = adapter;
+        this.removeFooterView(footer);
+    }
 
     public void addNewData(List<Inventoried> data) {
 
@@ -85,7 +90,14 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
         adapter.notifyDataSetChanged();
         isLoading = false;
     }
+    public void addNewDataBn(List<SBN001D> data) {
 
+        this.removeFooterView(footer);
+
+        adapterBn.addAll(data);
+        adapterBn.notifyDataSetChanged();
+        isLoading = false;
+    }
 
     public EndlessListener setListener() {
         return listener;
@@ -103,5 +115,4 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
     public static interface EndlessListener {
         public void loadData() ;
     }
-
 }

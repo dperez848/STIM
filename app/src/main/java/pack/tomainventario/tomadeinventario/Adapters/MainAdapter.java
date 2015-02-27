@@ -4,7 +4,6 @@ package pack.tomainventario.tomadeinventario.Adapters;
 import android.app.Activity;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,7 @@ import pack.tomainventario.tomadeinventario.R;
 
 public class MainAdapter extends ArrayAdapter<Inventoried> {
     private List<Inventoried> data;
-    Activity context;
+    private Activity context;
     private SparseBooleanArray mSelectedItemsIds;
     private LayoutInflater inflater;
 
@@ -59,7 +58,7 @@ public class MainAdapter extends ArrayAdapter<Inventoried> {
         holder.numero.setText("" +data.get(position).getNumero());
         holder.descripcion.setText(data.get(position).getDescripcion());
         holder.fecha.setText(data.get(position).getFecha());
-        holder.rpu.setText(data.get(position).getRpu());
+        holder.rpu.setText("RPU: "+data.get(position).getRpu());
         if(SBN051D.getBn(data.get(position).getNumero())!=null)
             holder.ubicacion.setText(SBN010D.getUbicacion(SBN050D.getInv(SBN051D.getBn(data.get(position).getNumero()).idInventario).codUbic));
         if(!data.get(position).getFoto().equals("")) {
@@ -80,6 +79,7 @@ public class MainAdapter extends ArrayAdapter<Inventoried> {
         TextView numero,descripcion,rpu,ubicacion,fecha;
         ImageView foto;
     }
+
     @Override
     public int getCount() {
         return data.size();

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,15 +16,16 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import pack.tomainventario.tomadeinventario.Adapters.BnAdapter;
 import pack.tomainventario.tomadeinventario.Config.BaseDrawer;
+import pack.tomainventario.tomadeinventario.Config.EndlessListView;
 import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
 import pack.tomainventario.tomadeinventario.DataBase.SBN010D;
 import pack.tomainventario.tomadeinventario.DataBase.SBN052D;
@@ -36,7 +38,7 @@ import pack.tomainventario.tomadeinventario.Interfaces.Configuracion;
 import pack.tomainventario.tomadeinventario.Interfaces.Filter;
 
 
-public class AjustarRPU extends BaseDrawer implements Filter,Configuracion,RpuDialog.NoticeDialogListener{
+public class AjustarRPU extends BaseDrawer implements EndlessListView.EndlessListener,Filter,Configuracion,RpuDialog.NoticeDialogListener{
 
     private SharedPreferences prefs;
     private List<SBN001D> data;
@@ -45,9 +47,12 @@ public class AjustarRPU extends BaseDrawer implements Filter,Configuracion,RpuDi
     private BnAdapter adaptador;
     private ImageView filter;
     private EditText eRpu;
-    private ListView lstOpciones;
+    private EndlessListView lstOpciones;
     private ActionBar actionBar;
     private SIP501V rpuSelected;
+    private final static int ITEM_PER_REQUEST = 20;
+    private int ini = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,9 +70,12 @@ public class AjustarRPU extends BaseDrawer implements Filter,Configuracion,RpuDi
 
         data = SBN001D.getAllFiltered(4, "", "");
         eRpu = (EditText)findViewById(R.id.edit_rpu);
-        lstOpciones = (ListView)findViewById(R.id.LstOpciones);
-        adaptador =  new BnAdapter(this,data,1);
-        lstOpciones.setAdapter(adaptador);
+
+        adaptador =  new BnAdapter(this,createItems(),1);
+        lstOpciones = (EndlessListView)findViewById(R.id.LstOpciones);
+        lstOpciones.setLoadingView(R.layout.loading_layout);
+        lstOpciones.setAdapterBn(adaptador);
+        lstOpciones.setListener(this);
 
         ckAll = (CheckBox) findViewById(R.id.ck_all);
         ckAll.setOnClickListener(new View.OnClickListener() {
@@ -219,7 +227,6 @@ public class AjustarRPU extends BaseDrawer implements Filter,Configuracion,RpuDi
         }
     }
 
-
     @Override
     public void configDialog(int num) {}
 
@@ -228,4 +235,44 @@ public class AjustarRPU extends BaseDrawer implements Filter,Configuracion,RpuDi
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         return df.format(c.getTime());
     }
+
+    @Override
+    public void loadData() {
+        FakeNetLoader fl = new FakeNetLoader();
+        fl.execute();
+    }
+
+    private class FakeNetLoader extends AsyncTask<String, Void, List<SBN001D>> {
+
+        @Override
+        protected List<SBN001D> doInBackground(String... params) {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return createItems();
+        }
+
+        @Override
+        protected void onPostExecute(List<SBN001D> result) {
+            super.onPostExecute(result);
+            lstOpciones.addNewDataBn(result);
+        }
+    }
+
+    private List<SBN001D> createItems() {
+        List<SBN001D> result = new ArrayList<SBN001D>();
+        int i;
+        for (i= 0; i < ITEM_PER_REQUEST; i++) {
+            if((i+ini)>=data.size()) {
+                lstOpciones.setDone(true);
+                return result;
+            }
+            else result.add(data.get(i+ini));
+        }
+        ini= ini+i;
+        return result;
+    }
+
 }

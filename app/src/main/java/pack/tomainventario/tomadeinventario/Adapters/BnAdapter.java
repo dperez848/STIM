@@ -2,6 +2,7 @@ package pack.tomainventario.tomadeinventario.Adapters;
 
 import android.app.Activity;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import pack.tomainventario.tomadeinventario.Interfaces.IGaleria;
 import pack.tomainventario.tomadeinventario.Interfaces.Rpu;
 import pack.tomainventario.tomadeinventario.Interfaces.Selected;
 import pack.tomainventario.tomadeinventario.NuevaToma;
+import pack.tomainventario.tomadeinventario.Objects.Inventoried;
 import pack.tomainventario.tomadeinventario.R;
 
 /**
@@ -39,12 +41,14 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
     private IGaleria listener2;
     private Rpu listener3;
     private Selected listener4;
+    private SparseBooleanArray mSelectedItemsIds;
 
 
     public BnAdapter(Activity context, List<SBN001D> data, int hasChecked) {
         super(context, R.layout.layout_list_bn,data);
         this.context = context;
         this.data=data;
+        mSelectedItemsIds = new SparseBooleanArray();
         this.hasChecked = hasChecked;
         if(context instanceof Galeria || context instanceof DetalleGaleria
                 || context instanceof NuevaToma) {
@@ -71,7 +75,6 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
     public View getView(final int position, View convertView, ViewGroup parent){
         View item = convertView;
         final ViewHolder holder;
-        Log.e("aa","soy el item "+data.get(position).numero);
         if(item == null){
             LayoutInflater inflater = context.getLayoutInflater();
             item = inflater.inflate(R.layout.layout_list_bn, null);
@@ -198,5 +201,42 @@ public class BnAdapter extends ArrayAdapter<SBN001D> {
         return data.size();
     }
 
+
+    public void remove(Inventoried object) {
+        data.remove(object);
+        notifyDataSetChanged();
+    }
+
+    public void toggleSelection(int position) {
+        selectView(position, !mSelectedItemsIds.get(position));
+
+    }
+
+    public void removeSelection() {
+        mSelectedItemsIds = new SparseBooleanArray();
+        notifyDataSetChanged();
+    }
+
+    public void selectView(int position, boolean value) {
+        if (value)
+            mSelectedItemsIds.put(position, true);
+        else
+            mSelectedItemsIds.delete(position);
+        notifyDataSetChanged();
+    }
+
+    public SparseBooleanArray getSelectedIds() {
+        return mSelectedItemsIds;
+    }
+
+    @Override
+    public SBN001D getItem(int position) {
+        return data.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return data.get(position).hashCode();
+    }
 
 }

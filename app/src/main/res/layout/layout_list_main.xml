@@ -28,9 +28,9 @@
                 android:textSize="@dimen/lista_main_titulo" />
 
             <TextView android:id="@+id/descripcion"
-                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/margin_bottom_peq"
                 android:textSize="@dimen/lista_main_titulo" />
 
         </LinearLayout>
@@ -57,6 +57,7 @@
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:gravity="right"
                 android:textStyle="normal"
                 android:textSize="@dimen/lista_main_subs" />
 

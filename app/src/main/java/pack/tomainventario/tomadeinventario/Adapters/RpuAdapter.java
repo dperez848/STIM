@@ -2,7 +2,6 @@ package pack.tomainventario.tomadeinventario.Adapters;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,17 +21,17 @@ import pack.tomainventario.tomadeinventario.R;
 public class RpuAdapter extends ArrayAdapter<SIP501V> {
     Activity context;
     private String rpu;
-    private List<SIP501V> data3;
+    private List<SIP501V> data;
 
-    public RpuAdapter(Activity context, List<SIP501V> data3) {
-        super(context, R.layout.extra,data3);
+    public RpuAdapter(Activity context, List<SIP501V> data) {
+        super(context, R.layout.extra,data);
         this.context = context;
-        this.data3 = data3;
+        this.data = data;
     }
     public RpuAdapter(Activity context, List<SIP501V> data3, String rpu) {
         super(context, R.layout.extra,data3);
         this.context = context;
-        this.data3 = data3;
+        this.data = data3;
         this.rpu = rpu;
     }
 
@@ -53,12 +52,11 @@ public class RpuAdapter extends ArrayAdapter<SIP501V> {
             holder = (ViewHolder)item.getTag();
         }
 
-        holder.nombre.setText(data3.get(position).nombre);
-        holder.ficha.setText(data3.get(position).ficha);
+        holder.nombre.setText(data.get(position).nombre);
+        holder.ficha.setText(data.get(position).ficha);
         if( (context instanceof NuevaToma || context instanceof DetalleToma) &&
-                data3.get(position).ficha.equals(rpu)){
+                data.get(position).ficha.equals(rpu)){
 
-            Log.e("TAAAG", "Entro a cambiar el color " + data3.get(position).ficha);
             holder.nombre.setTextColor(Color.parseColor("#A9CBE9"));
         }
         else{
@@ -70,6 +68,15 @@ public class RpuAdapter extends ArrayAdapter<SIP501V> {
     static class ViewHolder {
         TextView nombre;
         TextView ficha;
+    }
 
+    public void updateAdapter(List<SIP501V> data){
+        this.data=data;
+        this.notifyDataSetChanged();
+    }
+
+    @Override
+    public int getCount() {
+        return data.size();
     }
 }

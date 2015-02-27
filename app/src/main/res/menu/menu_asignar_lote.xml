@@ -2,8 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="pack.tomainventario.tomadeinventario.AsignarLote">
     <item
+        android:id="@+id/action_filtro"
+        android:showAsAction="always"
+        android:icon="@drawable/filter_empty"
+        android:title="@string/filter"/>
+    <item
         android:id="@+id/action_aceptar"
-        android:showAsAction="ifRoom|withText"
+        android:showAsAction="always"
         android:icon="@drawable/check"
-        android:title="@string/menu_add"/>
+        android:title="@string/aceptar"/>
 </menu>

@@ -16,7 +16,6 @@ public class VisorFotos extends Activity {
 
     private VisorAdapter adapter;
     private ViewPager viewPager;
-    private Button btnClose;
     private int pos;
     private ArrayList<SBN054D> fotos;
 
@@ -30,7 +29,6 @@ public class VisorFotos extends Activity {
         Bundle i = getIntent().getExtras();
 
         viewPager = (ViewPager) findViewById(R.id.pager2);
-        btnClose = (Button) findViewById(R.id.btnClose);
 
         fotos = SBN054D.getBn(i.getInt("numeroBn"));
         pos= i.getInt("pos");
@@ -38,12 +36,6 @@ public class VisorFotos extends Activity {
 
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(pos);
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 }
 

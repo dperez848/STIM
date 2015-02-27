@@ -66,7 +66,7 @@ public class Reportes extends BaseDrawer {
         // -------------------- Configuracion - final
 
 
-        adapUbic = new ArrayAdapter<SBN010D>(this,android.R.layout.simple_spinner_item);
+        adapUbic = new ArrayAdapter<SBN010D>(this,R.layout.layout_item_spinner);
         adapUbic.addAll(SBN010D.getAll());
         cmbUbic = (Spinner)findViewById(R.id.cmbUbic);
         cmbUbic.setAdapter(adapUbic);

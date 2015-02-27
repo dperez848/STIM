@@ -79,7 +79,8 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <ListView android:id="@+id/LstOpciones"
+        <pack.tomainventario.tomadeinventario.Config.EndlessListView
+            android:id="@+id/LstOpciones"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:choiceMode="multipleChoice"/>

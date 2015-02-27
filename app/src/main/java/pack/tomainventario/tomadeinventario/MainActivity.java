@@ -156,8 +156,7 @@ public class MainActivity extends BaseDrawer implements EndlessListView.EndlessL
         else if (data.size()!=0){
             lstOpciones.setVisibility(View.VISIBLE);
             txtEmpty.setVisibility(View.GONE);
-            /*adaptador =  new MainAdapter(this,data);
-            lstOpciones.setAdapter(adaptador);*/
+
             adaptador = new MainAdapter(this, createItems());
             lstOpciones.setLoadingView(R.layout.loading_layout);
             lstOpciones.setAdapter(adaptador);
@@ -301,8 +300,5 @@ public class MainActivity extends BaseDrawer implements EndlessListView.EndlessL
             super.onPostExecute(result);
             lstOpciones.addNewData(result);
         }
-
-
-
     }
 }

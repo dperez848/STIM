@@ -66,12 +66,12 @@ public class AsignarManual extends Activity implements RpuDialog.NoticeDialogLis
 
         cmbTipo.setOnItemSelectedListener(AsignarManual.this);
 
-        adapEdo = new ArrayAdapter<SBN206D>(this,android.R.layout.simple_spinner_item);
+        adapEdo = new ArrayAdapter<SBN206D>(this,R.layout.layout_item_spinner);
         adapEdo.addAll(SBN206D.getAll());
         cmbEstado = (Spinner)findViewById(R.id.cmbEstado);
         cmbEstado.setAdapter(adapEdo);
 
-        adapStatus = new ArrayAdapter<SBN203D>(this,android.R.layout.simple_spinner_item);
+        adapStatus = new ArrayAdapter<SBN203D>(this,R.layout.layout_item_spinner);
         adapStatus.addAll(SBN203D.getAll());
 
 

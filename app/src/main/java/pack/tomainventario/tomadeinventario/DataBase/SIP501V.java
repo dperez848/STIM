@@ -39,11 +39,21 @@ public class SIP501V extends Model {
                 .orderBy("nombre ASC")
                 .execute();
     }
+
     public static SIP501V getPersonal(String ficha) {
         return new Select()
                 .from(SIP501V.class)
                 .where("ficha = ?", ficha)
                 .executeSingle();
+    }
+
+    public static List<SIP501V> getPersonalDialog(String dato) {
+        return new Select()
+                .from(SIP501V.class)
+                .where("ficha = ?", dato)
+                .or("nombre = ?", dato)
+                .orderBy("nombre ASC")
+                .execute();
     }
     }
 

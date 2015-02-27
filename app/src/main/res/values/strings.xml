@@ -134,6 +134,10 @@
     <string name="observacion">Observación: </string>
     <string name="cambiar">Editar </string>
 
+    <!-- Asignar lote -->
+    <string name="filter">Filtro </string>
+    <string name="aceptar">Aceptar </string>
+
     <!-- Activacion de Inventario -->
     <string name="txtNum"># Toma de inventaro: </string>
     <string name="txtEstatus">Estatus: </string>
@@ -178,7 +182,7 @@
         <item>@drawable/rpu</item>
         <item>@drawable/gallery</item>
         <item>@drawable/report</item>
-        <item>@drawable/eliminar</item>
+        <item>@drawable/check</item>
         <item>@drawable/cerrar</item>
     </array>
     <!-- Titulos del drawer -->

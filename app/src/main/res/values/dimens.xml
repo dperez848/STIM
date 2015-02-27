@@ -23,5 +23,7 @@
     <!-- Padding -->
     <dimen name="lateral_padding">70dp</dimen>
 
-
+    <!-- Height -->
+    <dimen name="formulario">56dp</dimen>
+    <dimen name="formulario_doble">112dp</dimen>
 </resources>

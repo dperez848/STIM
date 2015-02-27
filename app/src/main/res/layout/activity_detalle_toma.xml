@@ -1,22 +1,25 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="pack.tomainventario.tomadeinventario.DetalleToma">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/formulario"
         android:orientation="horizontal">
 
         <TextView android:id="@+id/txtNum"
             android:text="@string/numero"
             android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:gravity="center"
             android:textStyle="bold"
             android:textSize="@dimen/lista_main_subs"/>
 
@@ -28,15 +31,16 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/formulario"
         android:orientation="horizontal">
 
         <TextView android:id="@+id/txtDesc"
             android:text="@string/descripcion"
             android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:gravity="center"
             android:textStyle="bold"
             android:textSize="@dimen/lista_main_subs"/>
 
@@ -48,15 +52,16 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/formulario"
         android:orientation="horizontal">
 
         <TextView android:id="@+id/txtFecha"
             android:text="@string/fecha"
             android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:gravity="center"
             android:textStyle="bold"
             android:textSize="@dimen/lista_main_subs"/>
 
@@ -68,15 +73,16 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/formulario"
         android:orientation="horizontal">
 
         <TextView android:id="@+id/txtUbic"
             android:text="@string/ubic"
             android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:gravity="center"
             android:textStyle="bold"
             android:textSize="@dimen/lista_main_subs"/>
 
@@ -88,15 +94,16 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/formulario"
         android:orientation="horizontal">
 
         <TextView android:id="@+id/txtStatus"
             android:text="@string/status"
             android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:gravity="center"
             android:textStyle="bold"
             android:textSize="@dimen/lista_main_subs"/>
 
@@ -108,15 +115,16 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/formulario"
         android:orientation="horizontal">
 
         <TextView android:id="@+id/txtRPU"
             android:text="@string/dRpu"
             android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:gravity="center"
             android:textStyle="bold"
             android:textSize="@dimen/lista_main_subs"/>
 
@@ -138,8 +146,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/formulario_doble"
         android:orientation="horizontal">
         <LinearLayout
             android:layout_width="0dp"
@@ -148,8 +155,7 @@
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="@dimen/formulario"
                 android:orientation="horizontal">
 
                 <TextView android:id="@+id/txtEdo"
@@ -157,6 +163,8 @@
                     android:layout_marginLeft="@dimen/check_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_gravity="top"
+                    android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="@dimen/lista_main_subs"/>
 
@@ -170,8 +178,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="@dimen/formulario"
                 android:orientation="horizontal">
 
                 <TextView android:id="@+id/txtObs"
@@ -179,6 +186,8 @@
                     android:layout_marginLeft="@dimen/check_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_gravity="top"
+                    android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="@dimen/lista_main_subs"/>
 
@@ -203,17 +212,17 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_height="@dimen/formulario_doble"
         android:orientation="horizontal"
         android:gravity="center">
 
         <ImageView android:id="@+id/foto"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/logo"
+            android:src="@drawable/noimagen"
             android:contentDescription="@string/content_description_logo"
-            android:adjustViewBounds="true"/>
+            android:adjustViewBounds="true"
+            android:background="@drawable/image_view_border"/>
         <Button
             android:id="@+id/btnFoto"
             android:textColor="@color/white"
@@ -224,6 +233,6 @@
             android:background="@drawable/button_selector"
             android:text="@string/foto"/>
 
-
     </LinearLayout>
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

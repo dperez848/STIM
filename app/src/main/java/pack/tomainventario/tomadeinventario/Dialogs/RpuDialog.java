@@ -13,7 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.List;
@@ -29,16 +29,15 @@ import pack.tomainventario.tomadeinventario.R;
  * Created by tmachado on 02/12/2014.
  */
 public class RpuDialog extends DialogFragment {
-    private RpuAdapter adaptador2;
-    private ImageButton bSearch;
+    private RpuAdapter adaptador;
+    private ImageView bSearch;
     private EditText eSearch;
     private boolean boolSearch=true;
     private Activity context=getActivity();
     private ListView lstOpciones;
     private AdapterView<?> adapterView;
     private List<SIP501V> data;
-    private int num;
-    private int pos;
+    private int num, pos;
 
     public interface NoticeDialogListener {
         public void onDialogItemClick(SIP501V rpu, int num);
@@ -48,10 +47,12 @@ public class RpuDialog extends DialogFragment {
 
         this.context = context;
     }
+
     public RpuDialog(Activity context, int num) {
         this.num = num;
         this.context = context;
     }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -59,15 +60,15 @@ public class RpuDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_rpu, null);
         builder.setView(dialogView);
-        bSearch = (ImageButton) dialogView.findViewById(R.id.search);
+        bSearch = (ImageView) dialogView.findViewById(R.id.search);
         eSearch = (EditText) dialogView.findViewById(R.id.edit_search);
 
         data= SIP501V.getAll();
         if(context instanceof DetalleToma || context instanceof NuevaToma) {
-            adaptador2 = new RpuAdapter(getActivity(), data, SBN001D.getBn(num).pUsuario);
-        } else adaptador2 =  new RpuAdapter(getActivity(),data);
+            adaptador = new RpuAdapter(getActivity(), data, SBN001D.getBn(num).pUsuario);
+        } else adaptador =  new RpuAdapter(getActivity(),data);
         lstOpciones = (ListView)dialogView.findViewById(R.id.listRpu);
-        lstOpciones.setAdapter(adaptador2);
+        lstOpciones.setAdapter(adaptador);
 
         lstOpciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
@@ -94,10 +95,6 @@ public class RpuDialog extends DialogFragment {
                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
                        builder1.setMessage("¿Desea realizar este cambio?").setPositiveButton("Si", dialogClickListener1)
                                .setNegativeButton("No", dialogClickListener1).show();
-
-
-
-
                    }
                 else{
                        NoticeDialogListener activity = (NoticeDialogListener) getActivity();
@@ -112,10 +109,14 @@ public class RpuDialog extends DialogFragment {
                 if (boolSearch && !(eSearch.getText().toString().equals(""))) {
                     bSearch.setImageResource(R.drawable.x);
                     boolSearch = false;
+                    data = SIP501V.getPersonalDialog(eSearch.getText().toString());
+                    adaptador.updateAdapter(data);
                 } else {
                     bSearch.setImageResource(R.drawable.search);
                     eSearch.setText("");
                     boolSearch = true;
+                    data = SIP501V.getAll();
+                    adaptador.updateAdapter(data);
                 }
             }
         });

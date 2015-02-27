@@ -7,8 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/formulario"
         android:orientation="horizontal"
         android:layout_marginBottom="@dimen/check_margin"
         android:layout_marginTop="@dimen/check_margin">
@@ -34,10 +33,16 @@
             android:textColor="@color/white"
             android:text="Buscar"/>
     </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/formulario"
         android:orientation="horizontal">
 
         <TextView android:id="@+id/txtNum"
@@ -61,8 +66,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/formulario"
         android:orientation="horizontal">
 
         <TextView android:id="@+id/txtDesc"
@@ -82,8 +86,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/formulario"
         android:orientation="horizontal">
 
         <TextView android:id="@+id/txtSerial"
@@ -103,8 +106,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/formulario"
         android:orientation="horizontal">
 
         <TextView android:id="@+id/txtUbic"
@@ -124,8 +126,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/formulario"
         android:orientation="horizontal">
 
         <TextView android:id="@+id/txtStatus"
@@ -145,8 +146,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/formulario"
         android:orientation="horizontal">
 
         <TextView android:id="@+id/txtUni"
@@ -166,8 +166,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/formulario"
         android:orientation="horizontal">
 
         <TextView android:id="@+id/txtSede"
@@ -187,8 +186,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/formulario"
         android:orientation="horizontal">
 
         <TextView android:id="@+id/txtRpp"
@@ -208,8 +206,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/formulario"
         android:orientation="horizontal">
 
         <TextView android:id="@+id/txtUsuario"
@@ -229,8 +226,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/formulario"
         android:orientation="horizontal">
 
         <TextView android:id="@+id/txtEdo"
@@ -247,9 +243,9 @@
             android:layout_height="match_parent"
             android:focusable="false"
             android:inputType="text" />
+
     </LinearLayout>
-
-
-
+    </LinearLayout>
+</ScrollView>
 
 </LinearLayout>

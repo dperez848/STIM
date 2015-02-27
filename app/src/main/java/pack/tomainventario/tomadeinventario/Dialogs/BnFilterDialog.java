@@ -48,7 +48,7 @@ public class BnFilterDialog extends DialogFragment {
             sSedes = (Spinner) dialogView.findViewById(R.id.sedes);
             btn1 = (Button) dialogView.findViewById(R.id.btn1);
 
-            adapSede = new ArrayAdapter<SIP517V>(getActivity(),android.R.layout.simple_spinner_item);
+            adapSede = new ArrayAdapter<SIP517V>(getActivity(),R.layout.layout_item_spinner);
             adapSede.addAll(SIP517V.getAll());
             defec1.setCodUbic("0");
             defec1.setDesUbic("Todos");
@@ -57,7 +57,7 @@ public class BnFilterDialog extends DialogFragment {
             sSedes.setAdapter(adapSede);
 
 
-            adapUbic = new ArrayAdapter<SBN010D>(getActivity(),android.R.layout.simple_spinner_item);
+            adapUbic = new ArrayAdapter<SBN010D>(getActivity(),R.layout.layout_item_spinner);
             adapUbic.addAll(SBN010D.getAll());
             defec2.setCodUbic("0");
             defec2.setNombre("Todas");

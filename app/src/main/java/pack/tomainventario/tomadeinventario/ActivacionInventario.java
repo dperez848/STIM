@@ -57,17 +57,17 @@ public class ActivacionInventario extends FragmentActivity implements RpuDialog.
 
         editSede.setText(SIP517V.getSede(SBN053D.getAll().get(0).sede).desUbic);
 
-        adapUCosto = new ArrayAdapter<SIP528V>(this,android.R.layout.simple_spinner_item);
+        adapUCosto = new ArrayAdapter<SIP528V>(this,R.layout.layout_item_spinner);
         adapUCosto.addAll(SIP528V.getAll());
         cmbCosto = (Spinner)findViewById(R.id.cmbCosto);
         cmbCosto.setAdapter(adapUCosto);
 
-        adapUbic = new ArrayAdapter<SBN010D>(this,android.R.layout.simple_spinner_item);
+        adapUbic = new ArrayAdapter<SBN010D>(this,R.layout.layout_item_spinner);
         adapUbic.addAll(SBN010D.getAllShow());
         cmbUbic = (Spinner)findViewById(R.id.cmbUbic);
         cmbUbic.setAdapter(adapUbic);
 
-        adapStatus = new ArrayAdapter<SBN203D>(this,android.R.layout.simple_spinner_item);
+        adapStatus = new ArrayAdapter<SBN203D>(this,R.layout.layout_item_spinner);
         adapStatus.addAll(SBN203D.getAll());
         cmbStatus = (Spinner)findViewById(R.id.cmbStatus);
         cmbStatus.setAdapter(adapStatus);

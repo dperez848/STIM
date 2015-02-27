@@ -2,25 +2,22 @@ package pack.tomainventario.tomadeinventario;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pack.tomainventario.tomadeinventario.Adapters.BnAdapter;
+import pack.tomainventario.tomadeinventario.Config.EndlessListView;
 import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
 import pack.tomainventario.tomadeinventario.DataBase.SBN010D;
 import pack.tomainventario.tomadeinventario.DataBase.SIP517V;
@@ -29,19 +26,18 @@ import pack.tomainventario.tomadeinventario.Interfaces.Configuracion;
 import pack.tomainventario.tomadeinventario.Interfaces.Filter;
 
 
-public class AsignarLote extends Activity implements Configuracion,Filter {
+public class AsignarLote extends Activity implements EndlessListView.EndlessListener,Configuracion,Filter {
     private BnAdapter adaptador;
-    private ImageButton bSearch;
     private CheckBox ckAll;
-    private ImageView filter;
-    private ListView lstOpciones;
+    private EndlessListView lstOpciones;
     private Boolean all=false;
     private ActionBar actionBar;
     private List<SBN001D> data;
-    private EditText eSearch;
-    private boolean boolSearch=true;
-    private LayoutInflater inflater2;
+    private Menu menu;
+    private final static int ITEM_PER_REQUEST = 20;
+    private int ini = 0;
     private final CharSequence[] items = { "Deshacer"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +45,6 @@ public class AsignarLote extends Activity implements Configuracion,Filter {
         actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Asignar por grupo");
-
-        bSearch = (ImageButton) findViewById(R.id.search);
-        eSearch = (EditText) findViewById(R.id.edit_search);
-
-        filter = (ImageView)findViewById(R.id.filter);
-        inflater2 = this.getLayoutInflater();
 
         data = SBN001D.getAllFiltered(0, "", "");
         for (SBN001D aData : data){
@@ -64,54 +54,12 @@ public class AsignarLote extends Activity implements Configuracion,Filter {
             inv.save();
         }
 
-        adaptador =  new BnAdapter(this,data,1);
-        lstOpciones = (ListView)findViewById(R.id.LstOpciones);
-        lstOpciones.setAdapter(adaptador);
+        adaptador =  new BnAdapter(this,createItems(),1);
+        lstOpciones = (EndlessListView)findViewById(R.id.LstOpciones);
+        lstOpciones.setLoadingView(R.layout.loading_layout);
+        lstOpciones.setAdapterBn(adaptador);
+        lstOpciones.setListener(this);
 
-        filter.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View arg0)
-            {  BnFilterDialog dialog = new BnFilterDialog(AsignarLote.this);
-                dialog.show(getFragmentManager(),"BnFilterDialog");
-                dialog.setTargetFragment(dialog, 1);
-            }
-        });
-
-        bSearch.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View arg0)
-            {
-                if(boolSearch && !(eSearch.getText().toString().equals(""))){
-                    bSearch.setImageResource(R.drawable.x);
-                    boolSearch=false;
-                }
-                else{
-                    bSearch.setImageResource(R.drawable.search);
-                    eSearch.setText("");
-                    boolSearch=true;
-                }
-            }
-        });
-        eSearch.addTextChangedListener(new TextWatcher() {
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                bSearch.setImageResource(R.drawable.search);
-                boolSearch=true;
-            }
-            public void afterTextChanged(Editable s) {}
-            public void beforeTextChanged(CharSequence s, int start, int count,int after) {}
-        });
-
-        eSearch.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                    bSearch.setImageResource(R.drawable.x);
-                    boolSearch=false;
-                    return true;
-                }
-                return false;
-            }
-        });
         ckAll = (CheckBox) findViewById(R.id.ck_all);
         ckAll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,6 +83,7 @@ public class AsignarLote extends Activity implements Configuracion,Filter {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_asignar_lote, menu);
+        this.menu = menu;
         return true;
     }
 
@@ -142,11 +91,26 @@ public class AsignarLote extends Activity implements Configuracion,Filter {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_aceptar) {
-            SBN001D.allCheckedToSelected();
-            SBN001D.setAllChecked(0,1);
-            Intent intent1 = new Intent();
-            setResult(RESULT_OK, intent1);
-            finish();
+            DialogInterface.OnClickListener dialogClickListener1 = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which){
+                        case DialogInterface.BUTTON_POSITIVE:
+                            SBN001D.allCheckedToSelected();
+                            SBN001D.setAllChecked(0,1);
+                            Intent intent1 = new Intent();
+                            setResult(RESULT_OK, intent1);
+                            finish();
+                            break;
+
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            break;
+                    }
+                }
+            };
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("¿Confirmar acción?").setPositiveButton("Si", dialogClickListener1)
+                    .setNegativeButton("No", dialogClickListener1).show();
             return true;
         }
         else if (id == android.R.id.home){
@@ -154,6 +118,12 @@ public class AsignarLote extends Activity implements Configuracion,Filter {
             Intent intent1 = new Intent();
             setResult(RESULT_OK, intent1);
             finish();
+            return true;
+        }
+        else if (id == R.id.action_filtro){
+            BnFilterDialog dialog = new BnFilterDialog(AsignarLote.this);
+            dialog.show(getFragmentManager(),"BnFilterDialog");
+            dialog.setTargetFragment(dialog, 1);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -172,21 +142,22 @@ public class AsignarLote extends Activity implements Configuracion,Filter {
 
     @Override
     public void filterSelect(SIP517V sede, SBN010D ubicacion) {
+        MenuItem mItem = menu.findItem(R.id.action_filtro);
         if(sede==null && ubicacion==null) {
             data = SBN001D.getAllFiltered(0, "", "");
-            filter.setImageResource(R.drawable.filter_empty);
+            mItem.setIcon(R.drawable.filter_empty);
         }
         else if(sede!=null && ubicacion ==null) {
             data = SBN001D.getAllFiltered(1, sede.codSede, "");
-            filter.setImageResource(R.drawable.filter_filled);
+            mItem.setIcon(R.drawable.filter_filled);
         }
         else if(sede == null) {
             data = SBN001D.getAllFiltered(2, "", ubicacion.codUbic);
-            filter.setImageResource(R.drawable.filter_filled);
+            mItem.setIcon(R.drawable.filter_filled);
         }
         else {
             data = SBN001D.getAllFiltered(3, sede.codSede, ubicacion.codUbic);
-            filter.setImageResource(R.drawable.filter_filled);
+            mItem.setIcon(R.drawable.filter_filled);
         }
 
         if (data.size()==0)
@@ -228,5 +199,47 @@ public class AsignarLote extends Activity implements Configuracion,Filter {
         Intent intent1 = new Intent();
         setResult(RESULT_OK, intent1);
         finish();
+    }
+
+    private List<SBN001D> createItems() {
+        List<SBN001D> result = new ArrayList<SBN001D>();
+        int i;
+        for (i= 0; i < ITEM_PER_REQUEST; i++) {
+            if((i+ini)>=data.size()) {
+                lstOpciones.setDone(true);
+                return result;
+            }
+            else result.add(data.get(i+ini));
+        }
+        ini= ini+i;
+        return result;
+    }
+
+    @Override
+    public void loadData() {
+        FakeNetLoader fl = new FakeNetLoader();
+        fl.execute();
+    }
+
+    private class FakeNetLoader extends AsyncTask<String, Void, List<SBN001D>> {
+
+        @Override
+        protected List<SBN001D> doInBackground(String... params) {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return createItems();
+        }
+
+        @Override
+        protected void onPostExecute(List<SBN001D> result) {
+            super.onPostExecute(result);
+            lstOpciones.addNewDataBn(result);
+        }
+
+
+
     }
 }

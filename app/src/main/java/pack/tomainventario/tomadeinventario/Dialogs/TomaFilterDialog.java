@@ -52,7 +52,7 @@ public class TomaFilterDialog extends DialogFragment  {
         sEdo = (Spinner) dialogView.findViewById(R.id.estado);
 
 
-        adapEdo = new ArrayAdapter<SBN206D>(getActivity(),android.R.layout.simple_spinner_item);
+        adapEdo = new ArrayAdapter<SBN206D>(getActivity(),R.layout.layout_item_spinner);
         adapEdo.addAll(SBN206D.getAll());
         sEdo.setAdapter(adapEdo);
         spinnerPosition = adapEdo.getPosition(SBN206D.getEdoDB(edo));

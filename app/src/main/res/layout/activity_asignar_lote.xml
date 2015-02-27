@@ -10,34 +10,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-
-        <EditText android:id="@+id/edit_search"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:hint="@string/search"
-            android:inputType="text"/>
-
-        <ImageButton
-            android:id="@+id/search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/search"/>
-
-        <ImageView android:id="@+id/filter"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/filter_empty"
-            android:contentDescription="@string/content_description_logo"
-            android:adjustViewBounds="true"
-            android:layout_marginRight="@dimen/check_margin"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
         <TextView android:id="@+id/selec_todos"
             android:text="@string/selec"
             android:textSize="@dimen/regular"
@@ -58,7 +30,8 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <ListView android:id="@+id/LstOpciones"
+        <pack.tomainventario.tomadeinventario.Config.EndlessListView
+            android:id="@+id/LstOpciones"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:choiceMode="multipleChoice"/>
