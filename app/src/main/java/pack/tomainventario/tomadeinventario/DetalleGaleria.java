@@ -107,7 +107,9 @@ public class DetalleGaleria extends Activity implements IGaleria {
         int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
-                onBackPressed();
+                Intent intent1 = new Intent();
+                setResult(RESULT_OK, intent1);
+                finish();
                 return true;
             case R.id.action_add:
                 pm = getPackageManager();
@@ -281,6 +283,12 @@ public class DetalleGaleria extends Activity implements IGaleria {
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate();
         }
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent1 = new Intent();
+        setResult(RESULT_OK, intent1);
+        finish();
     }
 }
 

@@ -118,7 +118,7 @@ public class NuevaToma extends Activity implements Selected,Rpu,RpuDialog.Notice
 
         if (resultCode == RESULT_OK) {
             Log.e("TAAAG", "entro a la "+requestCode);
-            if (requestCode==1005 ||requestCode==1006) {
+            if (requestCode==1005 ||requestCode==1006 ||requestCode==1007) {
 
                 if(requestCode==1006) {
                     observacion = data.getStringExtra("observacion");
@@ -292,7 +292,7 @@ public class NuevaToma extends Activity implements Selected,Rpu,RpuDialog.Notice
         Bundle bundle = new Bundle();
         bundle.putInt("numero", numero);
         intent.putExtras(bundle);
-        startActivity(intent);
+        startActivityForResult(intent,1007);
     }
 
     @Override
