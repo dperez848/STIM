@@ -26,4 +26,6 @@
     <!-- Height -->
     <dimen name="formulario">56dp</dimen>
     <dimen name="formulario_doble">112dp</dimen>
+    <dimen name="formulario_triple">168dp</dimen>
+    <dimen name="button">40dp</dimen>
 </resources>

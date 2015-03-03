@@ -10,8 +10,10 @@ import android.widget.ListView;
 import java.util.List;
 
 import pack.tomainventario.tomadeinventario.Adapters.BnAdapter;
+import pack.tomainventario.tomadeinventario.Adapters.GridViewAdapter;
 import pack.tomainventario.tomadeinventario.Adapters.MainAdapter;
 import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
+import pack.tomainventario.tomadeinventario.DataBase.SBN054D;
 import pack.tomainventario.tomadeinventario.Objects.Inventoried;
 
 public class EndlessListView extends ListView implements AbsListView.OnScrollListener {
@@ -22,6 +24,7 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
     private MainAdapter adapter;
     private BnAdapter adapterBn;
     private boolean done=false;
+    private GridViewAdapter adapterGrid;
 
     public EndlessListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -81,6 +84,11 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
         this.adapterBn = adapter;
         this.removeFooterView(footer);
     }
+    public void setAdapterGrid(GridViewAdapter adapter) {
+        super.setAdapter(adapter);
+        this.adapterGrid = adapter;
+        this.removeFooterView(footer);
+    }
 
     public void addNewData(List<Inventoried> data) {
 
@@ -96,6 +104,15 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
 
         adapterBn.addAll(data);
         adapterBn.notifyDataSetChanged();
+        isLoading = false;
+    }
+    public void addNewDataGrid(List<SBN054D> data) {
+
+        this.removeFooterView(footer);
+
+
+        adapterGrid.addAll(data);
+        adapterGrid.notifyDataSetChanged();
         isLoading = false;
     }
 

@@ -133,10 +133,12 @@
     <string name="foto">Gestor de fotos </string>
     <string name="observacion">Observación: </string>
     <string name="cambiar">Editar </string>
+    <string name="buscarButton">Buscar </string>
 
     <!-- Asignar lote -->
     <string name="filter">Filtro </string>
     <string name="aceptar">Aceptar </string>
+    <string name="noFiltro">El iltro seleccionado no generó bienes </string>
 
     <!-- Activacion de Inventario -->
     <string name="txtNum"># Toma de inventaro: </string>

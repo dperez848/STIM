@@ -2,6 +2,7 @@ package pack.tomainventario.tomadeinventario.Adapters;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,8 +62,29 @@ public class NavigationAdapter extends BaseAdapter {
             view.icono = (ImageView) convertView.findViewById(R.id.icon);
             view.icono.setImageResource(itm.getIcono());
             if(position == actual) {
-                convertView.setBackgroundColor(Color.parseColor("#73C0EA"));
+                convertView.setBackgroundColor(Color.parseColor("#003882"));
                 view.titulo_itm.setTextColor(Color.parseColor("#FFFFFF"));
+
+                switch (actual) {
+                    case 0:
+                        Log.e("ENTRO: ", " si");
+                        view.icono.setImageResource(R.drawable.cerrar);
+                        break;
+                    case 1:
+                        view.icono.setImageResource(R.drawable.home);
+                        break;
+                    case 2:
+                        view.icono.setImageResource(R.drawable.home);break;
+                    case 3:
+                        view.icono.setImageResource(R.drawable.home);break;
+                    case 4:
+                        view.icono.setImageResource(R.drawable.home);break;
+                    case 5:
+                        view.icono.setImageResource(R.drawable.home);break;
+                    default:
+                        view.icono.setImageResource(R.drawable.home); break;
+
+                }
             }
             convertView.setTag(view);
         }

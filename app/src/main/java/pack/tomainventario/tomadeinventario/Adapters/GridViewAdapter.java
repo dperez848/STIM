@@ -108,6 +108,16 @@ public class GridViewAdapter extends ArrayAdapter {
         notifyDataSetChanged();
     }
 
+    public void toggleSelection(int position) {
+        selectView(position, !mSelectedItemsIds.get(position));
+
+    }
+
+    public void removeSelection() {
+        mSelectedItemsIds = new SparseBooleanArray();
+        notifyDataSetChanged();
+    }
+
     public void selectView(int position, boolean value) {
         if (value)
             mSelectedItemsIds.put(position, true);
@@ -115,5 +125,21 @@ public class GridViewAdapter extends ArrayAdapter {
             mSelectedItemsIds.delete(position);
         notifyDataSetChanged();
     }
+
+    public SparseBooleanArray getSelectedIds() {
+        return mSelectedItemsIds;
+    }
+
+    @Override
+    public SBN054D getItem(int position) {
+        return data.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return data.get(position).hashCode();
+    }
+
+
 
 }
