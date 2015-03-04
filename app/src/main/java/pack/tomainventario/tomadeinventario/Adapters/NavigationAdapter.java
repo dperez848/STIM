@@ -2,7 +2,6 @@ package pack.tomainventario.tomadeinventario.Adapters;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,22 +66,21 @@ public class NavigationAdapter extends BaseAdapter {
 
                 switch (actual) {
                     case 0:
-                        Log.e("ENTRO: ", " si");
-                        view.icono.setImageResource(R.drawable.cerrar);
+                        view.icono.setImageResource(R.drawable.homeselect);
                         break;
                     case 1:
-                        view.icono.setImageResource(R.drawable.home);
+                        view.icono.setImageResource(R.drawable.searchselect);
                         break;
                     case 2:
-                        view.icono.setImageResource(R.drawable.home);break;
+                        view.icono.setImageResource(R.drawable.rpuselect);break;
                     case 3:
-                        view.icono.setImageResource(R.drawable.home);break;
+                        view.icono.setImageResource(R.drawable.galleryselect);break;
                     case 4:
-                        view.icono.setImageResource(R.drawable.home);break;
+                        view.icono.setImageResource(R.drawable.reportselect);break;
                     case 5:
-                        view.icono.setImageResource(R.drawable.home);break;
+                        view.icono.setImageResource(R.drawable.check);break;
                     default:
-                        view.icono.setImageResource(R.drawable.home); break;
+                        view.icono.setImageResource(R.drawable.cerrarselect); break;
 
                 }
             }

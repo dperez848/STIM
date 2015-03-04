@@ -43,6 +43,7 @@
         </activity>
         <activity
             android:name="pack.tomainventario.tomadeinventario.ConsultarBien"
+            android:windowSoftInputMode="stateHidden" >
             android:label="@string/title_activity_consultar_bien" >
         </activity>
         <activity

@@ -1,9 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="pack.tomainventario.tomadeinventario.Reportes">
+
     <item
         android:id="@+id/action_aceptar"
         android:showAsAction="always"
-        android:icon="@drawable/report"
+        android:icon="@drawable/reportselect"
         android:title="@string/menu_add"/>
 </menu>

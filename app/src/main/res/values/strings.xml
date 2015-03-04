@@ -15,23 +15,12 @@
     <string name="cerrar">Cerrar sesión</string>
 
     <!-- Aviso -->
-    <string name="aviso">No hay ninguna imagen asociada a este Bien Nacional. Agrégala (+)</string>
-
-    <!-- Galeria -->
-    <!-- Array de imagenes de prueba -->
-    <array name="imagenes_prueba">
-        <item>@drawable/home</item>
-        <item>@drawable/search</item>
-        <item>@drawable/rpu</item>
-        <item>@drawable/gallery</item>
-        <item>@drawable/report</item>
-        <item>@android:drawable/ic_lock_power_off</item>
-    </array>
+    <string name="aviso">No hay ninguna imagen asociada a este Bien Nacional</string>
 
     <!-- Main -->
     <string name="menu_add">Nuevo</string>
     <string name="delete">Excluir</string>
-    <string name="noRecord">No hay ningun Bien inventariado. Hazlo ahora (+)</string>
+    <string name="noRecord">No hay inventarios registrados</string>
     <string name="manual">Asignar manualmente</string>
     <string name="no_manual">Asignar de la lista</string>
 
@@ -184,7 +173,7 @@
         <item>@drawable/rpu</item>
         <item>@drawable/gallery</item>
         <item>@drawable/report</item>
-        <item>@drawable/check</item>
+        <item>@drawable/checkgris</item>
         <item>@drawable/cerrar</item>
     </array>
     <!-- Titulos del drawer -->
