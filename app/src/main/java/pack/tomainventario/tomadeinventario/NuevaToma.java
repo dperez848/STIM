@@ -39,7 +39,7 @@ import pack.tomainventario.tomadeinventario.Interfaces.Selected;
 import pack.tomainventario.tomadeinventario.Objects.ObservacionRpu;
 
 
-public class NuevaToma extends Activity implements Selected,Rpu,RpuDialog.NoticeDialogListener, Configuracion,IGaleria,Observacion{
+public class NuevaToma extends Activity implements Selected,Rpu, Configuracion,IGaleria,Observacion{
     private SharedPreferences prefs;
     private SharedPreferences.Editor edit;
     private BnAdapter adaptador;
@@ -300,14 +300,9 @@ public class NuevaToma extends Activity implements Selected,Rpu,RpuDialog.Notice
 
     }
 
-    @Override
+    //@Override
     public void onDialogItemClick(SIP501V rpu, int num) {
-        SBN001D bN = SBN001D.getBn(num);
-        bN.pUsuario= SIP501V.getPersonal(rpu.ficha).ficha;
-        bN.save();
-        SBN052D historialRpu=new SBN052D(num, fechaActual(),rpu.ficha,
-                                prefs.getInt("Activar", 0),SBN053D.getAll().get(0).idInventarioActivo);
-        historialRpu.save();
+
     }
 
     @Override
@@ -315,6 +310,31 @@ public class NuevaToma extends Activity implements Selected,Rpu,RpuDialog.Notice
         RpuDialog dialog = new RpuDialog(NuevaToma.this,bn);
         dialog.show(getFragmentManager(),"RpuDialog");
         dialog.setTargetFragment(dialog, 1);
+    }
+
+    @Override
+    public void onRpuItemClick(final SIP501V rpu) {
+        DialogInterface.OnClickListener dialogClickListener1 = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        SBN001D bN = SBN001D.getBn(num);
+                        bN.pUsuario= SIP501V.getPersonal(rpu.ficha).ficha;
+                        bN.save();
+                        SBN052D historialRpu=new SBN052D(num, fechaActual(),rpu.ficha,
+                                prefs.getInt("Activar", 0),SBN053D.getAll().get(0).idInventarioActivo);
+                        historialRpu.save();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(NuevaToma.this);
+        builder1.setMessage("¿Desea realizar este cambio?").setPositiveButton("Si", dialogClickListener1)
+                .setNegativeButton("No", dialogClickListener1).show();
     }
 
     @Override

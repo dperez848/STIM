@@ -24,9 +24,10 @@ import pack.tomainventario.tomadeinventario.DataBase.SIP501V;
 import pack.tomainventario.tomadeinventario.DataBase.SIP517V;
 import pack.tomainventario.tomadeinventario.DataBase.SIP528V;
 import pack.tomainventario.tomadeinventario.Dialogs.RpuDialog;
+import pack.tomainventario.tomadeinventario.Interfaces.Rpu;
 
 
-public class ActivacionInventario extends FragmentActivity implements RpuDialog.NoticeDialogListener  {
+public class ActivacionInventario extends FragmentActivity implements Rpu {
     private SharedPreferences prefs;
     private SharedPreferences.Editor edit;
     private EditText editFecha, editRpp, editSede, editNum;
@@ -126,11 +127,7 @@ public class ActivacionInventario extends FragmentActivity implements RpuDialog.
         return df.format(c.getTime());
     }
 
-    @Override
-    public void onDialogItemClick(SIP501V rpu, int num) {
-        this.pUsuario=rpu;
-        editRpp.setText(rpu.nombre);
-    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -157,5 +154,16 @@ public class ActivacionInventario extends FragmentActivity implements RpuDialog.
         Intent intent2 = new Intent();
         setResult(RESULT_OK, intent2);
         finish();
+    }
+
+    @Override
+    public void openRpuDialog(int bn) {
+
+    }
+
+    @Override
+    public void onRpuItemClick(SIP501V rpu) {
+        this.pUsuario=rpu;
+        editRpp.setText(rpu.nombre);
     }
 }

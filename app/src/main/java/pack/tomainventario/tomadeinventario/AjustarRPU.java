@@ -38,7 +38,7 @@ import pack.tomainventario.tomadeinventario.Interfaces.Configuracion;
 import pack.tomainventario.tomadeinventario.Interfaces.Filter;
 
 
-public class AjustarRPU extends BaseDrawer implements EndlessListView.EndlessListener,Filter,Configuracion,RpuDialog.NoticeDialogListener{
+public class AjustarRPU extends BaseDrawer implements RpuDialog.NoticeDialogListener,EndlessListView.EndlessListener,Filter,Configuracion{
 
     private SharedPreferences prefs;
     private List<SBN001D> data;
@@ -194,11 +194,11 @@ public class AjustarRPU extends BaseDrawer implements EndlessListView.EndlessLis
         return false;
     }
 
-    @Override
-    public void onDialogItemClick(SIP501V rpu, int num) {
-        rpuSelected=rpu;
-        eRpu.setText(rpu.nombre);
-    }
+   @Override
+    public void onDialogItemClick(SIP501V rpu) {
+       rpuSelected=rpu;
+       eRpu.setText(rpu.nombre);
+   }
 
     @Override
     public void filterSelect(SIP517V sede, SBN010D ubicacion) {
@@ -242,6 +242,15 @@ public class AjustarRPU extends BaseDrawer implements EndlessListView.EndlessLis
         fl.execute();
     }
 
+    //@Override
+    public void openRpuDialog(int bn) {}
+
+    /*@Override
+    public void onRpuItemClick(SIP501V rpu) {
+        rpuSelected=rpu;
+        eRpu.setText(rpu.nombre);
+    }*/
+
     private class FakeNetLoader extends AsyncTask<String, Void, List<SBN001D>> {
 
         @Override
@@ -252,6 +261,7 @@ public class AjustarRPU extends BaseDrawer implements EndlessListView.EndlessLis
                 e.printStackTrace();
             }
             return createItems();
+
         }
 
         @Override

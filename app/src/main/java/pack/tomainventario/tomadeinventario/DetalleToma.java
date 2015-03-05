@@ -1,5 +1,7 @@
 package pack.tomainventario.tomadeinventario;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -29,9 +31,10 @@ import pack.tomainventario.tomadeinventario.DataBase.SIP517V;
 import pack.tomainventario.tomadeinventario.Dialogs.RpuDialog;
 import pack.tomainventario.tomadeinventario.Dialogs.TomaFilterDialog;
 import pack.tomainventario.tomadeinventario.Interfaces.Observacion;
+import pack.tomainventario.tomadeinventario.Interfaces.Rpu;
 
 
-public class DetalleToma extends FragmentActivity implements RpuDialog.NoticeDialogListener,Observacion {
+public class DetalleToma extends FragmentActivity implements Rpu,Observacion {
     private int numeroBn;
     private String descripcion,fecha,foto,sede,ubic,rpu,observacion,edo,status;
     private EditText editNum,editDescripcion,editFecha,editUbic,editRpu,editObservacion,editEdo, editStatus;
@@ -146,20 +149,9 @@ public class DetalleToma extends FragmentActivity implements RpuDialog.NoticeDia
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
+    //@Override
     public void onDialogItemClick(SIP501V rpu,int num) {
-        SBN001D bN= SBN001D.getBn(numeroBn);
-        bN.pUsuario=rpu.ficha;
-        bN.save();
-        SBN052D historialRpu=new SBN052D(num, fechaActual(),rpu.ficha,
-                SBN052D.getInventario(num).idInventario, SBN053D.getAll().get(0).idInventarioActivo);
-        historialRpu.save();
-        /*for (SBN052D aData : SBN052D.getAll()){
-            Log.e("TAAASSSSSG", "Los selected son " + aData.numeroBn);
-        }*/
 
-        this.pUsuario=rpu;
-        editRpu.setText(rpu.nombre);
     }
 
     @Override
@@ -185,5 +177,40 @@ public class DetalleToma extends FragmentActivity implements RpuDialog.NoticeDia
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         return df.format(c.getTime());
+    }
+
+    @Override
+    public void openRpuDialog(int bn) {
+
+    }
+
+    @Override
+    public void onRpuItemClick(final SIP501V rpu) {
+        DialogInterface.OnClickListener dialogClickListener1 = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        SBN001D bN= SBN001D.getBn(numeroBn);
+                        bN.pUsuario=rpu.ficha;
+                        bN.save();
+                        SBN052D historialRpu=new SBN052D(numeroBn, fechaActual(),rpu.ficha,
+                                SBN052D.getInventario(numeroBn).idInventario, SBN053D.getAll().get(0).idInventarioActivo);
+                        historialRpu.save();
+                        /*for (SBN052D aData : SBN052D.getAll()){
+                            Log.e("TAAASSSSSG", "Los selected son " + aData.numeroBn);
+                        }*/
+                        pUsuario=rpu;
+                        editRpu.setText(rpu.nombre);
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(DetalleToma.this);
+        builder1.setMessage("¿Desea realizar este cambio?").setPositiveButton("Si", dialogClickListener1)
+                .setNegativeButton("No", dialogClickListener1).show();
     }
 }

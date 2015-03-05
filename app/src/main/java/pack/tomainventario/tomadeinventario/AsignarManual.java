@@ -28,9 +28,10 @@ import pack.tomainventario.tomadeinventario.DataBase.SBN203D;
 import pack.tomainventario.tomadeinventario.DataBase.SBN206D;
 import pack.tomainventario.tomadeinventario.DataBase.SIP501V;
 import pack.tomainventario.tomadeinventario.Dialogs.RpuDialog;
+import pack.tomainventario.tomadeinventario.Interfaces.Rpu;
 
 
-public class AsignarManual extends Activity implements RpuDialog.NoticeDialogListener,AdapterView.OnItemSelectedListener{
+public class AsignarManual extends Activity implements Rpu,AdapterView.OnItemSelectedListener{
 
     private SharedPreferences prefs;
     private ActionBar actionBar;
@@ -231,10 +232,9 @@ public class AsignarManual extends Activity implements RpuDialog.NoticeDialogLis
         return (int) l;
     }
 
-    @Override
-    public void onDialogItemClick(SIP501V rpu, int num) {
-        this.pUsuario=rpu;
-        eRpu.setText(rpu.nombre);
+    //@Override
+    public void onDialogItemClick(SIP501V rpu) {
+
     }
 
     public String fechaActual(){
@@ -252,5 +252,16 @@ public class AsignarManual extends Activity implements RpuDialog.NoticeDialogLis
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void openRpuDialog(int bn) {
+
+    }
+
+    @Override
+    public void onRpuItemClick(SIP501V rpu) {
+        this.pUsuario=rpu;
+        eRpu.setText(rpu.nombre);
     }
 }

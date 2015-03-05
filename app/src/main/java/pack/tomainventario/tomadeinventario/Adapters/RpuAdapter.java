@@ -19,7 +19,7 @@ import pack.tomainventario.tomadeinventario.R;
  * Created by tmachado on 02/12/2014.
  */
 public class RpuAdapter extends ArrayAdapter<SIP501V> {
-    Activity context;
+    private Activity context;
     private String rpu;
     private List<SIP501V> data;
 
@@ -35,7 +35,7 @@ public class RpuAdapter extends ArrayAdapter<SIP501V> {
         this.rpu = rpu;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(final int position, View convertView, ViewGroup parent){
         View item = convertView;
         ViewHolder holder;
 
@@ -62,6 +62,14 @@ public class RpuAdapter extends ArrayAdapter<SIP501V> {
         else{
             holder.nombre.setTextColor(Color.parseColor("#000000"));
         }
+
+       /* item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("aaa", "Entro al clik ");
+                listener.onRpuItemClick(data.get(position));
+            }
+        });*/
         return(item);
     }
 
