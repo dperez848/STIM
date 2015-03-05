@@ -9,12 +9,14 @@
     <dimen name="margin_bottom_peq">10dp</dimen>
     <dimen name="check_margin">5dp</dimen>
     <dimen name="regular_margin">8dp</dimen>
+    <dimen name="pequeño">4dp</dimen>
 
 
     <!-- Text Size -->
     <dimen name="toma_inventario">22sp</dimen>
     <dimen name="activity_grid_margin">20dp</dimen>
     <dimen name="lista_main_titulo">20sp</dimen>
+    <dimen name="lista_main_medio">18sp</dimen>
     <dimen name="lista_main_subs">15sp</dimen>
     <dimen name="width_img_list_main">70sp</dimen>
     <dimen name="height_img_list_ain">70sp</dimen>

@@ -78,7 +78,7 @@ public class RpuDialog extends DialogFragment implements Rpu {
     }
 
     public interface NoticeDialogListener {
-        public void onDialogItemClick(SIP501V rpu);
+        public void onDialogItemClick(SIP501V rpu, int num);
     }
 
     public RpuDialog(Activity context) {
@@ -121,7 +121,7 @@ public class RpuDialog extends DialogFragment implements Rpu {
                             switch (which) {
                                 case DialogInterface.BUTTON_POSITIVE:
                                     NoticeDialogListener activity = (NoticeDialogListener) getActivity();
-                                    activity.onDialogItemClick((SIP501V) adapterView.getAdapter().getItem(pos));
+                                    activity.onDialogItemClick((SIP501V) adapterView.getAdapter().getItem(pos),num);
                                     dismiss();
                                     break;
 
@@ -136,7 +136,7 @@ public class RpuDialog extends DialogFragment implements Rpu {
                 }
                 else{
                     NoticeDialogListener activity = (NoticeDialogListener) getActivity();
-                    activity.onDialogItemClick((SIP501V) a.getAdapter().getItem(position));
+                    activity.onDialogItemClick((SIP501V) a.getAdapter().getItem(position),num);
                     dismiss();
                 }
             }

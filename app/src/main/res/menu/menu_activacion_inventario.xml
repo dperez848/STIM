@@ -3,7 +3,7 @@
     tools:context="pack.tomainventario.tomadeinventario.ActivacionInventario">
     <item
         android:id="@+id/action_aceptar"
-        android:showAsAction="ifRoom|withText"
+        android:showAsAction="always"
         android:icon="@drawable/check"
         android:title="@string/menu_add"/>
 </menu>

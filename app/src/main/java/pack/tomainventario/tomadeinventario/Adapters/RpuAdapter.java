@@ -24,12 +24,12 @@ public class RpuAdapter extends ArrayAdapter<SIP501V> {
     private List<SIP501V> data;
 
     public RpuAdapter(Activity context, List<SIP501V> data) {
-        super(context, R.layout.extra,data);
+        super(context, R.layout.layout_item_rpu,data);
         this.context = context;
         this.data = data;
     }
     public RpuAdapter(Activity context, List<SIP501V> data3, String rpu) {
-        super(context, R.layout.extra,data3);
+        super(context, R.layout.layout_item_rpu,data3);
         this.context = context;
         this.data = data3;
         this.rpu = rpu;
@@ -41,7 +41,7 @@ public class RpuAdapter extends ArrayAdapter<SIP501V> {
 
         if(item == null){
             LayoutInflater inflater = context.getLayoutInflater();
-            item = inflater.inflate(R.layout.extra, null);
+            item = inflater.inflate(R.layout.layout_item_rpu, null);
 
             holder = new ViewHolder();
             holder.nombre = (TextView)item.findViewById(R.id.numero);

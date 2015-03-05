@@ -51,6 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="top"
             android:textSize="@dimen/lista_main_subs"/>
 
         <EditText android:id="@+id/editNum"
@@ -74,6 +76,8 @@
             android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_gravity="top"
             android:textStyle="bold"
             android:textSize="@dimen/lista_main_subs"/>
 
@@ -95,6 +99,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="top"
             android:textSize="@dimen/lista_main_subs"/>
 
         <EditText android:id="@+id/editSerial"
@@ -114,6 +120,8 @@
             android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_gravity="top"
             android:textStyle="bold"
             android:textSize="@dimen/lista_main_subs"/>
 
@@ -134,6 +142,8 @@
             android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_gravity="top"
             android:textStyle="bold"
             android:textSize="@dimen/lista_main_subs"/>
 
@@ -154,6 +164,8 @@
             android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_gravity="top"
             android:textStyle="bold"
             android:textSize="@dimen/lista_main_subs"/>
 
@@ -174,6 +186,8 @@
             android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_gravity="top"
             android:textStyle="bold"
             android:textSize="@dimen/lista_main_subs"/>
 
@@ -194,6 +208,8 @@
             android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_gravity="top"
             android:textStyle="bold"
             android:textSize="@dimen/lista_main_subs"/>
 
@@ -214,6 +230,8 @@
             android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_gravity="top"
             android:textStyle="bold"
             android:textSize="@dimen/lista_main_subs"/>
 

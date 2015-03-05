@@ -10,7 +10,8 @@ android:descendantFocusability="blocksDescendants">
     android:orientation="vertical"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_weight="1">
+    android:layout_weight="1"
+    android:paddingLeft="@dimen/margin_bottom_peq">
 
     <TextView android:id="@+id/numero"
         android:layout_width="match_parent"
@@ -21,8 +22,8 @@ android:descendantFocusability="blocksDescendants">
     <TextView android:id="@+id/descripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="normal"
-        android:textSize="@dimen/lista_main_subs" />
+        android:textStyle="bold"
+        android:textSize="@dimen/lista_main_medio" />
 
     <TextView android:id="@+id/serial"
         android:layout_width="match_parent"

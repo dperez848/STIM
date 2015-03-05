@@ -59,6 +59,7 @@ public class Splash extends Activity {
     private final int SPLASH_DISPLAY_LENGTH = 2000;
     private SharedPreferences prefs;
     private  Bundle bundle;
+    private Boolean cont=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,81 +69,86 @@ public class Splash extends Activity {
         prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
         bundle = new Bundle();
         edit = prefs.edit();
-        if(prefs.getInt("First", 0) != 1){ //Si es la primera vez q abre la app
 
-            inventarioActivo = new SBN053D();inventarioActivo.idInventarioActivo= 1;inventarioActivo.anno = 2015;
-            inventarioActivo.trimestre = 1;inventarioActivo.sede = "atco";inventarioActivo.fechaUa = "20-11-12";
-            inventarioActivo.fichaUa = "1";inventarioActivo.status = "activo";
-            inventarioActivo.deviceId = android_id;inventarioActivo.obervacion = "observacion";inventarioActivo.save();
+        File dest = new File(Environment.getExternalStorageDirectory() + "/SistemaInventario/BD_nueva");
+        File org = new File(dest, "TomaInventario.db");
+        if(!org.exists()) {
+            Toast.makeText(getBaseContext(), "Archivo de base de datos no encontrado", Toast.LENGTH_LONG).show();
 
-
-            File sd = Environment.getExternalStorageDirectory();
-
-            if (sd.canWrite()) {
-
-                Context context = getApplicationContext();
-               String pathDestino = "/data/data/"+ context.getPackageName()+ "/databases/";
-               File pathOrigen = new File(Environment.getExternalStorageDirectory() + "/SistemaInventario/BD_nueva");
-               File destino = new File(pathDestino, "TomaInventario.db");
-               File origen = new File(pathOrigen, "TomaInventario.db");
-                if (destino.exists()) {
-                    Log.e("EXISTE destino",": si");
-                    if(origen.exists()) {
-                        Log.e("EXISTE origen",": si");
-                        try {
-                            //copy(origen, destino);
-                            // importDatabase(Environment.getExternalStorageDirectory() + "/SistemaInventario/BD_nueva/TomaInventario.db");
-                            copyFile(origen,destino);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        edit.putInt("Formatear", 0);
-                        edit.putInt("Activar", 0);
-
-                    }
-                    else Log.e("EXISTE origen",": no");
-                }
-                else Log.e("EXISTE destino",": no");
-            }
-
-            edit.putInt("First", 1);
-            edit.putInt("Activar", 0);
-            edit.apply();
+            edit.putBoolean("Cont", false);
+            finish();
         }
+        else {
+            if (prefs.getInt("First", 0) != 1) { //Si es la primera vez q abre la app
 
-        new Handler().postDelayed(new Runnable(){
-            @Override
-            public void run() {
+                File sd = Environment.getExternalStorageDirectory();
 
-                if(prefs.getInt("Login", 0) == 0){
-                    if(prefs.getInt("Formatear",0)== 1) {
-                        bundle.putBoolean("Formatear",true);
-                    }
-                    else{
-                        bundle.putBoolean("Formatear",false);
-                    }
-                    Intent intent = new Intent(Splash.this, Login.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                    finish();
+                if (sd.canWrite()) {
+
+                    Context context = getApplicationContext();
+                    String pathDestino = "/data/data/" + context.getPackageName() + "/databases/";
+                    File pathOrigen = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/SistemaInventario/BD_nueva");
+                    File destino = new File(pathDestino, "TomaInventario.db");
+                    File origen = new File(pathOrigen, "TomaInventario.db");
+                    if (destino.exists()) {
+                        Log.e("EXISTE destino", ": si");
+                        if (origen.exists()) {
+                            Log.e("EXISTE origen", ": si");
+                            try {
+                                //copy(origen, destino);
+                                // importDatabase(Environment.getExternalStorageDirectory() + "/SistemaInventario/BD_nueva/TomaInventario.db");
+                                copyFile(origen, destino);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            edit.putInt("Formatear", 0);
+                            edit.putInt("Activar", 0);
+
+                        } else {
+                            Log.e("EXISTE origen", ": no");
+
+                            //System.exit(0);
+                        }
+                    } else Log.e("EXISTE destino", ": no");
                 }
-                else{
 
-                    if(prefs.getInt("Act", 0) != 1){
-
-                        Intent intent = new Intent(Splash.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                    else{
-                        // Toast.makeText(getBaseContext(), ""+act, Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(Splash.this, NuevaToma.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                }
+                edit.putInt("First", 1);
+                edit.putInt("Activar", 0);
+                edit.apply();
             }
-        }, SPLASH_DISPLAY_LENGTH);
+
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    if (prefs.getInt("Login", 0) == 0) {
+                        if (prefs.getInt("Formatear", 0) == 1) {
+                            bundle.putBoolean("Formatear", true);
+                        } else {
+                            bundle.putBoolean("Formatear", false);
+                        }
+                        Intent intent = new Intent(Splash.this, Login.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        finish();
+                    } else {
+
+                        if (prefs.getInt("Act", 0) != 1) {
+
+                            Intent intent = new Intent(Splash.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            // Toast.makeText(getBaseContext(), ""+act, Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(Splash.this, NuevaToma.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                }
+            }, SPLASH_DISPLAY_LENGTH);
+        }
     }
 
     @Override

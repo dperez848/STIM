@@ -31,7 +31,7 @@ import pack.tomainventario.tomadeinventario.Dialogs.RpuDialog;
 import pack.tomainventario.tomadeinventario.Interfaces.Rpu;
 
 
-public class AsignarManual extends Activity implements Rpu,AdapterView.OnItemSelectedListener{
+public class AsignarManual extends Activity implements RpuDialog.NoticeDialogListener,AdapterView.OnItemSelectedListener{
 
     private SharedPreferences prefs;
     private ActionBar actionBar;
@@ -232,9 +232,10 @@ public class AsignarManual extends Activity implements Rpu,AdapterView.OnItemSel
         return (int) l;
     }
 
-    //@Override
-    public void onDialogItemClick(SIP501V rpu) {
-
+    @Override
+    public void onDialogItemClick(SIP501V rpu, int num) {
+        this.pUsuario=rpu;
+        eRpu.setText(rpu.nombre);
     }
 
     public String fechaActual(){
@@ -254,14 +255,4 @@ public class AsignarManual extends Activity implements Rpu,AdapterView.OnItemSel
 
     }
 
-    @Override
-    public void openRpuDialog(int bn) {
-
-    }
-
-    @Override
-    public void onRpuItemClick(SIP501V rpu) {
-        this.pUsuario=rpu;
-        eRpu.setText(rpu.nombre);
-    }
 }

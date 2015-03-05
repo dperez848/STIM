@@ -195,7 +195,7 @@ public class AjustarRPU extends BaseDrawer implements RpuDialog.NoticeDialogList
     }
 
    @Override
-    public void onDialogItemClick(SIP501V rpu) {
+    public void onDialogItemClick(SIP501V rpu,int num) {
        rpuSelected=rpu;
        eRpu.setText(rpu.nombre);
    }

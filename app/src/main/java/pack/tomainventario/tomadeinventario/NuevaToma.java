@@ -39,7 +39,7 @@ import pack.tomainventario.tomadeinventario.Interfaces.Selected;
 import pack.tomainventario.tomadeinventario.Objects.ObservacionRpu;
 
 
-public class NuevaToma extends Activity implements Selected,Rpu, Configuracion,IGaleria,Observacion{
+public class NuevaToma extends Activity implements RpuDialog.NoticeDialogListener,Selected,Rpu, Configuracion,IGaleria,Observacion{
     private SharedPreferences prefs;
     private SharedPreferences.Editor edit;
     private BnAdapter adaptador;
@@ -300,20 +300,8 @@ public class NuevaToma extends Activity implements Selected,Rpu, Configuracion,I
 
     }
 
-    //@Override
-    public void onDialogItemClick(SIP501V rpu, int num) {
-
-    }
-
     @Override
-    public void openRpuDialog(int bn) {
-        RpuDialog dialog = new RpuDialog(NuevaToma.this,bn);
-        dialog.show(getFragmentManager(),"RpuDialog");
-        dialog.setTargetFragment(dialog, 1);
-    }
-
-    @Override
-    public void onRpuItemClick(final SIP501V rpu) {
+    public void onDialogItemClick(final SIP501V rpu, final int num) {
         DialogInterface.OnClickListener dialogClickListener1 = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -336,6 +324,16 @@ public class NuevaToma extends Activity implements Selected,Rpu, Configuracion,I
         builder1.setMessage("¿Desea realizar este cambio?").setPositiveButton("Si", dialogClickListener1)
                 .setNegativeButton("No", dialogClickListener1).show();
     }
+
+    @Override
+    public void openRpuDialog(int bn) {
+        RpuDialog dialog = new RpuDialog(NuevaToma.this,bn);
+        dialog.show(getFragmentManager(),"RpuDialog");
+        dialog.setTargetFragment(dialog, 1);
+    }
+
+    @Override
+    public void onRpuItemClick(final SIP501V rpu) { }
 
     @Override
     public void setCheck(Boolean value) {}

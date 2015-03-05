@@ -2,20 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/pequeño">
 
     <ImageView android:id="@+id/foto"
         android:layout_width="@dimen/width_img_list_main"
         android:layout_height="@dimen/width_img_list_main"
         android:src="@drawable/noimagen"
         android:contentDescription="@string/content_description_logo"
-        android:adjustViewBounds="true"/>
+        android:adjustViewBounds="true"
+        />
 
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/margin_bottom_peq">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -59,7 +62,8 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:textStyle="normal"
-                android:textSize="@dimen/lista_main_subs" />
+                android:textSize="@dimen/lista_main_subs"
+                android:paddingLeft="@dimen/margin_bottom_peq"/>
 
         </LinearLayout>
 

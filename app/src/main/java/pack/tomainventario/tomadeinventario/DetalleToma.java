@@ -31,10 +31,9 @@ import pack.tomainventario.tomadeinventario.DataBase.SIP517V;
 import pack.tomainventario.tomadeinventario.Dialogs.RpuDialog;
 import pack.tomainventario.tomadeinventario.Dialogs.TomaFilterDialog;
 import pack.tomainventario.tomadeinventario.Interfaces.Observacion;
-import pack.tomainventario.tomadeinventario.Interfaces.Rpu;
 
 
-public class DetalleToma extends FragmentActivity implements Rpu,Observacion {
+public class DetalleToma extends FragmentActivity implements RpuDialog.NoticeDialogListener,Observacion {
     private int numeroBn;
     private String descripcion,fecha,foto,sede,ubic,rpu,observacion,edo,status;
     private EditText editNum,editDescripcion,editFecha,editUbic,editRpu,editObservacion,editEdo, editStatus;
@@ -149,43 +148,8 @@ public class DetalleToma extends FragmentActivity implements Rpu,Observacion {
         return super.onOptionsItemSelected(item);
     }
 
-    //@Override
-    public void onDialogItemClick(SIP501V rpu,int num) {
-
-    }
-
     @Override
-    public void putObservacion(String iobservacion, int bn, int edo) {
-        SBN051D bien= SBN051D.getBn(bn);
-        bien.observacion= iobservacion;
-        bien.save();
-        SBN001D bien2= SBN001D.getBn(bn);
-        bien2.edoFis= edo;
-        bien2.save();
-        editEdo.setText(SBN206D.getEdo(edo));
-        editObservacion.setText(iobservacion);
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent2 = new Intent();
-        setResult(RESULT_OK, intent2);
-        finish();
-    }
-
-    public String fechaActual(){
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        return df.format(c.getTime());
-    }
-
-    @Override
-    public void openRpuDialog(int bn) {
-
-    }
-
-    @Override
-    public void onRpuItemClick(final SIP501V rpu) {
+    public void onDialogItemClick(final SIP501V rpu,int num) {
         DialogInterface.OnClickListener dialogClickListener1 = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -213,4 +177,33 @@ public class DetalleToma extends FragmentActivity implements Rpu,Observacion {
         builder1.setMessage("¿Desea realizar este cambio?").setPositiveButton("Si", dialogClickListener1)
                 .setNegativeButton("No", dialogClickListener1).show();
     }
+
+
+    @Override
+    public void putObservacion(String iobservacion, int bn, int edo) {
+        SBN051D bien= SBN051D.getBn(bn);
+        bien.observacion= iobservacion;
+        bien.save();
+        SBN001D bien2= SBN001D.getBn(bn);
+        bien2.edoFis= edo;
+        bien2.save();
+        editEdo.setText(SBN206D.getEdo(edo));
+        editObservacion.setText(iobservacion);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent2 = new Intent();
+        setResult(RESULT_OK, intent2);
+        finish();
+    }
+
+    public String fechaActual(){
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        return df.format(c.getTime());
+    }
+
+
+
 }
