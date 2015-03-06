@@ -1,7 +1,5 @@
 package pack.tomainventario.tomadeinventario;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -150,32 +148,18 @@ public class DetalleToma extends FragmentActivity implements RpuDialog.NoticeDia
 
     @Override
     public void onDialogItemClick(final SIP501V rpu,int num) {
-        DialogInterface.OnClickListener dialogClickListener1 = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        SBN001D bN= SBN001D.getBn(numeroBn);
-                        bN.pUsuario=rpu.ficha;
-                        bN.save();
-                        SBN052D historialRpu=new SBN052D(numeroBn, fechaActual(),rpu.ficha,
-                                SBN052D.getInventario(numeroBn).idInventario, SBN053D.getAll().get(0).idInventarioActivo);
-                        historialRpu.save();
-                        /*for (SBN052D aData : SBN052D.getAll()){
+        SBN001D bN= SBN001D.getBn(numeroBn);
+        bN.pUsuario=rpu.ficha;
+        bN.save();
+        SBN052D historialRpu=new SBN052D(numeroBn, fechaActual(),rpu.ficha,
+                SBN052D.getInventario(numeroBn).idInventario, SBN053D.getAll().get(0).idInventarioActivo);
+        historialRpu.save();
+                                /*for (SBN052D aData : SBN052D.getAll()){
                             Log.e("TAAASSSSSG", "Los selected son " + aData.numeroBn);
                         }*/
-                        pUsuario=rpu;
-                        editRpu.setText(rpu.nombre);
-                        break;
+        pUsuario=rpu;
+        editRpu.setText(rpu.nombre);
 
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        break;
-                }
-            }
-        };
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(DetalleToma.this);
-        builder1.setMessage("¿Desea realizar este cambio?").setPositiveButton("Si", dialogClickListener1)
-                .setNegativeButton("No", dialogClickListener1).show();
     }
 
 

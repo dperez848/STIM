@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="@dimen/margin_bottom_peq"
     tools:context="pack.tomainventario.tomadeinventario.NuevaToma">
 
     <TextView android:id="@+id/tittle"
@@ -14,10 +15,6 @@
     <ListView android:id="@+id/LstOpciones"
         android:layout_height="0dp"
         android:layout_width="match_parent"
-        android:layout_marginRight="@dimen/activity_grid_margin"
-        android:layout_marginLeft="@dimen/activity_grid_margin"
-        android:layout_marginTop="@dimen/activity_grid_margin"
-        android:layout_marginBottom="@dimen/activity_grid_margin"
         android:layout_weight="1"/>
 
     <LinearLayout android:orientation="horizontal"
@@ -32,7 +29,7 @@
             android:background="@drawable/button_selector"
             android:layout_height="match_parent"
             android:textColor="@color/white"
-            android:layout_margin="@dimen/check_margin"
+            android:layout_margin="@dimen/pequeño"
             android:src="@drawable/search"/>
         <Button
             android:id="@+id/lote"
@@ -41,7 +38,7 @@
             android:layout_weight="1"
             android:text="@string/no_manual"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/check_margin"
+            android:layout_margin="@dimen/pequeño"
             android:background="@drawable/button_selector"
             android:src="@drawable/search"/>
     </LinearLayout>

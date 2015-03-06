@@ -302,27 +302,12 @@ public class NuevaToma extends Activity implements RpuDialog.NoticeDialogListene
 
     @Override
     public void onDialogItemClick(final SIP501V rpu, final int num) {
-        DialogInterface.OnClickListener dialogClickListener1 = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        SBN001D bN = SBN001D.getBn(num);
-                        bN.pUsuario= SIP501V.getPersonal(rpu.ficha).ficha;
-                        bN.save();
-                        SBN052D historialRpu=new SBN052D(num, fechaActual(),rpu.ficha,
-                                prefs.getInt("Activar", 0),SBN053D.getAll().get(0).idInventarioActivo);
-                        historialRpu.save();
-                        break;
-
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        break;
-                }
-            }
-        };
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(NuevaToma.this);
-        builder1.setMessage("¿Desea realizar este cambio?").setPositiveButton("Si", dialogClickListener1)
-                .setNegativeButton("No", dialogClickListener1).show();
+        SBN001D bN = SBN001D.getBn(num);
+        bN.pUsuario= SIP501V.getPersonal(rpu.ficha).ficha;
+        bN.save();
+        SBN052D historialRpu=new SBN052D(num, fechaActual(),rpu.ficha,
+                prefs.getInt("Activar", 0),SBN053D.getAll().get(0).idInventarioActivo);
+        historialRpu.save();
     }
 
     @Override

@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/margin_bottom_peq"
     tools:context="pack.tomainventario.tomadeinventario.AsignarManual">
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,14 +11,12 @@
    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/formulario"
-        android:orientation="horizontal"
-       android:layout_marginTop="@dimen/margin_bottom_peq">
+        android:orientation="horizontal">
 
         <Spinner android:id="@+id/cmbTipo"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/check_margin"
             android:entries="@array/serialnumero"/>
 
         <EditText android:id="@+id/editCod"
@@ -29,7 +28,6 @@
             android:id="@+id/bConsultar"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button"
-            android:layout_marginRight="@dimen/check_margin"
             android:text="@string/buscarButton"
             android:textColor="@color/white"
             android:background="@drawable/button_selector"/>
@@ -118,7 +116,6 @@
             android:text="@string/cambiar"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button"
-            android:layout_marginRight="@dimen/check_margin"
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:background="@drawable/button_selector"/>
@@ -142,11 +139,7 @@
             android:layout_weight="1"
             android:background="@drawable/button"
             android:gravity="top|left"
-            android:inputType="textMultiLine"
-            android:layout_marginLeft="@dimen/check_margin"
-            android:layout_marginRight="@dimen/check_margin"
-            android:layout_marginBottom="@dimen/check_margin"
-            android:layout_marginTop="@dimen/check_margin" />
+            android:inputType="textMultiLine" />
     </LinearLayout>
     </LinearLayout>
 </ScrollView>

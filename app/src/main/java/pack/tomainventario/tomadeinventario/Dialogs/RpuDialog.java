@@ -41,6 +41,7 @@ public class RpuDialog extends DialogFragment implements Rpu {
     private int num, pos;
     AlertDialog.Builder builder;
     private AdapterView.OnItemClickListener adapterView1;
+
     @Override
     public void openRpuDialog(int bn) {
 
@@ -48,7 +49,7 @@ public class RpuDialog extends DialogFragment implements Rpu {
 
     @Override
     public void onRpuItemClick(final SIP501V rpu) {
-        /*if(context instanceof DetalleToma || context instanceof NuevaToma) {
+        if(context instanceof DetalleToma || context instanceof NuevaToma) {
 
             DialogInterface.OnClickListener dialogClickListener1 = new DialogInterface.OnClickListener() {
                 @Override
@@ -56,7 +57,7 @@ public class RpuDialog extends DialogFragment implements Rpu {
                     switch (which) {
                         case DialogInterface.BUTTON_POSITIVE:
                             NoticeDialogListener activity = (NoticeDialogListener) getActivity();
-                            activity.onDialogItemClick(rpu);
+                            activity.onDialogItemClick(rpu,num);
                             dismiss();
                             break;
 
@@ -70,14 +71,13 @@ public class RpuDialog extends DialogFragment implements Rpu {
                     .setNegativeButton("No", dialogClickListener1).show();
         }
         else{
-            Log.e("aaa", "ANTES ");
             NoticeDialogListener activity = (NoticeDialogListener) getActivity();
-            activity.onDialogItemClick(rpu);
-            Log.e("aaa", "DESPUES ");
-        }*/
+            activity.onDialogItemClick(rpu,num);
+            dismiss();
+        }
     }
 
-    public interface NoticeDialogListener {
+   public interface NoticeDialogListener {
         public void onDialogItemClick(SIP501V rpu, int num);
     }
 
@@ -103,12 +103,12 @@ public class RpuDialog extends DialogFragment implements Rpu {
 
         data= SIP501V.getAll();
         if(context instanceof DetalleToma || context instanceof NuevaToma) {
-            adaptador = new RpuAdapter(getActivity(), data, SBN001D.getBn(num).pUsuario);
-        } else adaptador =  new RpuAdapter(getActivity(),data);
+            adaptador = new RpuAdapter(getActivity(),this, data, SBN001D.getBn(num).pUsuario);
+        } else adaptador =  new RpuAdapter(getActivity(),this,data);
         lstOpciones = (ListView)dialogView.findViewById(R.id.listRpu);
         lstOpciones.setAdapter(adaptador);
 
-       adapterView1 = new AdapterView.OnItemClickListener() {
+      /* adapterView1 = new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 adapterView=a;
                 pos=position;
@@ -140,9 +140,9 @@ public class RpuDialog extends DialogFragment implements Rpu {
                     dismiss();
                 }
             }
-        };
+        };*/
 
-        lstOpciones.setOnItemClickListener(adapterView1);
+       // lstOpciones.setOnItemClickListener(adapterView1);
 
         bSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
@@ -151,14 +151,14 @@ public class RpuDialog extends DialogFragment implements Rpu {
                     boolSearch = false;
                     data = SIP501V.getPersonalDialog(eSearch.getText().toString());
                     adaptador.updateAdapter(data);
-                    lstOpciones.setOnItemClickListener(adapterView1);
+                    //lstOpciones.setOnItemClickListener(adapterView1);
                 } else {
                     bSearch.setImageResource(R.drawable.search);
                     eSearch.setText("");
                     boolSearch = true;
                     data = SIP501V.getAll();
                     adaptador.updateAdapter(data);
-                    lstOpciones.setOnItemClickListener(adapterView1);
+                   // lstOpciones.setOnItemClickListener(adapterView1);
                 }
             }
         });

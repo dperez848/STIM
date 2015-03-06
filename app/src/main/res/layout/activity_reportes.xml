@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="@dimen/margin_bottom_peq"
     tools:context="pack.tomainventario.tomadeinventario.Reportes">
 
     <TextView android:id="@+id/txtUbic"
         android:text="@string/txtUbic"
-        android:layout_marginTop="@dimen/check_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

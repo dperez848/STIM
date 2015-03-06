@@ -2,7 +2,7 @@
 <resources>
 
     <!-- App -->
-    <string name="app_name">Toma de inventaro</string>
+    <string name="app_name">Toma de inventario</string>
     <string name="action_settings">Settings</string>
     <string name="content_description_logo">Logo UNEG</string>
 

@@ -99,6 +99,7 @@ public class MainActivity extends BaseDrawer implements EndlessListView.EndlessL
             startActivityForResult(intent, 1008);
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -109,6 +110,8 @@ public class MainActivity extends BaseDrawer implements EndlessListView.EndlessL
             if(requestCode==1008) {
                 data = new ArrayList<Inventoried>();
                 inventariados= SBN051D.getAll();
+                ini=0;
+                lstOpciones.setDone(false);
                 setData();
                 showList();
             }
@@ -160,9 +163,10 @@ public class MainActivity extends BaseDrawer implements EndlessListView.EndlessL
             adaptador = new MainAdapter(this, createItems());
             lstOpciones.setLoadingView(R.layout.loading_layout);
             lstOpciones.setAdapter(adaptador);
-
             lstOpciones.setListener(this);
+
             lstOpciones.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+
             if(prefs.getInt("Login",0)==2) {
 
                 lstOpciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -264,9 +268,13 @@ public class MainActivity extends BaseDrawer implements EndlessListView.EndlessL
     private List<Inventoried> createItems() {
         List<Inventoried> result = new ArrayList<Inventoried>();
         int i;
+        Log.e("CREATE", "data es "+data.size());
+        Log.e("CREATE2", "ini es "+ini);
         for (i= 0; i < ITEM_PER_REQUEST; i++) {
             if((i+ini)>=data.size()) {
+                Log.e("if", "Dice q i= "+i+"+"+ini+" es mayor q "+data.size()+" y x eso pone done");
                 lstOpciones.setDone(true);
+                Log.e("i2", "mandare u result de tamaño "+result.size());
                 return result;
             }
             else {
@@ -298,6 +306,7 @@ public class MainActivity extends BaseDrawer implements EndlessListView.EndlessL
         @Override
         protected void onPostExecute(List<Inventoried> result) {
             super.onPostExecute(result);
+            Log.e("POST", "el result q voy a mandar es de tamaño "+ result.size());
             lstOpciones.addNewData(result);
         }
     }

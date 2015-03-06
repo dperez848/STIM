@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -187,6 +188,7 @@ public class AjustarRPU extends BaseDrawer implements RpuDialog.NoticeDialogList
         super.onStop();
         SBN001D.setAllChecked(0,2);
     }
+
     @Override
     public Boolean isAll() {
         if (all)
@@ -198,6 +200,7 @@ public class AjustarRPU extends BaseDrawer implements RpuDialog.NoticeDialogList
     public void onDialogItemClick(SIP501V rpu,int num) {
        rpuSelected=rpu;
        eRpu.setText(rpu.nombre);
+       Log.e("RPU", ""+eRpu.getText());
    }
 
     @Override

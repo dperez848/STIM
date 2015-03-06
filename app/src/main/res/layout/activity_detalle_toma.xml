@@ -6,6 +6,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/margin_bottom_peq"
         android:orientation="vertical">
 
     <LinearLayout
@@ -15,7 +16,6 @@
 
         <TextView android:id="@+id/txtNum"
             android:text="@string/numero"
-            android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="top"
@@ -36,7 +36,6 @@
 
         <TextView android:id="@+id/txtDesc"
             android:text="@string/descripcion"
-            android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="top"
@@ -57,7 +56,6 @@
 
         <TextView android:id="@+id/txtFecha"
             android:text="@string/fecha"
-            android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="top"
@@ -78,7 +76,6 @@
 
         <TextView android:id="@+id/txtUbic"
             android:text="@string/ubic"
-            android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="top"
@@ -99,7 +96,6 @@
 
         <TextView android:id="@+id/txtStatus"
             android:text="@string/status"
-            android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="top"
@@ -120,7 +116,6 @@
 
         <TextView android:id="@+id/txtRPU"
             android:text="@string/dRpu"
-            android:layout_marginLeft="@dimen/check_margin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="top"
@@ -138,7 +133,6 @@
             android:id="@+id/btnRpu"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button"
-            android:layout_marginRight="@dimen/check_margin"
             android:background="@drawable/button_selector"
             android:textColor="@color/white"
             android:layout_gravity="center"
@@ -160,7 +154,6 @@
 
                 <TextView android:id="@+id/txtEdo"
                     android:text="@string/edo"
-                    android:layout_marginLeft="@dimen/check_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="top"
@@ -183,7 +176,6 @@
 
                 <TextView android:id="@+id/txtObs"
                     android:text="@string/observacion"
-                    android:layout_marginLeft="@dimen/check_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="top"
@@ -205,7 +197,6 @@
             android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button"
-            android:layout_marginRight="@dimen/check_margin"
             android:background="@drawable/button_selector"
             android:layout_gravity="center"
             android:text="@string/editar"/>

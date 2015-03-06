@@ -2,6 +2,7 @@ package pack.tomainventario.tomadeinventario.Config;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -49,12 +50,18 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
     public void onScroll(AbsListView view, int firstVisibleItem,
                          int visibleItemCount, int totalItemCount) {
 
-        if (getAdapter() == null)
-            return ;
-        if (getAdapter().getCount() == 0)
-            return ;
-        if (isDone())
-            return ;
+        if (getAdapter() == null) {
+            Log.e("LOG", "getadapter() es null");
+            return;
+        }
+        if (getAdapter().getCount() == 0) {
+            Log.e("LOG", "getadapter() es 000");
+            return;
+        }
+        if (isDone()) {
+            Log.e("LOG", "isDone()");
+            return;
+        }
         int l = visibleItemCount + firstVisibleItem;
         if (l >= totalItemCount && !isLoading) {
             this.addFooterView(footer);
@@ -93,8 +100,13 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
     public void addNewData(List<Inventoried> data) {
 
         this.removeFooterView(footer);
-
-        adapter.addAll(data);
+        Log.e("addnewdata", "Voy a meter esta cantidad de elementos nueva: "+ data.size());
+        for (int i= 0; i < data.size(); i++) {
+            adapter.add(data.get(i));
+            Log.e("LOG", "adapter va por:  "+adapter.getCount());
+        }
+        //adapter.addAll(data);
+        Log.e("LOG", "COUNT: "+adapter.getCount());
         adapter.notifyDataSetChanged();
         isLoading = false;
     }

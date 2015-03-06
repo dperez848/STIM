@@ -2,14 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/margin_bottom_peq"
     android:descendantFocusability="blocksDescendants"
     tools:context="pack.tomainventario.tomadeinventario.Galeria" >
 
     <GridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp"
+        android:layout_height="match_parent"
         android:columnWidth="100dp"
         android:gravity="center"
         android:numColumns="auto_fit"

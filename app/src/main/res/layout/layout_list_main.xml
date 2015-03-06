@@ -18,21 +18,22 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="@dimen/margin_bottom_peq">
+        android:paddingLeft="@dimen/regular_margin">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <TextView android:id="@+id/numero"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="@dimen/lista_main_titulo" />
 
             <TextView android:id="@+id/descripcion"
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_marginLeft="@dimen/margin_bottom_peq"
                 android:textSize="@dimen/lista_main_titulo" />
 
@@ -48,7 +49,8 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <TextView android:id="@+id/fecha"
                 android:layout_height="match_parent"
@@ -62,8 +64,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:textStyle="normal"
-                android:textSize="@dimen/lista_main_subs"
-                android:paddingLeft="@dimen/margin_bottom_peq"/>
+                android:textSize="@dimen/lista_main_subs"/>
 
         </LinearLayout>
 
