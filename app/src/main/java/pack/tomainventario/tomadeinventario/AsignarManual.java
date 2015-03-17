@@ -21,14 +21,13 @@ import android.widget.Spinner;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN052D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN053D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN203D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN206D;
-import pack.tomainventario.tomadeinventario.DataBase.SIP501V;
+import pack.tomainventario.tomadeinventario.Models.SBN001D;
+import pack.tomainventario.tomadeinventario.Models.SBN052D;
+import pack.tomainventario.tomadeinventario.Models.SBN053D;
+import pack.tomainventario.tomadeinventario.Models.SBN203D;
+import pack.tomainventario.tomadeinventario.Models.SBN206D;
+import pack.tomainventario.tomadeinventario.Models.SIP501V;
 import pack.tomainventario.tomadeinventario.Dialogs.RpuDialog;
-import pack.tomainventario.tomadeinventario.Interfaces.Rpu;
 
 
 public class AsignarManual extends Activity implements RpuDialog.NoticeDialogListener,AdapterView.OnItemSelectedListener{

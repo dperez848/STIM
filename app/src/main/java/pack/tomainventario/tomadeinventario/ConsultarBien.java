@@ -18,13 +18,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import pack.tomainventario.tomadeinventario.Config.BaseDrawer;
-import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN010D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN203D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN206D;
-import pack.tomainventario.tomadeinventario.DataBase.SIP501V;
-import pack.tomainventario.tomadeinventario.DataBase.SIP517V;
-import pack.tomainventario.tomadeinventario.DataBase.SIP528V;
+import pack.tomainventario.tomadeinventario.Models.SBN001D;
+import pack.tomainventario.tomadeinventario.Models.SBN010D;
+import pack.tomainventario.tomadeinventario.Models.SBN203D;
+import pack.tomainventario.tomadeinventario.Models.SBN206D;
+import pack.tomainventario.tomadeinventario.Models.SIP501V;
+import pack.tomainventario.tomadeinventario.Models.SIP517V;
+import pack.tomainventario.tomadeinventario.Models.SIP528V;
 
 
 public class ConsultarBien extends BaseDrawer implements AdapterView.OnItemSelectedListener {
@@ -74,14 +74,14 @@ public class ConsultarBien extends BaseDrawer implements AdapterView.OnItemSelec
                             numero = Integer.parseInt(eCod.getText().toString());
                             eNumero.setText("" + SBN001D.getBn(numero).numero);
                             eDescripcion.setText(SBN001D.getBn(numero).nombre);
-                            eSede.setText(SIP517V.getSede(SBN001D.getBn(numero).codSede).desUbic);
+                            eSede.setText(SIP517V.getSede(SBN010D.getUbic(SBN001D.getBn(numero).codUbic).codSede).desUbic);
                             eUbic.setText(SBN010D.getUbicacion(SBN001D.getBn(numero).codUbic));
                             eEdo.setText(SBN206D.getEdoDB(SBN001D.getBn(numero).edoFis).descripcion);
                             eRpp.setText(SIP501V.getPersonal(SBN001D.getBn(numero).numFicha).nombre);
                             eRpu.setText(SIP501V.getPersonal(SBN001D.getBn(numero).pUsuario).nombre);
                             eSerial.setText(SBN001D.getBn(numero).serial);
                             eStatus.setText(SBN203D.getStatus(SBN001D.getBn(numero).status).descripcion);
-                            eUnidad.setText(SIP528V.getUnidad(SBN001D.getBn(numero).codUnidad).desUejec);
+                            eUnidad.setText(SIP528V.getUnidad(SBN010D.getUbic(SBN001D.getBn(numero).codUbic).codUejec).desUejec);
                         } else {
                             eNumero.setText("");
                             eDescripcion.setText("");
@@ -101,14 +101,14 @@ public class ConsultarBien extends BaseDrawer implements AdapterView.OnItemSelec
                             serial = eCod.getText().toString();
                             eNumero.setText("" + SBN001D.getSerial(eCod.getText().toString()).numero);
                             eDescripcion.setText(SBN001D.getSerial(serial).nombre);
-                            eSede.setText(SIP517V.getSede(SBN001D.getSerial(serial).codSede).desUbic);
+                            eSede.setText(SIP517V.getSede(SBN010D.getUbic(SBN001D.getSerial(serial).codUbic).codSede).desUbic);
                             eUbic.setText(SBN010D.getUbicacion(SBN001D.getSerial(serial).codUbic));
                             eEdo.setText(SBN206D.getEdoDB(SBN001D.getSerial(serial).edoFis).descripcion);
                             eRpp.setText(SIP501V.getPersonal(SBN001D.getSerial(serial).numFicha).nombre);
                             eRpu.setText(SIP501V.getPersonal(SBN001D.getSerial(serial).pUsuario).nombre);
                             eSerial.setText(SBN001D.getSerial(serial).serial);
                             eStatus.setText(SBN203D.getStatus(SBN001D.getSerial(serial).status).descripcion);
-                            eUnidad.setText(SIP528V.getUnidad(SBN001D.getSerial(serial).codUnidad).desUejec);
+                            eUnidad.setText(SIP528V.getUnidad(SBN010D.getUbic(SBN001D.getSerial(serial).codUbic).codUejec).desUejec);
                         } else {
                             eNumero.setText("");
                             eDescripcion.setText("");

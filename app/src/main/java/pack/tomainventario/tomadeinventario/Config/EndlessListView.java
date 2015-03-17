@@ -13,8 +13,8 @@ import java.util.List;
 import pack.tomainventario.tomadeinventario.Adapters.BnAdapter;
 import pack.tomainventario.tomadeinventario.Adapters.GridViewAdapter;
 import pack.tomainventario.tomadeinventario.Adapters.MainAdapter;
-import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN054D;
+import pack.tomainventario.tomadeinventario.Models.SBN001D;
+import pack.tomainventario.tomadeinventario.Models.SBN054D;
 import pack.tomainventario.tomadeinventario.Objects.Inventoried;
 
 public class EndlessListView extends ListView implements AbsListView.OnScrollListener {

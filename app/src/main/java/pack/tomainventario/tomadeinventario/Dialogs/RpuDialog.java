@@ -19,8 +19,8 @@ import android.widget.ListView;
 import java.util.List;
 
 import pack.tomainventario.tomadeinventario.Adapters.RpuAdapter;
-import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
-import pack.tomainventario.tomadeinventario.DataBase.SIP501V;
+import pack.tomainventario.tomadeinventario.Models.SBN001D;
+import pack.tomainventario.tomadeinventario.Models.SIP501V;
 import pack.tomainventario.tomadeinventario.DetalleToma;
 import pack.tomainventario.tomadeinventario.Interfaces.Rpu;
 import pack.tomainventario.tomadeinventario.NuevaToma;

@@ -1,4 +1,4 @@
-package pack.tomainventario.tomadeinventario.DataBase;
+package pack.tomainventario.tomadeinventario.Models;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;

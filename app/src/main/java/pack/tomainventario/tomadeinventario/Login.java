@@ -26,9 +26,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import pack.tomainventario.tomadeinventario.DataBase.SBN051D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN053D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN090D;
+import pack.tomainventario.tomadeinventario.Models.SBN051D;
+import pack.tomainventario.tomadeinventario.Models.SBN053D;
+import pack.tomainventario.tomadeinventario.Models.SBN090D;
 
 
 public class Login extends Activity {

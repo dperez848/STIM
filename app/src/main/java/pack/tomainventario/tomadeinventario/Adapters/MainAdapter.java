@@ -14,9 +14,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import pack.tomainventario.tomadeinventario.DataBase.SBN010D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN050D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN051D;
+import pack.tomainventario.tomadeinventario.Models.SBN010D;
+import pack.tomainventario.tomadeinventario.Models.SBN050D;
+import pack.tomainventario.tomadeinventario.Models.SBN051D;
 import pack.tomainventario.tomadeinventario.Objects.Inventoried;
 import pack.tomainventario.tomadeinventario.R;
 

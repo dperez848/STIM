@@ -1,6 +1,6 @@
 package pack.tomainventario.tomadeinventario.Objects;
 
-import pack.tomainventario.tomadeinventario.DataBase.SIP501V;
+import pack.tomainventario.tomadeinventario.Models.SIP501V;
 
 /**
  * Created by tmachado on 16/01/2015.

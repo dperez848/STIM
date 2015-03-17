@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pack.tomainventario.tomadeinventario.Adapters.BnAdapter;
-import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN050D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN051D;
+import pack.tomainventario.tomadeinventario.Models.SBN001D;
+import pack.tomainventario.tomadeinventario.Models.SBN050D;
+import pack.tomainventario.tomadeinventario.Models.SBN051D;
 
 
 public class Faltantes extends android.support.v4.app.Fragment {

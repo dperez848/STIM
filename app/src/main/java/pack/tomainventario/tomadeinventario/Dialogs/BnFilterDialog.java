@@ -12,8 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import pack.tomainventario.tomadeinventario.DataBase.SBN010D;
-import pack.tomainventario.tomadeinventario.DataBase.SIP517V;
+import pack.tomainventario.tomadeinventario.Models.SBN010D;
+import pack.tomainventario.tomadeinventario.Models.SIP517V;
 import pack.tomainventario.tomadeinventario.Interfaces.Filter;
 import pack.tomainventario.tomadeinventario.R;
 

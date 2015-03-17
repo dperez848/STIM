@@ -1,4 +1,4 @@
-package pack.tomainventario.tomadeinventario.DataBase;
+package pack.tomainventario.tomadeinventario.Models;
 
 import android.util.Log;
 

@@ -17,9 +17,9 @@ import java.util.List;
 
 import pack.tomainventario.tomadeinventario.AjustarRPU;
 import pack.tomainventario.tomadeinventario.AsignarLote;
-import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN010D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN054D;
+import pack.tomainventario.tomadeinventario.Models.SBN001D;
+import pack.tomainventario.tomadeinventario.Models.SBN010D;
+import pack.tomainventario.tomadeinventario.Models.SBN054D;
 import pack.tomainventario.tomadeinventario.DetalleGaleria;
 import pack.tomainventario.tomadeinventario.Galeria;
 import pack.tomainventario.tomadeinventario.Interfaces.Configuracion;

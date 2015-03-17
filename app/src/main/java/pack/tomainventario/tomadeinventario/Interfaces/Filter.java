@@ -1,7 +1,7 @@
 package pack.tomainventario.tomadeinventario.Interfaces;
 
-import pack.tomainventario.tomadeinventario.DataBase.SBN010D;
-import pack.tomainventario.tomadeinventario.DataBase.SIP517V;
+import pack.tomainventario.tomadeinventario.Models.SBN010D;
+import pack.tomainventario.tomadeinventario.Models.SIP517V;
 
 /**
  * Created by tmachado on 14/01/2015.

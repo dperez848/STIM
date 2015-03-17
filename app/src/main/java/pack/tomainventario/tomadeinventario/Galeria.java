@@ -16,7 +16,7 @@ import java.util.List;
 
 import pack.tomainventario.tomadeinventario.Adapters.GridViewAdapter;
 import pack.tomainventario.tomadeinventario.Config.BaseDrawer;
-import pack.tomainventario.tomadeinventario.DataBase.SBN054D;
+import pack.tomainventario.tomadeinventario.Models.SBN054D;
 import pack.tomainventario.tomadeinventario.Interfaces.IGaleria;
 
 

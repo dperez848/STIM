@@ -16,13 +16,13 @@ import android.widget.Spinner;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import pack.tomainventario.tomadeinventario.DataBase.SBN010D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN050D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN053D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN203D;
-import pack.tomainventario.tomadeinventario.DataBase.SIP501V;
-import pack.tomainventario.tomadeinventario.DataBase.SIP517V;
-import pack.tomainventario.tomadeinventario.DataBase.SIP528V;
+import pack.tomainventario.tomadeinventario.Models.SBN010D;
+import pack.tomainventario.tomadeinventario.Models.SBN050D;
+import pack.tomainventario.tomadeinventario.Models.SBN053D;
+import pack.tomainventario.tomadeinventario.Models.SBN203D;
+import pack.tomainventario.tomadeinventario.Models.SIP501V;
+import pack.tomainventario.tomadeinventario.Models.SIP517V;
+import pack.tomainventario.tomadeinventario.Models.SIP528V;
 import pack.tomainventario.tomadeinventario.Dialogs.RpuDialog;
 import pack.tomainventario.tomadeinventario.Interfaces.Rpu;
 

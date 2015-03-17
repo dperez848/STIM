@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import pack.tomainventario.tomadeinventario.DataBase.SBN054D;
+import pack.tomainventario.tomadeinventario.Models.SBN054D;
 import pack.tomainventario.tomadeinventario.DetalleGaleria;
 import pack.tomainventario.tomadeinventario.Galeria;
 import pack.tomainventario.tomadeinventario.Interfaces.IGaleria;

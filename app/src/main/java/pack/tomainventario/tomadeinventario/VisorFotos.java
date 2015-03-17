@@ -9,7 +9,7 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 import pack.tomainventario.tomadeinventario.Adapters.VisorAdapter;
-import pack.tomainventario.tomadeinventario.DataBase.SBN054D;
+import pack.tomainventario.tomadeinventario.Models.SBN054D;
 
 
 public class VisorFotos extends Activity {

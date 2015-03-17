@@ -18,9 +18,9 @@ import java.util.List;
 
 import pack.tomainventario.tomadeinventario.Adapters.BnAdapter;
 import pack.tomainventario.tomadeinventario.Config.EndlessListView;
-import pack.tomainventario.tomadeinventario.DataBase.SBN001D;
-import pack.tomainventario.tomadeinventario.DataBase.SBN010D;
-import pack.tomainventario.tomadeinventario.DataBase.SIP517V;
+import pack.tomainventario.tomadeinventario.Models.SBN001D;
+import pack.tomainventario.tomadeinventario.Models.SBN010D;
+import pack.tomainventario.tomadeinventario.Models.SIP517V;
 import pack.tomainventario.tomadeinventario.Dialogs.BnFilterDialog;
 import pack.tomainventario.tomadeinventario.Interfaces.Configuracion;
 import pack.tomainventario.tomadeinventario.Interfaces.Filter;
