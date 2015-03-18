@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pack.tomainventario.tomadeinventario" >
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
+
     <application
         android:name="com.activeandroid.app.Application"
         android:allowBackup="true"
@@ -13,7 +16,6 @@
         android:label="@string/app_name"
         android:logo="@drawable/logo"
         android:theme="@style/CustomActionBarTheme" >
-
         <meta-data
             android:name="AA_DB_NAME"
             android:value="TomaInventario.db" />
@@ -22,7 +24,7 @@
             android:value="17" />
 
         <activity
-            android:name="pack.tomainventario.tomadeinventario.Config.Splash"
+            android:name=".Config.Splash"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
@@ -32,69 +34,73 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="pack.tomainventario.tomadeinventario.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="pack.tomainventario.tomadeinventario.Login"
+            android:name=".Login"
             android:excludeFromRecents="true"
             android:label="@string/title_activity_login"
             android:noHistory="true" >
         </activity>
         <activity
-            android:name="pack.tomainventario.tomadeinventario.ConsultarBien"
+            android:name=".ConsultarBien"
             android:windowSoftInputMode="stateHidden" >
             android:label="@string/title_activity_consultar_bien" >
         </activity>
         <activity
-            android:name="pack.tomainventario.tomadeinventario.AjustarRPU"
+            android:name=".AjustarRPU"
             android:label="@string/title_activity_ajustar_rpu" >
         </activity>
         <activity
-            android:name="pack.tomainventario.tomadeinventario.Galeria"
+            android:name=".Galeria"
             android:label="@string/title_activity_galeria" >
         </activity>
         <activity
-            android:name="pack.tomainventario.tomadeinventario.Reportes"
+            android:name=".Reportes"
             android:label="@string/title_activity_reportes" >
         </activity>
         <activity
-            android:name="pack.tomainventario.tomadeinventario.ActivacionInventario"
-            android:windowSoftInputMode="stateHidden"
-            android:label="@string/title_activity_activacion_inventario" >
+            android:name=".ActivacionInventario"
+            android:label="@string/title_activity_activacion_inventario"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="pack.tomainventario.tomadeinventario.NuevaToma"
+            android:name=".NuevaToma"
             android:label="@string/title_activity_nueva_toma" >
         </activity>
         <activity
-            android:name="pack.tomainventario.tomadeinventario.AsignarLote"
+            android:name=".AsignarLote"
             android:label="@string/title_activity_asignar_lote"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="pack.tomainventario.tomadeinventario.DetalleGaleria"
+            android:name=".DetalleGaleria"
             android:label="@string/title_activity_detalle_galeria" >
         </activity>
         <activity
-            android:name="pack.tomainventario.tomadeinventario.VisorFotos"
+            android:name=".VisorFotos"
             android:label="@string/title_activity_visor_fotos"
             android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen" >
         </activity>
 
         <provider
-            android:name="pack.tomainventario.tomadeinventario.Config.MyFileContentProvider"
+            android:name=".Config.MyFileContentProvider"
             android:authorities="com.example.camerademo"
             android:enabled="true"
             android:exported="true" />
 
         <activity
-            android:name="pack.tomainventario.tomadeinventario.AsignarManual"
+            android:name=".AsignarManual"
             android:label="@string/title_activity_asignar_manual" >
         </activity>
         <activity
-            android:name="pack.tomainventario.tomadeinventario.DetalleToma"
+            android:name=".DetalleToma"
             android:label="@string/title_activity_detalle_toma" >
+        </activity>
+        <activity
+            android:name=".ActivacionPorSede"
+            android:label="@string/title_activity_activacion_por_sede" >
         </activity>
     </application>
 

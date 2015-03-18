@@ -87,7 +87,6 @@
                         5OpiNqWlJK8icueJed1n0vbNvwbapgp9NDnD1lxS3FZqWo9p7O
                         QA2HZjAq1WqNmaatOmEFhP/9k=</string>
 
-
     <!-- Detalle de la toma -->
     <string name="detalletoma">Detalle de toma de inventario</string>
     <string name="numero">Numero de Bien: </string>
@@ -143,10 +142,12 @@
     <string name="consultar">Esta pantalla esta horrible
         pero mas o menos asi quedará.
         Aqui va toda la informacion del bien nacional</string>
+
     <string-array name="serialnumero">
         <item>#</item>
         <item>S</item>
     </string-array>
+
     <string name="unidad">Unidad: </string>
     <string name="sede">Sede: </string>
     <string name="usuario">RPU: </string>
@@ -194,5 +195,6 @@
     <string name="title_activity_asignar_manual">Asignar Manualmente</string>
     <string name="title_activity_toma_filter_dialog">TomaFilterDialog</string>
     <string name="title_activity_detalle_toma">DetalleToma</string>
+    <string name="title_activity_activacion_por_sede">ActivacionPorSede</string>
 
 </resources>
