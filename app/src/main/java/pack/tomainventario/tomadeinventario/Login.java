@@ -131,8 +131,6 @@ public class Login extends Activity {
                 }
                 else
                 {
-
-
                     if(SBN090D.getUser(eUser.getText()).ficha.equals(SBN053D.getAll().get(0).fichaUa)){
                         edit.putInt("Login", 2);
                     }
@@ -141,7 +139,8 @@ public class Login extends Activity {
                         Toast.makeText(getApplicationContext(),"Usuario invitado",Toast.LENGTH_LONG).show();
                     }
                     edit.apply();
-                    Intent intent = new Intent(Login.this, MainActivity.class);
+                    Intent intent = new Intent(Login.this, ActivacionPorSede.class);
+                    intent.putExtra("login",eUser.getText());
                     startActivity(intent);
                 }
             }
@@ -160,19 +159,7 @@ public class Login extends Activity {
         if (id == R.id.action_settings)return true;
         return super.onOptionsItemSelected(item);
     }
-    public void copy(File src, File dst) throws IOException {
-        InputStream in = new FileInputStream(src);
-        OutputStream out = new FileOutputStream(dst);
 
-        // Transfer bytes from in to out
-        byte[] buf = new byte[1024];
-        int len;
-        while ((len = in.read(buf)) > 0) {
-            out.write(buf, 0, len);
-        }
-        in.close();
-        out.close();
-    }
 
     private void importDatabase(String inputFileName) throws IOException
     {Context context = getApplicationContext();

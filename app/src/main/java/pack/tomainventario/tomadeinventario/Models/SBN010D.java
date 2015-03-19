@@ -46,6 +46,13 @@ public class SBN010D extends Model
                 .orderBy("nombre ASC")
                 .execute();
     }
+    public static List<SBN010D> getUbicOfSede(String sede) {
+        return new Select()
+                .from(SBN010D.class)
+                .where("codSede = ?", sede)
+                .orderBy("nombre ASC")
+                .execute();
+    }
     public static String getUbicacion(String ubic) {
         List<SBN010D> data = getAll();
         for (SBN010D aData : data) {
