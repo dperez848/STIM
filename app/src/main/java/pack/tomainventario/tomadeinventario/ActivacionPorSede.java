@@ -2,7 +2,9 @@ package pack.tomainventario.tomadeinventario;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,35 +24,43 @@ import java.util.List;
 import pack.tomainventario.tomadeinventario.Adapters.UbicacionesAdapter;
 import pack.tomainventario.tomadeinventario.Interfaces.Selected;
 import pack.tomainventario.tomadeinventario.Models.SBN010D;
+import pack.tomainventario.tomadeinventario.Models.SBN050D;
 import pack.tomainventario.tomadeinventario.Models.SBN090D;
+import pack.tomainventario.tomadeinventario.Models.SIP501V;
 import pack.tomainventario.tomadeinventario.Models.SIP517V;
 
 
 public class ActivacionPorSede extends Activity implements Selected {
 
     private Button bIngresar;
-    private List<SBN010D> data= new ArrayList<SBN010D>();
+    private List<SBN010D> data1= new ArrayList<SBN010D>(),data= new ArrayList<SBN010D>();
     private ArrayAdapter<SIP517V> adapSede;
     private UbicacionesAdapter adaptador;
     private ListView lstOpciones;
     private Spinner cmbSede;
-    private EditText eFecha,eRPP;
+    private EditText eFecha,eUser,eRPP;
     private ActionBar actionBar;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activacion_por_sede);
 
+        prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
+        edit = prefs.edit();
+
         actionBar= getActionBar();
-        actionBar.setTitle("Activación");
+        actionBar.setTitle("UNEG");
 
         eFecha = (EditText) findViewById(R.id.editFecha);
         eFecha.setText(fechaActual());
+        eUser = (EditText) findViewById(R.id.editUser);
         eRPP = (EditText) findViewById(R.id.editRPP);
 
         Bundle extras = getIntent().getExtras();
-        if(extras != null) eRPP.setText(SBN090D.getUser(extras.get("login")).nombre);
+        if(extras != null) eUser.setText(SBN090D.getUser(extras.get("login")).nombre);
 
 
         adapSede = new ArrayAdapter<SIP517V>(this,R.layout.layout_item_spinner);
@@ -60,8 +70,14 @@ public class ActivacionPorSede extends Activity implements Selected {
         cmbSede.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                data = SBN010D.getUbicOfSede(adapSede.getItem(safeLongToInt(cmbSede.getSelectedItemId())).codSede);
+                data1 = SBN010D.getUbicOfSede(adapSede.getItem(safeLongToInt(cmbSede.getSelectedItemId())).codSede);
+                for (SBN010D aData : data1) {
+                    if (SBN050D.isIn(aData.codUbic)){
+                        data.add(aData);
+                    }
+                }
                 adaptador.updateAdapter(data);
+
             }
 
             @Override
@@ -89,7 +105,8 @@ public class ActivacionPorSede extends Activity implements Selected {
         if (id == R.id.action_aceptar) {
 
 
-
+            edit.putInt("Login", 1);
+            edit.apply();
             Intent intent = new Intent(ActivacionPorSede.this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -102,6 +119,13 @@ public class ActivacionPorSede extends Activity implements Selected {
     @Override
     public void deshacer(int pos) {
 
+    }
+
+    @Override
+    public void getUbicacion(SBN010D ubic) {
+        eRPP.setText(SIP501V.getPersonal(ubic.respUa).nombre);
+        edit.putString("Ubicacion", ubic.codUbic);
+        edit.apply();
     }
 
     public static int safeLongToInt(long l) {

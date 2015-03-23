@@ -15,12 +15,7 @@
         android:gravity="center"
      android:padding="@dimen/margin_bottom_peq">
 
-    <ImageView
-        android:layout_width="85dp"
-        android:layout_height="90dp"
-        android:src="@drawable/logoinicio"
-        android:contentDescription="@string/content_description_logo"
-        android:adjustViewBounds="true"/>
+
 
     <TextView android:id="@+id/label1"
         android:text="@string/activacion_sede"
@@ -34,14 +29,14 @@
          android:layout_height="@dimen/formulario"
          android:orientation="horizontal">
 
-         <TextView android:id="@+id/txtRPP"
-             android:text="@string/txtRPP"
+         <TextView android:id="@+id/txtUser"
+             android:text="@string/usuario_act"
              android:layout_width="wrap_content"
              android:layout_height="match_parent"
              android:layout_gravity="top"
              android:gravity="center"/>
 
-         <EditText android:id="@+id/editRPP"
+         <EditText android:id="@+id/editUser"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:inputType="text"
@@ -65,6 +60,24 @@
              android:inputType="text"
              android:focusable="false"/>
      </LinearLayout>
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/formulario"
+         android:orientation="horizontal">
+
+         <TextView android:id="@+id/txtRPP"
+             android:text="@string/txtRPP"
+             android:layout_width="wrap_content"
+             android:layout_height="match_parent"
+             android:layout_gravity="top"
+             android:gravity="center"/>
+
+         <EditText android:id="@+id/editRPP"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:inputType="text"
+             android:focusable="false"/>
+     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/formulario"
@@ -82,6 +95,7 @@
             android:layout_height="match_parent"/>
 
     </LinearLayout>
+
     <TextView android:id="@+id/txtUbic"
         android:text="@string/txtUbic"
         android:layout_width="wrap_content"

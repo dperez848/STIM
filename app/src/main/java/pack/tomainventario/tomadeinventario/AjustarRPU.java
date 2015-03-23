@@ -172,7 +172,7 @@ public class AjustarRPU extends BaseDrawer implements RpuDialog.NoticeDialogList
             bN.pUsuario = ficha;
             bN.save();
             SBN052D historialRpu=new SBN052D(bN.numero,fechaActual(),ficha,
-                    prefs.getInt("Activar", 0), SBN053D.getAll().get(0).idInventarioActivo);
+                    prefs.getInt("Activar", 0), SBN053D.getAll().get(0).idInventario);
             historialRpu.save();
         }
     }

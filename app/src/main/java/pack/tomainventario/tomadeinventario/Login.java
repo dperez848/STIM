@@ -27,7 +27,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import pack.tomainventario.tomadeinventario.Models.SBN051D;
-import pack.tomainventario.tomadeinventario.Models.SBN053D;
 import pack.tomainventario.tomadeinventario.Models.SBN090D;
 
 
@@ -131,14 +130,8 @@ public class Login extends Activity {
                 }
                 else
                 {
-                    if(SBN090D.getUser(eUser.getText()).ficha.equals(SBN053D.getAll().get(0).fichaUa)){
-                        edit.putInt("Login", 2);
-                    }
-                    else{
-                        edit.putInt("Login", 1);
-                        Toast.makeText(getApplicationContext(),"Usuario invitado",Toast.LENGTH_LONG).show();
-                    }
-                    edit.apply();
+
+
                     Intent intent = new Intent(Login.this, ActivacionPorSede.class);
                     intent.putExtra("login",eUser.getText());
                     startActivity(intent);

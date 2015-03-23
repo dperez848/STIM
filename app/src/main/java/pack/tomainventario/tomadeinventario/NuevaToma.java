@@ -94,7 +94,7 @@ public class NuevaToma extends Activity implements RpuDialog.NoticeDialogListene
         for (int i = 0; i < data.size(); i++) {
             SBN001D bien = SBN001D.getBn(data.get(i).numero);
             SBN051D inv = new SBN051D(data.get(i).numero,prefs.getInt("Activar", 0),
-                    SBN053D.getAll().get(0).idInventarioActivo, getObservacion(data.get(i).numero),fechaActual());
+                    SBN053D.getAll().get(0).idInventario, getObservacion(data.get(i).numero),fechaActual());
             inv.save();
         }
     }
@@ -171,7 +171,6 @@ public class NuevaToma extends Activity implements RpuDialog.NoticeDialogListene
                             case DialogInterface.BUTTON_POSITIVE:
                                 prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
                                 edit = prefs.edit();
-                                edit.putInt("Act", 0);
                                 edit.putInt("Activar", prefs.getInt("Activar",0)-1);
                                 edit.apply();
                                 Intent intent1 = new Intent();
@@ -198,7 +197,6 @@ public class NuevaToma extends Activity implements RpuDialog.NoticeDialogListene
                             case DialogInterface.BUTTON_POSITIVE:
                                 prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
                                 edit = prefs.edit();
-                                edit.putInt("Act", 0);
                                 edit.apply();
                                 SBN001D.allSelectedToTaken();
                                 inventariar(SBN001D.getTaken());
@@ -256,7 +254,6 @@ public class NuevaToma extends Activity implements RpuDialog.NoticeDialogListene
                     case DialogInterface.BUTTON_POSITIVE:
                         prefs = getSharedPreferences("invPreferences", Context.MODE_PRIVATE);
                         edit = prefs.edit();
-                        edit.putInt("Act", 0);
                         edit.putInt("Activar", prefs.getInt("Activar",0)-1);
                         edit.apply();
                         SBN001D.setAllSelected(0);
@@ -306,7 +303,7 @@ public class NuevaToma extends Activity implements RpuDialog.NoticeDialogListene
         bN.pUsuario= SIP501V.getPersonal(rpu.ficha).ficha;
         bN.save();
         SBN052D historialRpu=new SBN052D(num, fechaActual(),rpu.ficha,
-                prefs.getInt("Activar", 0),SBN053D.getAll().get(0).idInventarioActivo);
+                prefs.getInt("Activar", 0),SBN053D.getAll().get(0).idInventario);
         historialRpu.save();
     }
 
@@ -343,5 +340,10 @@ public class NuevaToma extends Activity implements RpuDialog.NoticeDialogListene
         });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    @Override
+    public void getUbicacion(SBN010D ubic) {
+
     }
 }

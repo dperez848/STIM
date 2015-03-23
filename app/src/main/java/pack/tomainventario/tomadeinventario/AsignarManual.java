@@ -198,7 +198,7 @@ public class AsignarManual extends Activity implements RpuDialog.NoticeDialogLis
             bN.pUsuario=pUsuario.ficha;
             bN.save();
             SBN052D historialRpu=new SBN052D(SBN001D.getBn(Integer.parseInt(eCod.getText().toString())).numero,
-                    fechaActual(),pUsuario.ficha,prefs.getInt("Activar", 0), SBN053D.getAll().get(0).idInventarioActivo);
+                    fechaActual(),pUsuario.ficha,prefs.getInt("Activar", 0), SBN053D.getAll().get(0).idInventario);
             historialRpu.save();
             Intent intent = new Intent();
            // Bundle bundle = new Bundle();

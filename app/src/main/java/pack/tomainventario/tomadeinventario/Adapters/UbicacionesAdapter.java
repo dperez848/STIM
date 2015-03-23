@@ -52,7 +52,11 @@ public class UbicacionesAdapter extends ArrayAdapter<SBN010D> {
         else{
             holder = (ViewHolder)item.getTag();
         }
-        holder.rb1.setChecked(selectedPosition==position);
+
+        if(selectedPosition==position){
+            holder.rb1.setChecked(true);
+            listener.getUbicacion(data.get(position));
+        }
         holder.ubicacion.setText("" + data.get(position).nombre);
 
         holder.rb1.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +71,7 @@ public class UbicacionesAdapter extends ArrayAdapter<SBN010D> {
             public void onClick(View v) {
                 selectedPosition=position;
                 notifyDataSetChanged();
+
             }
         });
         return (item);

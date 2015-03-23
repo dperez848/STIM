@@ -14,8 +14,10 @@
     <string name="hint_clave">Contraseña</string>
     <string name="cerrar">Cerrar sesión</string>
 
-    <!-- Login -->
+    <!-- Activacion por sede -->
     <string name="activacion_sede">Activación de inventario</string>
+    <string name="usuario_act">Usuario:</string>
+
     <!-- Aviso -->
     <string name="aviso">No hay ninguna imagen asociada a este Bien Nacional</string>
 

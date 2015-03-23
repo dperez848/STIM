@@ -109,13 +109,10 @@ public class BaseDrawer extends FragmentActivity {
                     }
                     case 2: {
                         Log.e("LOG","El login es "+prefs.getInt("Login",0));
-                        if(prefs.getInt("Login",0)==2) {
+
                             Intent intent = new Intent(BaseDrawer.this, AjustarRPU.class);
                             startActivity(intent);
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(), "Invitado no puede ajustar RPU", Toast.LENGTH_LONG).show();
-                        }
+
                         break;
                     }
                     case 3: {
@@ -130,7 +127,7 @@ public class BaseDrawer extends FragmentActivity {
                         break;
                     }
                     case 5: {   //Si finaliza inventario
-                        if(prefs.getInt("Login",0)==2) {
+
                             DialogInterface.OnClickListener dialogClickListener2 = new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -161,6 +158,7 @@ public class BaseDrawer extends FragmentActivity {
                                             Intent intent = new Intent(BaseDrawer.this, Splash.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                             edit.putInt("Formatear", 1);
+                                            edit.putInt("Act", 0);
                                             edit.apply();
 
                                             startActivity(intent);
@@ -177,10 +175,7 @@ public class BaseDrawer extends FragmentActivity {
                             AlertDialog.Builder builder2 = new AlertDialog.Builder(BaseDrawer.this);
                             builder2.setMessage("¿Esta seguro de finalizar el inventario actual? ").setPositiveButton("Si", dialogClickListener2)
                                     .setNegativeButton("No", dialogClickListener2).show();
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(), "Invitado no puede finalizar inventario", Toast.LENGTH_LONG).show();
-                        }
+
                         break;
                     }
                     default: {

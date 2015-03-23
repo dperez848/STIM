@@ -39,7 +39,6 @@ import pack.tomainventario.tomadeinventario.Models.SBN206D;
 import pack.tomainventario.tomadeinventario.Models.SIP501V;
 import pack.tomainventario.tomadeinventario.Models.SIP517V;
 import pack.tomainventario.tomadeinventario.Models.SIP528V;
-import pack.tomainventario.tomadeinventario.NuevaToma;
 import pack.tomainventario.tomadeinventario.R;
 
 
@@ -95,8 +94,6 @@ public class Splash extends Activity {
                         if (origen.exists()) {
                             Log.e("EXISTE origen", ": si");
                             try {
-                                //copy(origen, destino);
-                                // importDatabase(Environment.getExternalStorageDirectory() + "/SistemaInventario/BD_nueva/TomaInventario.db");
                                 copyFile(origen, destino);
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -133,18 +130,9 @@ public class Splash extends Activity {
                         startActivity(intent);
                         finish();
                     } else {
-
-                        if (prefs.getInt("Act", 0) != 1) {
-
-                            Intent intent = new Intent(Splash.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            // Toast.makeText(getBaseContext(), ""+act, Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(Splash.this, NuevaToma.class);
-                            startActivity(intent);
-                            finish();
-                        }
+                        Intent intent = new Intent(Splash.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 }
             }, SPLASH_DISPLAY_LENGTH);

@@ -85,9 +85,6 @@ public class MainActivity extends BaseDrawer implements EndlessListView.EndlessL
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean drawerOpen = navDrawerLayout.isDrawerOpen(navList);
         menu.findItem(R.id.action_add).setVisible(!drawerOpen);
-        if(prefs.getInt("Login",0)!=2){
-            menu.findItem(R.id.action_add).setVisible(false);
-        }
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -95,7 +92,7 @@ public class MainActivity extends BaseDrawer implements EndlessListView.EndlessL
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_add) {
-            Intent intent = new Intent(MainActivity.this, ActivacionInventario.class);
+            Intent intent = new Intent(MainActivity.this, NuevaToma.class);
             startActivityForResult(intent, 1008);
             return true;
         }
@@ -167,14 +164,12 @@ public class MainActivity extends BaseDrawer implements EndlessListView.EndlessL
 
             lstOpciones.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 
-            if(prefs.getInt("Login",0)==2) {
-
                 lstOpciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                         sendData(position);
                     }
                 });
-            }
+
                 lstOpciones.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
                     @Override
                     public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
